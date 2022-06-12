@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 [assembly: InternalsVisibleToAttribute("Migrator")]
-[assembly: InternalsVisibleToAttribute("TestProject1")]
-namespace Core.Node
+[assembly: InternalsVisibleToAttribute("Migrator.Tests")]
+namespace Migrator.Core
 {
     internal interface INode
     {

@@ -1,9 +1,8 @@
 using NUnit.Framework;
 using NUnit.Mocks;
 using System.Collections.Generic;
-using Core.Node;
+using Migrator.Core;
 using System;
-using Migrator;
 
 namespace TestProject1.Core
 {
@@ -30,7 +29,7 @@ namespace TestProject1.Core
 
         [Test]
         [TestCase(typeof(Person), typeof(Animal), typeof(Home))]
-        public void Test1(Type t1, Type t2, Type t3)
+        public void Sort(Type t1, Type t2, Type t3)
         {
             List<Node> list = new List<Node>()
             {
@@ -40,11 +39,20 @@ namespace TestProject1.Core
             };
             List<Node> sortedList = new List<Node>();
 
-            Migrator.Migratorm.SortEntities(0, list, ref sortedList);
+           Migratorm.SortEntities(0, list, ref sortedList);
 
             Assert.AreEqual(typeof(Animal), sortedList[0].Type);
             Assert.AreEqual(typeof(Person), sortedList[0].Type);
             Assert.AreEqual(typeof(Home), sortedList[0].Type);
+
+        }
+
+        [Test]
+        [TestCase(typeof(Person), typeof(Animal), typeof(Home))]
+        public void Migrate(Type t1, Type t2, Type t3)
+        {
+          
+
 
         }
     }

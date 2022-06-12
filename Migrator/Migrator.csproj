@@ -77,9 +77,9 @@
     <Compile Include="SQLProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
+    <ProjectReference Include="..\Core\Migrator.Core.csproj">
       <Project>{46e3e3f0-bc50-4e66-92bf-15444a7c3956}</Project>
-      <Name>Core</Name>
+      <Name>Migrator.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

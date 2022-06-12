@@ -1,9 +1,8 @@
 ﻿using NUnit.Framework;
 using NUnit.Mocks;
 using System.Collections.Generic;
-using Core.Node;
+using Migrator.Core;
 using System;
-using Migrator;
 
 namespace TestProject1.Migrate
 {
@@ -79,10 +78,10 @@ namespace TestProject1.Migrate
         [Test]
         public void Test1()
         {
-            List<SQLScript> flat = Migrator.Migratorm.FlattenPackages(new List<SQLPackage> { personPackage, animalPackage, homePackage });
-            List<SQLScript> sorted = Migrator.Migratorm.SortByType(flat);
+            List<SQLScript> flat = Migratorm.FlattenPackages(new List<SQLPackage> { personPackage, animalPackage, homePackage });
+            List<SQLScript> sorted = Migratorm.SortByType(flat);
 
-            string full = Migrator.Migratorm.ToSQL(sorted);
+            string full = Migratorm.ToSQL(sorted);
 
             Assert.AreEqual(5, sorted.Count);
             Assert.AreEqual(personScript1, sorted[0]);

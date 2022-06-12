@@ -1,5 +1,4 @@
 ﻿using Common.Extensions;
-using Core.TypeMapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace Core.XMLModel
+namespace Migrator.Core
 {
     internal interface IXMLModelConverter
     {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common
+namespace Migrator.Core
 {
-    public class Class1
+    public class Entity : Attribute
     {
     }
 }

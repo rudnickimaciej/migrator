@@ -1,6 +1,4 @@
-﻿using Migrator.Core.Node;
-using Migrator.Core.XMLModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -13,7 +11,7 @@ using System.Xml;
 [assembly: InternalsVisibleToAttribute("Migrator.Tests")]
 [assembly: InternalsVisibleToAttribute("Migrator.Program")]
 
-namespace Migrator
+namespace Migrator.Core
 {
 
 
@@ -58,20 +56,20 @@ namespace Migrator
 
     internal class Migratorm
     {
-        internal void Migrate(string connectionString, Assembly assembly)
+        internal string Migrate(string connectionString, List<Type> types)
         {
             ISqlProvider sqlProvider = new SQLProvider();
-            List<Node> list = new List<Node>();
-            List<Node> sortedList = new List<Node>();
-            SortEntities(0, list, ref sortedList);
+            List<Node> nodes = types.Select(t => new Node(t)).ToList();
+            List<Node> sortedNoted = new List<Node>();
+            SortEntities(0, nodes, ref sortedNoted);
 
 
             List<SQLPackage> packages = new List<SQLPackage>();
-            sortedList.ForEach(s => packages.Add(sqlProvider.Parse(s.Type)));
+            sortedNoted.ForEach(s => packages.Add(sqlProvider.Parse(s.Type)));
 
             List<SQLScript> scripts = SortByType(FlattenPackages(packages));
-            
 
+            return "Full SQL";
         }
         internal static string ToSQL(List<SQLScript> scripts)
         {

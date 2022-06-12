@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Migrator;
 
-namespace ConsoleApp3
+namespace MigratorProgram
 {
     class Home
     {
@@ -24,6 +25,8 @@ namespace ConsoleApp3
     {
         static void Main(string[] args)
         {
+
+            Migratorm
             //var list = new List<int>();
             //var l = Rekurencja.Process(10, ref list);
             //var entities = new List<Node>()
@@ -40,10 +43,4 @@ namespace ConsoleApp3
 }
 
 
-namespace Core
-{
-
-   
-
-}
 

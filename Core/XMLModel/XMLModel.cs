@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.XMLModel
+namespace Migrator.Core
 {
     internal class XMLModel
     {
@@ -31,7 +31,7 @@ namespace Core.XMLModel
         UNDEFINED
     }
 
-    internal enum SQLType
+    public enum SQLType
     {
         INT,
         VARCHAR,
