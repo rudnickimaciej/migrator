@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace Migrator.Core
+namespace Migrator
 {
     internal interface ISqlProvider
     {
@@ -83,7 +83,7 @@ namespace Migrator.Core
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand(sql.SelectFromMigration.Replace("#entityName#", entityName), connection))
+                using (SqlCommand command = new SqlCommand(sql.SelectSchemas.Replace("#entityName#", entityName), connection))
                 {
                     XmlReader rdr = command.ExecuteXmlReader();
                     XmlDocument xdoc = new XmlDocument();

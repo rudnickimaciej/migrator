@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,17 +44,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\Entity.cs" />
+    <Compile Include="Attributes\Field.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Migratorm.cs" />
+    <Compile Include="Node\Node.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLProvider\sql.Designer.cs">
+      <DependentUpon>sql.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="SQLProvider\SQLProvider.cs" />
+    <Compile Include="TypeMapping\TypeMapper.cs" />
+    <Compile Include="XMLModel\XMLModel.cs" />
+    <Compile Include="XMLModel\XMLModelConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Migrator.Core.csproj">
-      <Project>{46e3e3f0-bc50-4e66-92bf-15444a7c3956}</Project>
-      <Name>Migrator.Core</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="SQLProvider\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Migrator.Core</CustomToolNamespace>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

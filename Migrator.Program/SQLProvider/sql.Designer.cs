@@ -19,7 +19,7 @@ namespace Migrator.Core {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class sql {
@@ -39,7 +39,7 @@ namespace Migrator.Core {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Core.SQLProvider.sql", typeof(sql).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Migrator.Program.SQLProvider.sql", typeof(sql).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,37 +63,35 @@ namespace Migrator.Core {
         /// <summary>
         ///   Looks up a localized string similar to BEGIN TRANSACTION
         ///
-        ///IF NOT EXISTS ( SELECT  *
-        ///                FROM    sys.schemas
-        ///                WHERE   name = N&apos;migrator&apos; )
-        ///    EXEC(&apos;CREATE SCHEMA [migrator]&apos;);
+        ///IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = N&apos;migrator&apos;)
+        ///    EXEC (&apos;CREATE SCHEMA [migrator]&apos;);
         ///
+        ///if not exists (select * from sysobjects where name = &apos;SchemaVersion&apos;)
+        ///    CREATE TABLE [migrator].[SchemaVersion]
+        ///    (
+        ///        [VersionId] [int] PRIMARY KEY IDENTITY(100, 1) NOT NULL,
+        ///        [Created] [datetime] NOT NULL
+        ///    )
         ///
-        ///if not exists (select * from sysobjects where name=&apos;Migrations&apos;)
-        ///
-        ///	CREATE TABLE [migrator].[Migrations]
-        ///	(
-        ///		ID INT PRIMARY KEY IDENTITY (1,1),
-        ///		EntityName VARCHAR(100) NOT NULL,
-        ///		EntitySchemaXML XML NOT NULL,
-        ///		CreatedOn DATETIME NOT NULL
-        ///	)
-        ///
-        ///
-        ///COMMIT TRANSACTION.
+        ///if not exists (select * from sysobjects where name = &apos;Schema&apos;)
+        ///    CREATE TABLE [migrator].[Migrations]
+        ///    (
+        ///        [ID] [int] IDENTITY(1,  [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string CreateMigrationTable {
+        internal static string InitMigratorTables {
             get {
-                return ResourceManager.GetString("CreateMigrationTable", resourceCulture);
+                return ResourceManager.GetString("InitMigratorTables", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT EntitySchemaXML FROM migrator.Migrations WHERE EntityName = &apos;#entityName#&apos;.
+        ///   Looks up a localized string similar to SELECT EntitySchemaXML FROM [migrator].[Schema] 
+        ///WHERE VersionId = (SELECT TOP 1 VersionId FROM [migrator].[SchemaVersion] 
+        ///					ORDER BY CREATED DESC).
         /// </summary>
-        internal static string SelectFromMigration {
+        internal static string SelectSchemas {
             get {
-                return ResourceManager.GetString("SelectFromMigration", resourceCulture);
+                return ResourceManager.GetString("SelectSchemas", resourceCulture);
             }
         }
     }

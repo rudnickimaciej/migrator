@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Migrator.Core
 {
-    public class Entity : Attribute
+    public class Field : Attribute
     {
-        public Entity()
+        public Field()
         {
         }
 
-        public Entity(string name)
+        public Field(string name)
         {
             Name = name;
         }

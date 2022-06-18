@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Migrator.Core
+namespace Migrator
 {
-    public class Entity : Attribute
+    public class Field : Attribute
     {
-        public Entity()
+        public Field()
         {
         }
 
-        public Entity(string name)
+        public Field(string name)
         {
             Name = name;
         }

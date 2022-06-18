@@ -5,9 +5,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Extensions
+namespace Migrator
 {
-    public static class Extensions
+    internal static class Extensions
     {
         public static bool IsSimple(this Type type)
         {
@@ -24,29 +24,29 @@ namespace Common.Extensions
               || type.Equals(typeof(DateTime));
         }
 
-        public static bool IsSingleRefenceType(this Type type)
+        internal static bool IsSingleRefenceType(this Type type)
         {
             return !type.IsSimple() && !type.IsList();
         }
-        public static bool IsList(this Type type)
+        internal static bool IsList(this Type type)
         {
             return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>);
         }
-        public static bool IsSimpleList(this Type type)
+        internal static bool IsSimpleList(this Type type)
         {
             return type.IsList() && type.GetGenericArguments()[0].IsSimple();
         }
-        public static bool IsReferenceList(this Type type)
+        internal static bool IsReferenceList(this Type type)
         {
             return type.IsList() && !type.GetGenericArguments()[0].IsSimple();
         }
 
-        public static string GetNamespace(this Type type)
+        internal static string GetNamespace(this Type type)
         {
             return type.IsList() ? type.GetGenericArguments()[0].Namespace : type.Namespace;
         }
 
-        public static Type GetListType<T>(this List<T> _)
+        internal static Type GetListType<T>(this List<T> _)
         {
             return typeof(T);
         }

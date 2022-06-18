@@ -1,6 +1,7 @@
 ﻿using Migrator.Core;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -14,7 +15,7 @@ namespace Migrator.Program
     {
         static void Main(string[] args)
         {
-            string sql = new Migratorm().Migrate("connectionString", LoadAllBinDirectoryAssemblies());
+            string sql = new Migratorm().Migrate(ConfigurationManager.ConnectionStrings["Migrator"].ConnectionString, LoadAllBinDirectoryAssemblies());
             Console.WriteLine(sql);
         }
 

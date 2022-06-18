@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
@@ -12,7 +13,7 @@ using Migrator.Core;
 [assembly: InternalsVisibleToAttribute("Migrator.Tests")]
 [assembly: InternalsVisibleToAttribute("Migrator.Program")]
 
-namespace Migrator.Core
+namespace Migrator
 {
 
 
@@ -40,7 +41,7 @@ namespace Migrator.Core
             SqlScriptType = sqlScriptType;
         }
 
-        public string Sql{ get; set; }
+        public string Sql { get; set; }
         public SqlScriptType SqlScriptType { get; set; }
 
     }
@@ -64,7 +65,7 @@ namespace Migrator.Core
             ISqlProvider sqlProvider = new SQLProvider(connectionString);
             List<Node> nodes = types.Select(t => new Node(t)).ToList();
             List<Node> sortedNoted = new List<Node>();
-           // SortEntities(0, nodes, ref sortedNoted);
+            // SortEntities(0, nodes, ref sortedNoted);
 
             List<SQLPackage> packages = nodes.Select(n => sqlProvider.Parse(n.Type)).ToList();
 
@@ -82,15 +83,15 @@ namespace Migrator.Core
         internal static List<SQLScript> FlattenPackages(List<SQLPackage> packages)
         {
             List<SQLScript> flat = new List<SQLScript>();
-            
+
             foreach (var package in packages)
                 foreach (var script in package.Scripts)
                     flat.Add(script);
             return flat;
         }
-        internal static List<SQLScript> SortByType(List<SQLScript> list) =>  list.OrderBy(c => c.SqlScriptType).ToList();
-           
-        
+        internal static List<SQLScript> SortByType(List<SQLScript> list) => list.OrderBy(c => c.SqlScriptType).ToList();
+
+
         internal static void SortEntities(int i, List<Node> list, ref List<Node> sortedList)
         {
             while (i < list.Count)
@@ -102,15 +103,27 @@ namespace Migrator.Core
                 if (!sortedList.Any(n => n.Type.Equals(node.Type)))
                     sortedList.Add(list[i]);
                 //ProcessEntities(++i, ref list, ref sortedList);
-                i++;             
+                i++;
             }
         }
 
         internal void GetSchemasFromDb()
         {
 
+
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Migrator"].ConnectionString))
+            {
+                connection.Open();
+
+
+                using (SqlCommand command = new SqlCommand(sql.SelectSchemas.Replace('\t', ' ').Replace('\n', ' ').Replace('\r', ' '), connection))
+                {
+                    command.ExecuteNonQuery();
+
+                }
+            }
         }
-       
+
         private void CreateConfigurationTables(string connectionString)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -118,7 +131,7 @@ namespace Migrator.Core
                 connection.Open();
 
 
-                using (SqlCommand command = new SqlCommand(sql.CreateMigrationTable.Replace('\t', ' ').Replace('\n', ' ').Replace('\r', ' '), connection))
+                using (SqlCommand command = new SqlCommand(sql.InitMigratorTables.Replace('\t', ' ').Replace('\n', ' ').Replace('\r', ' '), connection))
                 {
                     command.ExecuteNonQuery();
 

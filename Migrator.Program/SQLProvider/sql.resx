@@ -117,29 +117,36 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CreateMigrationTable" xml:space="preserve">
+  <data name="InitMigratorTables" xml:space="preserve">
     <value>BEGIN TRANSACTION
 
-IF NOT EXISTS ( SELECT  *
-                FROM    sys.schemas
-                WHERE   name = N'migrator' )
-    EXEC('CREATE SCHEMA [migrator]');
+IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = N'migrator')
+    EXEC ('CREATE SCHEMA [migrator]');
 
+if not exists (select * from sysobjects where name = 'SchemaVersion')
+    CREATE TABLE [migrator].[SchemaVersion]
+    (
+        [VersionId] [int] PRIMARY KEY IDENTITY(100, 1) NOT NULL,
+        [Created] [datetime] NOT NULL
+    )
 
-if not exists (select * from sysobjects where name='Migrations')
-
-	CREATE TABLE [migrator].[Migrations]
-	(
-		ID INT PRIMARY KEY IDENTITY (1,1),
-		EntityName VARCHAR(100) NOT NULL,
-		EntitySchemaXML XML NOT NULL,
-		CreatedOn DATETIME NOT NULL
-	)
+if not exists (select * from sysobjects where name = 'Schema')
+    CREATE TABLE [migrator].[Migrations]
+    (
+        [ID] [int] IDENTITY(1, 1) NOT NULL,
+        [VersionId] [int]
+            FOREIGN KEY REFERENCES [migrator].[SchemaVersion] (VersionId),
+        [EntityName] [varchar](100) NOT NULL,
+        [EntitySchemaXML] [xml] NOT NULL,
+        [CreatedOn] [datetime] NOT NULL,
+    )
 
 
 COMMIT TRANSACTION</value>
   </data>
-  <data name="SelectFromMigration" xml:space="preserve">
-    <value>SELECT EntitySchemaXML FROM migrator.Migrations WHERE EntityName = '#entityName#'</value>
+  <data name="SelectSchemas" xml:space="preserve">
+    <value>SELECT EntitySchemaXML FROM [migrator].[Schema] 
+WHERE VersionId = (SELECT TOP 1 VersionId FROM [migrator].[SchemaVersion] 
+					ORDER BY CREATED DESC)</value>
   </data>
 </root>

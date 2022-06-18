@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\Entity2.cs" />
+    <Compile Include="Attributes\Field.cs" />
     <Compile Include="Attributes\Entity.cs" />
     <Compile Include="Migratorm.cs" />
     <Compile Include="Node\Node.cs" />
@@ -66,6 +66,7 @@
     <EmbeddedResource Include="SQLProvider\sql.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>sql.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Migrator.Core</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

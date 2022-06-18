@@ -48,9 +48,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Migrator.Core.csproj">
-      <Project>{46E3E3F0-BC50-4E66-92BF-15444A7C3956}</Project>
-      <Name>Migrator.Core</Name>
+    <ProjectReference Include="..\Migrator.Program\Migrator.csproj">
+      <Project>{9E8C493E-234B-492F-87F9-43DF48F91EE3}</Project>
+      <Name>Migrator</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

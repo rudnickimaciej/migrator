@@ -1,4 +1,4 @@
-﻿using Migrator.Core;
+﻿using Migrator;
 using System;
 using System.Collections.Generic;
 
@@ -11,6 +11,8 @@ namespace APKA_TEST.Domain
         public int Paws { get; set; }
         public string Name { get; set; }
         public DateTime Born { get; set; }
+
+        [Field("Value")]
         public List<int> ListofInts { get; set; }
         public Person Person { get; set; }
         public Person Person2 { get; set; }
