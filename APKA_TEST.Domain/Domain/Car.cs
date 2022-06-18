@@ -1,4 +1,4 @@
-﻿using Migrator.Core;
+﻿using Migrator;
 using System;
 using System.Collections.Generic;
 

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Migrator.Core {
+namespace Migrator {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Migrator.Core {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Migrator.Program.SQLProvider.sql", typeof(sql).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Migrator.SQLProvider.sql", typeof(sql).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

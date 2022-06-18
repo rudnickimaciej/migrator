@@ -1,4 +1,4 @@
-﻿using Migrator.Core;
+﻿using Migrator;
 using System;
 
 namespace APKA_TEST.Domain

@@ -1,5 +1,4 @@
-﻿using Migrator.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -15,6 +14,7 @@ namespace Migrator.Program
     {
         static void Main(string[] args)
         {
+            var xmls = new Migratorm().GetSchemasFromDb();
             string sql = new Migratorm().Migrate(ConfigurationManager.ConnectionStrings["Migrator"].ConnectionString, LoadAllBinDirectoryAssemblies());
             Console.WriteLine(sql);
         }
@@ -43,7 +43,7 @@ namespace Migrator.Program
         private static bool AssemblyContainsEntity(Assembly assembly)
         {
 
-            var attributes = assembly.GetCustomAttributes(typeof(Entity2), false);
+            var attributes = assembly.GetCustomAttributes(typeof(Entity), false);
 
             if (attributes.Length > 0)
                 return true;

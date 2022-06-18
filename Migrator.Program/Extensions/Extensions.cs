@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -50,5 +51,15 @@ namespace Migrator
         {
             return typeof(T);
         }
+
+        public static IEnumerable<T> Select<T>(this IDataReader reader,
+                                       Func<IDataReader, T> projection)
+        {
+            while (reader.Read())
+            {
+                yield return projection(reader);
+            }
+        }
+
     }
 }

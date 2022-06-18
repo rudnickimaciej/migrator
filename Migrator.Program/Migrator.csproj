@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{9E8C493E-234B-492F-87F9-43DF48F91EE3}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Migrator.Program</RootNamespace>
-    <AssemblyName>Migrator.Program</AssemblyName>
+    <RootNamespace>Migrator</RootNamespace>
+    <AssemblyName>Migrator</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -58,6 +58,7 @@
     </Compile>
     <Compile Include="SQLProvider\SQLProvider.cs" />
     <Compile Include="TypeMapping\TypeMapper.cs" />
+    <Compile Include="XmlDoc\XmlDoc.cs" />
     <Compile Include="XMLModel\XMLModel.cs" />
     <Compile Include="XMLModel\XMLModelConverter.cs" />
   </ItemGroup>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
@@ -8,7 +9,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
-using Migrator.Core;
 
 [assembly: InternalsVisibleToAttribute("Migrator.Tests")]
 [assembly: InternalsVisibleToAttribute("Migrator.Program")]
@@ -107,20 +107,17 @@ namespace Migrator
             }
         }
 
-        internal void GetSchemasFromDb()
+        internal List<XmlDoc> GetSchemasFromDb()
         {
-
-
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Migrator"].ConnectionString))
             {
                 connection.Open();
 
-
-                using (SqlCommand command = new SqlCommand(sql.SelectSchemas.Replace('\t', ' ').Replace('\n', ' ').Replace('\r', ' '), connection))
+                using (IDataReader reader = new SqlCommand(sql.SelectSchemas.Replace('\t', ' ').Replace('\n', ' ').Replace('\r', ' '), connection).ExecuteReader())
                 {
-                    command.ExecuteNonQuery();
-
-                }
+                    return reader.Select(r => new XmlDoc(r["EntitySchemaXML"] is DBNull ? null : r["EntitySchemaXML"].ToString())
+                  ).ToList();
+                }            
             }
         }
 
