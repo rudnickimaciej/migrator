@@ -1,10 +1,11 @@
 using NUnit.Framework;
 using NUnit.Mocks;
 using System.Collections.Generic;
-using Migrator.Core;
+using Migrator;
 using System;
 
-namespace TestProject1.Core
+namespace Migrator.Tests.Core
+
 {
     class Home
     {

@@ -9,7 +9,7 @@ namespace Migrator
 {
     internal class XmlDoc
     {
-        protected XmlDocument xml { get; set; }
+        public XmlDocument xml { get; set; }
 
         public XmlDoc(XmlDocument xml)
         {

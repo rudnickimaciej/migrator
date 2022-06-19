@@ -60,9 +60,16 @@ namespace Migrator
 
     internal class Migratorm
     {
-        internal string Migrate(string connectionString, List<Type> types)
+        internal string Migrate(List<Type> types)
         {
-            ISqlProvider sqlProvider = new SQLProvider(connectionString);
+            CreateConfigurationTables();
+            List<XMLModel> oldSchemas =  GetSchemasFromDb().Select(doc=>XMLModelConverter.ConverXmlToXMLModel(doc.xml)).ToList();
+            List<XMLModel> newSchemas = types.Select(t => XMLModelConverter.ConvertTypeToXMLModel(t)).ToList();
+            List<XmlModelPair> schemaPairs = PairSchemas(oldSchemas, newSchemas);
+
+
+
+            ISqlProvider sqlProvider = new SQLProvider();
             List<Node> nodes = types.Select(t => new Node(t)).ToList();
             List<Node> sortedNoted = new List<Node>();
             // SortEntities(0, nodes, ref sortedNoted);
@@ -107,6 +114,44 @@ namespace Migrator
             }
         }
 
+
+        internal static List<XmlModelPair> PairSchemas(List<XMLModel> oldSchemas, List<XMLModel> newSchemas)
+        {
+            List<XmlModelPair> pairs = new List<XmlModelPair>();
+            foreach(XMLModel schema in oldSchemas)
+            {
+                foreach(XMLModel schema2 in newSchemas)
+                {
+                    if(schema.EntityName == schema2.EntityName)
+                    {
+                        pairs.Add(new XmlModelPair(schema, schema2));
+                    }
+                }
+            }
+
+            foreach(XMLModel schema in oldSchemas)
+            {
+                foreach(XmlModelPair pair in pairs)
+                {
+                    if (schema.EntityName == pair.SchemaPair.Item1.EntityName)
+                        continue;
+                }
+                pairs.Add(new XmlModelPair(oldSchema: schema, newSchema: null));
+            }
+
+
+            foreach (XMLModel schema in newSchemas)
+            {
+                foreach (XmlModelPair pair in pairs)
+                {
+                    if (schema.EntityName == pair.SchemaPair.Item2.EntityName)
+                        continue;
+                }
+                pairs.Add(new XmlModelPair(oldSchema: null, newSchema: schema));
+            }
+
+            return pairs;
+        }
         internal List<XmlDoc> GetSchemasFromDb()
         {
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Migrator"].ConnectionString))
@@ -121,9 +166,9 @@ namespace Migrator
             }
         }
 
-        private void CreateConfigurationTables(string connectionString)
+        private void CreateConfigurationTables()
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Migrator"].ConnectionString))
             {
                 connection.Open();
 

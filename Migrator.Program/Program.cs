@@ -14,8 +14,7 @@ namespace Migrator.Program
     {
         static void Main(string[] args)
         {
-            var xmls = new Migratorm().GetSchemasFromDb();
-            string sql = new Migratorm().Migrate(ConfigurationManager.ConnectionStrings["Migrator"].ConnectionString, LoadAllBinDirectoryAssemblies());
+            string sql = new Migratorm().Migrate(LoadAllBinDirectoryAssemblies());
             Console.WriteLine(sql);
         }
 

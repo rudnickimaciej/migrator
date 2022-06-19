@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Migrator.Tests", "TestProject1\Migrator.Tests.csproj", "{A83A6FD6-4BD9-4A77-8D0F-28DDD86DDF68}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4A7CD43B-F5E5-4FF8-9A01-5ECA93EAB945}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\..\Desktop\Migrations.xlsx = ..\..\..\Desktop\Migrations.xlsx
@@ -17,16 +15,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APKA_TEST", "APKA_TEST\APKA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APKA_TEST.Domain", "APKA_TEST.Domain\APKA_TEST.Domain.csproj", "{10C74590-5E94-4AD2-9455-8779D2CBBBFE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Migrator.Tests", "Migrator.Tests\Migrator.Tests.csproj", "{256C3741-2E99-4B2C-8212-5358D3FA36CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A83A6FD6-4BD9-4A77-8D0F-28DDD86DDF68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A83A6FD6-4BD9-4A77-8D0F-28DDD86DDF68}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A83A6FD6-4BD9-4A77-8D0F-28DDD86DDF68}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A83A6FD6-4BD9-4A77-8D0F-28DDD86DDF68}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9E8C493E-234B-492F-87F9-43DF48F91EE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9E8C493E-234B-492F-87F9-43DF48F91EE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E8C493E-234B-492F-87F9-43DF48F91EE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{10C74590-5E94-4AD2-9455-8779D2CBBBFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10C74590-5E94-4AD2-9455-8779D2CBBBFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10C74590-5E94-4AD2-9455-8779D2CBBBFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{256C3741-2E99-4B2C-8212-5358D3FA36CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{256C3741-2E99-4B2C-8212-5358D3FA36CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{256C3741-2E99-4B2C-8212-5358D3FA36CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{256C3741-2E99-4B2C-8212-5358D3FA36CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -61,6 +61,7 @@
     <Compile Include="XmlDoc\XmlDoc.cs" />
     <Compile Include="XMLModel\XMLModel.cs" />
     <Compile Include="XMLModel\XMLModelConverter.cs" />
+    <Compile Include="XMLModel\XmlModelPair.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

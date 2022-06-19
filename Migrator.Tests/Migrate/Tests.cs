@@ -1,10 +1,10 @@
 ﻿using NUnit.Framework;
 using NUnit.Mocks;
 using System.Collections.Generic;
-using Migrator.Core;
+using Migrator;
 using System;
 
-namespace TestProject1.Migrate
+namespace Migrator.Tests.Migrate
 {
     class Home
     {
@@ -72,6 +72,12 @@ namespace TestProject1.Migrate
             };
 
             homePackage = new SQLPackage(homeScript1, homeScript2);
+
+        }
+
+        [Test]
+        public void PairXmlModels_InitialMigration_TuplesShouldBeHalfEmpty()
+        {
 
         }
 

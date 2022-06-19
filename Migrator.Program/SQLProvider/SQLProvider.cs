@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -15,12 +16,6 @@ namespace Migrator
     internal class SQLProvider : ISqlProvider
     {
         XMLModelConverter converter = new XMLModelConverter();
-        private readonly string _connectionString;
-
-        public SQLProvider(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
 
         public SQLPackage Parse(Type type)
         {
@@ -79,7 +74,7 @@ namespace Migrator
         internal XmlDocument GetMigrationFromDb(string entityName)
         {
 
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Migrator"].ConnectionString))
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand(sql.SelectSchemas.Replace("#entityName#", entityName), connection))
