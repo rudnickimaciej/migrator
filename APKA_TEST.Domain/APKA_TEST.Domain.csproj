@@ -48,8 +48,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Migrator.Program\Migrator.csproj">
-      <Project>{9E8C493E-234B-492F-87F9-43DF48F91EE3}</Project>
+    <ProjectReference Include="..\Migrator\Migrator.csproj">
+      <Project>{9e8c493e-234b-492f-87f9-43df48f91ee3}</Project>
       <Name>Migrator</Name>
     </ProjectReference>
   </ItemGroup>

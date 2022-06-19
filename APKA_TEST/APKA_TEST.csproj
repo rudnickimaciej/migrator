@@ -54,7 +54,7 @@
       <Project>{10c74590-5e94-4ad2-9455-8779d2cbbbfe}</Project>
       <Name>APKA_TEST.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Migrator.Program\Migrator.csproj">
+    <ProjectReference Include="..\Migrator\Migrator.csproj">
       <Project>{9e8c493e-234b-492f-87f9-43df48f91ee3}</Project>
       <Name>Migrator</Name>
     </ProjectReference>
