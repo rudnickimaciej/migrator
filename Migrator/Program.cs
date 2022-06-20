@@ -14,6 +14,7 @@ namespace Migrator.Program
     {
         static void Main(string[] args)
         {
+
             string sql = new Migratorm().Migrate(LoadAllBinDirectoryAssemblies());
             Console.WriteLine(sql);
         }
@@ -50,5 +51,8 @@ namespace Migrator.Program
 
             return false;
         }
+
+     
+
     }
 }

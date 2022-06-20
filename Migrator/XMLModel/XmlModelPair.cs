@@ -13,5 +13,10 @@ namespace Migrator
             SchemaPair = new Tuple<XMLModel, XMLModel>(oldSchema,newSchema);
         }
         public Tuple<XMLModel,XMLModel> SchemaPair{ get; set; }
+
+         public override string ToString()
+        {
+            return string.Format("({0}, {1})", SchemaPair?.Item1?.EntityName, SchemaPair?.Item2?.EntityName);
+        }
     }
 }

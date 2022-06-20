@@ -51,6 +51,8 @@
     <Compile Include="Node\Node.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLOperation\SQLOperation.cs" />
+    <Compile Include="SQLOperation\SQLOperationFabric.cs" />
     <Compile Include="SQLProvider\sql.Designer.cs">
       <DependentUpon>sql.resx</DependentUpon>
       <AutoGen>True</AutoGen>

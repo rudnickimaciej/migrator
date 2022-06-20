@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 [assembly: InternalsVisibleToAttribute("Migrator.Tests")]
-
 namespace Migrator
 {
     internal class XMLModel

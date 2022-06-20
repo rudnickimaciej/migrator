@@ -16,7 +16,6 @@ using System.Xml;
 namespace Migrator
 {
 
-
     internal class SQLPackage
     {
         public SQLPackage(params SQLScript[] scripts)
@@ -66,7 +65,7 @@ namespace Migrator
             List<XMLModel> oldSchemas =  GetSchemasFromDb().Select(doc=>XMLModelConverter.ConverXmlToXMLModel(doc.xml)).ToList();
             List<XMLModel> newSchemas = types.Select(t => XMLModelConverter.ConvertTypeToXMLModel(t)).ToList();
             List<XmlModelPair> schemaPairs = PairSchemas(oldSchemas, newSchemas);
-
+            List<ISQLOperation>
 
 
             ISqlProvider sqlProvider = new SQLProvider();
@@ -113,45 +112,136 @@ namespace Migrator
                 i++;
             }
         }
+        internal static List<XmlModelPair> PairSchemas(List<XMLModel> first, List<XMLModel> second)
+        {
+            var pairs = new List<Tuple<XMLModel, XMLModel>>();
 
+            pairs.AddRange(first.Intersect(second)
+                .Select(match => Tuple.Create(match, match)));
 
-        internal static List<XmlModelPair> PairSchemas(List<XMLModel> oldSchemas, List<XMLModel> newSchemas)
+            pairs.AddRange(first.Except(second)
+                .Select(inFirst => Tuple.Create(inFirst, (XMLModel)null)));
+
+            pairs.AddRange(second.Except(first)
+                .Select(inSecond => Tuple.Create((XMLModel)null, inSecond)));
+
+            return pairs.Select(p => new XmlModelPair(p.Item1, p.Item2)).ToList();
+        }
+
+        #region pair functions
+
+        
+
+        internal static List<XmlModelPair> PairSchemas2(List<XMLModel> oldSchemas, List<XMLModel> newSchemas)
         {
             List<XmlModelPair> pairs = new List<XmlModelPair>();
-            foreach(XMLModel schema in oldSchemas)
+            List<XMLModel> oldSchemasbuffor = new List<XMLModel>(oldSchemas);
+            List<XMLModel> newSchemasbuffor = new List<XMLModel>(newSchemas);
+
+            foreach (XMLModel schema in oldSchemas)
             {
                 foreach(XMLModel schema2 in newSchemas)
                 {
                     if(schema.EntityName == schema2.EntityName)
                     {
                         pairs.Add(new XmlModelPair(schema, schema2));
+                        oldSchemasbuffor.Remove(oldSchemasbuffor.Where(s => s.EntityName == schema.EntityName).FirstOrDefault());
+                        newSchemasbuffor.Remove(newSchemasbuffor.Where(s => s.EntityName == schema.EntityName).FirstOrDefault());
                     }
                 }
             }
 
-            foreach(XMLModel schema in oldSchemas)
+            foreach(XMLModel schema in oldSchemasbuffor)
             {
-                foreach(XmlModelPair pair in pairs)
-                {
-                    if (schema.EntityName == pair.SchemaPair.Item1.EntityName)
-                        continue;
-                }
                 pairs.Add(new XmlModelPair(oldSchema: schema, newSchema: null));
             }
 
-
-            foreach (XMLModel schema in newSchemas)
+            foreach (XMLModel schema in newSchemasbuffor)
             {
-                foreach (XmlModelPair pair in pairs)
-                {
-                    if (schema.EntityName == pair.SchemaPair.Item2.EntityName)
-                        continue;
-                }
                 pairs.Add(new XmlModelPair(oldSchema: null, newSchema: schema));
             }
 
             return pairs;
         }
+
+        public static List<XmlModelPair> PairSchemas5(List<XMLModel> oldSchemas, List<XMLModel> newSchemas)
+        {
+            var result = (from a in oldSchemas
+                          join b in newSchemas.Select(x => x) on a.EntityName equals b.EntityName into ab
+                          from b in ab.DefaultIfEmpty()
+                          select new XmlModelPair(a, b)
+                   ).ToList();
+
+             result.Concat(newSchemas.Where(x => !result.Any(y => y.SchemaPair?.Item2?.EntityName == x.EntityName))
+                       .Select(x => new XmlModelPair(null, x)))
+                .ToList();
+
+            return result.Concat(oldSchemas.Where(x => !result.Any(y => y.SchemaPair?.Item1?.EntityName == x.EntityName))
+                      .Select(x => new XmlModelPair(x, null)))
+               .ToList() ;
+        }
+
+     
+        public static List<Tuple<int?, int?>> PairInts(List<int> listOne, List<int> listTwo)
+        {
+            var result = (from a in listOne
+                          join b in listTwo.Select(x => (int?)x) on a equals b into ab
+                          from b in ab.DefaultIfEmpty()
+                          select Tuple.Create<int?, int?>(a, b)
+                   ).ToList();
+
+            return result
+                .Concat(listTwo.Where(x => !result.Any(y => y.Item1 == x))
+                       .Select(x => Tuple.Create<int?, int?>(null, x)))
+                .ToList();
+        }
+
+        public static List<Tuple<XMLModel, XMLModel>> PairXmlModels3(List<XMLModel> listOne, List<XMLModel> listTwo)
+        {
+            var result = (from a in listOne
+                          join b in listTwo.Select(x => x) on a equals b into ab
+                          from b in ab.DefaultIfEmpty()
+                          select Tuple.Create<XMLModel, XMLModel>(a, b)
+                   ).ToList();
+
+            return result
+                .Concat(listTwo.Where(x => !result.Any(y => y.Item1.EntityName == x.EntityName))
+                       .Select(x => Tuple.Create<XMLModel, XMLModel>(null, x)))
+                .ToList();
+        }
+        internal static List<Tuple<int?, int?>> PairInts2(List<int> firstList, List<int> secondList)
+        {
+            List<Tuple<int?, int?>> pairs = new List<Tuple<int?, int?>>();
+            List<int> firstListBackup = new List<int>(firstList);
+            List<int> secondListBackup = new List<int>(secondList);
+
+            foreach (int val in firstList)
+            {
+                foreach (int val2 in secondList)
+                {
+                    if (val == val2)
+                    {
+                        pairs.Add(new Tuple<int?, int?>(val, val2));
+                        firstListBackup.Remove(firstListBackup.Where(v => v == val).FirstOrDefault());
+                        secondListBackup.Remove(secondListBackup.Where(v => v == val2).FirstOrDefault());
+                    }
+                }
+            }
+
+            foreach (int val in firstListBackup)
+            {
+                pairs.Add(new Tuple<int?, int?>(val, null));
+            }
+
+            foreach (int val in secondListBackup)
+            {
+                pairs.Add(new Tuple<int?, int?>(null, val));
+            }
+
+            return pairs;
+        }
+        #endregion
+
         internal List<XmlDoc> GetSchemasFromDb()
         {
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Migrator"].ConnectionString))
