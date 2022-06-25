@@ -10,12 +10,14 @@ namespace Migrator
 {
     internal class XMLModel
     {
+        public int ID { get; set; }
         public string EntityName { get; set; }
         public List<XMLModelField> Fields = new List<XMLModelField>();
     }
 
     internal class XMLModelField
     {
+        public int ID { get; set; }
         public string EntityName { get; set; }
         public FieldType fieldType { get; set; }
         public string fieldName { get; set; }

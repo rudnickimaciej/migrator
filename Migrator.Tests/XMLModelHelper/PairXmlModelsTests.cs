@@ -10,8 +10,13 @@ namespace Migrator.Tests.XMLModelHelper
         private XMLModel type11;
 
         private XMLModel type2;
+        private XMLModel type22;
+
         private XMLModel type3;
+        private XMLModel type33;
+
         private XMLModel type4;
+        private XMLModel type44;
 
         [SetUp]
         public void Setup()
@@ -20,8 +25,14 @@ namespace Migrator.Tests.XMLModelHelper
             type11 = new XMLModel() { EntityName = "entity1" };
 
             type2 = new XMLModel() { EntityName = "entity2" };
+            type22 = new XMLModel() { EntityName = "entity2" };
+
             type3 = new XMLModel() { EntityName = "entity3" };
+            type33 = new XMLModel() { EntityName = "entity3" };
+
             type4 = new XMLModel() { EntityName = "entity4" };
+            type44 = new XMLModel() { EntityName = "entity4" };
+
         }
 
         [Test]
@@ -68,7 +79,7 @@ namespace Migrator.Tests.XMLModelHelper
         public void PairXmlModels_NoTypeAddedNorDeleted_TuplesShouldBeFull()
         {
             List<XMLModel> oldSchemas = new List<XMLModel>() { type1, type2, type3, type4 };
-            List<XMLModel> newSchemas = new List<XMLModel>() { type2, type3, type11, type4 };
+            List<XMLModel> newSchemas = new List<XMLModel>() { type22, type33, type11, type44 };
 
             List<XMLModelPair> pairs = Migrator.XMLModelHelper.PairSchemas(oldSchemas, newSchemas);
 
@@ -83,7 +94,7 @@ namespace Migrator.Tests.XMLModelHelper
         public void PairXmlModels_TypeDeleted_TuplesShouldContainRightHalfEmptyTuple()
         {
             List<XMLModel> oldSchemas = new List<XMLModel>() { type1, type2, type3, type4 };
-            List<XMLModel> newSchemas = new List<XMLModel>() { type2, type3, type4 };
+            List<XMLModel> newSchemas = new List<XMLModel>() { type22, type33, type44 };
 
             List<XMLModelPair> pairs = Migrator.XMLModelHelper.PairSchemas(oldSchemas, newSchemas);
 
@@ -99,7 +110,7 @@ namespace Migrator.Tests.XMLModelHelper
         public void PairXmlModels_TypeAdded_TuplesShouldContainLeftHalfEmptyTuple()
         {
             List<XMLModel> oldSchemas = new List<XMLModel>() { type2, type3, type4 };
-            List<XMLModel> newSchemas = new List<XMLModel>() { type2, type3, type4, type1 };
+            List<XMLModel> newSchemas = new List<XMLModel>() { type22, type33, type44, type11 };
 
             List<XMLModelPair> pairs = Migrator.XMLModelHelper.PairSchemas(oldSchemas, newSchemas);
 

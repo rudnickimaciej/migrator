@@ -52,6 +52,9 @@
     <Compile Include="Node\Node.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLActions\ModifyFieldTypeAction.cs" />
+    <Compile Include="SQLActions\AddFieldAction.cs" />
+    <Compile Include="SQLActions\DeleteFieldAction.cs" />
     <Compile Include="SQLActions\CreateTableAction.cs" />
     <Compile Include="SQLActions\DeleteTableAction.cs" />
     <Compile Include="SQLActions\ISQLAction.cs" />

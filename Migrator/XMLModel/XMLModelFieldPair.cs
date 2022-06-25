@@ -16,7 +16,7 @@ namespace Migrator
 
          public override string ToString()
         {
-            return string.Format("({0}, {1})", FieldPair?.Item1?.fieldName, FieldPair?.Item2?.fieldName);
+            return string.Format("({0} {1}, {2} {3})", FieldPair?.Item1?.fieldName, FieldPair?.Item1?.ID, FieldPair?.Item2?.fieldName, FieldPair?.Item2?.ID);
         }
     }
 }
