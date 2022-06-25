@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Migrator
 {
-    internal class XmlModelPair
+    internal class XMLModelPair
     {
-        public XmlModelPair(XMLModel oldSchema, XMLModel newSchema)
+        public XMLModelPair(XMLModel oldSchema, XMLModel newSchema)
         {
             SchemaPair = new Tuple<XMLModel, XMLModel>(oldSchema,newSchema);
         }

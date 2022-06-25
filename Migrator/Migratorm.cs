@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-[assembly: InternalsVisibleToAttribute("Migrator.Tests")]
+
 [assembly: InternalsVisibleToAttribute("Migrator.Program")]
 
 namespace Migrator
@@ -57,15 +57,15 @@ namespace Migrator
         DELETE_TABLE
     }
 
-    internal class Migratorm
+    internal class TypeMigrator
     {
         internal string Migrate(List<Type> types)
         {
             CreateConfigurationTables();
             List<XMLModel> oldSchemas =  GetSchemasFromDb().Select(doc=>XMLModelConverter.ConverXmlToXMLModel(doc.xml)).ToList();
             List<XMLModel> newSchemas = types.Select(t => XMLModelConverter.ConvertTypeToXMLModel(t)).ToList();
-            List<XmlModelPair> schemaPairs = PairSchemas(oldSchemas, newSchemas);
-            List<ISQLOperation>
+            List<XMLModelPair> schemaPairs = XMLModelHelper.PairSchemas(oldSchemas, newSchemas);
+         
 
 
             ISqlProvider sqlProvider = new SQLProvider();
@@ -112,29 +112,14 @@ namespace Migrator
                 i++;
             }
         }
-        internal static List<XmlModelPair> PairSchemas(List<XMLModel> first, List<XMLModel> second)
-        {
-            var pairs = new List<Tuple<XMLModel, XMLModel>>();
-
-            pairs.AddRange(first.Intersect(second)
-                .Select(match => Tuple.Create(match, match)));
-
-            pairs.AddRange(first.Except(second)
-                .Select(inFirst => Tuple.Create(inFirst, (XMLModel)null)));
-
-            pairs.AddRange(second.Except(first)
-                .Select(inSecond => Tuple.Create((XMLModel)null, inSecond)));
-
-            return pairs.Select(p => new XmlModelPair(p.Item1, p.Item2)).ToList();
-        }
 
         #region pair functions
 
         
 
-        internal static List<XmlModelPair> PairSchemas2(List<XMLModel> oldSchemas, List<XMLModel> newSchemas)
+        internal static List<XMLModelPair> PairSchemas2(List<XMLModel> oldSchemas, List<XMLModel> newSchemas)
         {
-            List<XmlModelPair> pairs = new List<XmlModelPair>();
+            List<XMLModelPair> pairs = new List<XMLModelPair>();
             List<XMLModel> oldSchemasbuffor = new List<XMLModel>(oldSchemas);
             List<XMLModel> newSchemasbuffor = new List<XMLModel>(newSchemas);
 
@@ -144,7 +129,7 @@ namespace Migrator
                 {
                     if(schema.EntityName == schema2.EntityName)
                     {
-                        pairs.Add(new XmlModelPair(schema, schema2));
+                        pairs.Add(new XMLModelPair(schema, schema2));
                         oldSchemasbuffor.Remove(oldSchemasbuffor.Where(s => s.EntityName == schema.EntityName).FirstOrDefault());
                         newSchemasbuffor.Remove(newSchemasbuffor.Where(s => s.EntityName == schema.EntityName).FirstOrDefault());
                     }
@@ -153,31 +138,31 @@ namespace Migrator
 
             foreach(XMLModel schema in oldSchemasbuffor)
             {
-                pairs.Add(new XmlModelPair(oldSchema: schema, newSchema: null));
+                pairs.Add(new XMLModelPair(oldSchema: schema, newSchema: null));
             }
 
             foreach (XMLModel schema in newSchemasbuffor)
             {
-                pairs.Add(new XmlModelPair(oldSchema: null, newSchema: schema));
+                pairs.Add(new XMLModelPair(oldSchema: null, newSchema: schema));
             }
 
             return pairs;
         }
 
-        public static List<XmlModelPair> PairSchemas5(List<XMLModel> oldSchemas, List<XMLModel> newSchemas)
+        public static List<XMLModelPair> PairSchemas5(List<XMLModel> oldSchemas, List<XMLModel> newSchemas)
         {
             var result = (from a in oldSchemas
                           join b in newSchemas.Select(x => x) on a.EntityName equals b.EntityName into ab
                           from b in ab.DefaultIfEmpty()
-                          select new XmlModelPair(a, b)
+                          select new XMLModelPair(a, b)
                    ).ToList();
 
              result.Concat(newSchemas.Where(x => !result.Any(y => y.SchemaPair?.Item2?.EntityName == x.EntityName))
-                       .Select(x => new XmlModelPair(null, x)))
+                       .Select(x => new XMLModelPair(null, x)))
                 .ToList();
 
             return result.Concat(oldSchemas.Where(x => !result.Any(y => y.SchemaPair?.Item1?.EntityName == x.EntityName))
-                      .Select(x => new XmlModelPair(x, null)))
+                      .Select(x => new XMLModelPair(x, null)))
                .ToList() ;
         }
 

@@ -40,7 +40,7 @@ namespace Migrator.Tests.Core
             };
             List<Node> sortedList = new List<Node>();
 
-           Migratorm.SortEntities(0, list, ref sortedList);
+            TypeMigrator.SortEntities(0, list, ref sortedList);
 
             Assert.AreEqual(typeof(Animal), sortedList[0].Type);
             Assert.AreEqual(typeof(Person), sortedList[0].Type);

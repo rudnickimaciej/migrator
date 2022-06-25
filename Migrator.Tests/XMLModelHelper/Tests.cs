@@ -84,10 +84,10 @@ namespace Migrator.Tests.Migrate
         [Test]
         public void Test1()
         {
-            List<SQLScript> flat = Migratorm.FlattenPackages(new List<SQLPackage> { personPackage, animalPackage, homePackage });
-            List<SQLScript> sorted = Migratorm.SortByType(flat);
+            List<SQLScript> flat = TypeMigrator.FlattenPackages(new List<SQLPackage> { personPackage, animalPackage, homePackage });
+            List<SQLScript> sorted = TypeMigrator.SortByType(flat);
 
-            string full = Migratorm.ToSQL(sorted);
+            string full = TypeMigrator.ToSQL(sorted);
 
             Assert.AreEqual(5, sorted.Count);
             Assert.AreEqual(personScript1, sorted[0]);

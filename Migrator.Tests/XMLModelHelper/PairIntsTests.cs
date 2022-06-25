@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Migrator;
 
-namespace Migrator.Tests.Migrate
+namespace Migrator.Tests.XMLModelHelper
 {
     internal class PairInts
     {
@@ -31,7 +31,7 @@ namespace Migrator.Tests.Migrate
             List<int> oldSchemas = new List<int>() { };
             List<int> newSchemas = new List<int>() { };
 
-            List<Tuple<int?, int?>> pairs = Migratorm.PairInts(oldSchemas, newSchemas);
+            List<Tuple<int?, int?>> pairs = TypeMigrator.PairInts(oldSchemas, newSchemas);
 
             Assert.AreEqual(0, pairs.Count);
         }
@@ -41,7 +41,7 @@ namespace Migrator.Tests.Migrate
             List<int> oldSchemas = new List<int>() {};
             List<int> newSchemas = new List<int>() { 1,2,3,4 };
 
-           List<Tuple<int?, int?>> pairs =  Migratorm.PairInts(oldSchemas, newSchemas);
+           List<Tuple<int?, int?>> pairs = TypeMigrator.PairInts(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
             Assert.IsNull(pairs[0].Item1);
@@ -61,7 +61,7 @@ namespace Migrator.Tests.Migrate
             List<int> oldSchemas = new List<int>() { 1,2,3,4 };
             List<int> newSchemas = new List<int>() { };
 
-            List<Tuple<int?, int?>> pairs = Migratorm.PairInts(oldSchemas, newSchemas);
+            List<Tuple<int?, int?>> pairs = TypeMigrator.PairInts(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
             Assert.IsNull(pairs[0].Item2);
@@ -81,7 +81,7 @@ namespace Migrator.Tests.Migrate
             List<int> oldSchemas = new List<int>() { 1, 2, 3, 4 };
             List<int> newSchemas = new List<int>() { 3,4,2,1};
 
-            List<Tuple<int?, int?>> pairs = Migratorm.PairInts(oldSchemas, newSchemas);
+            List<Tuple<int?, int?>> pairs = TypeMigrator.PairInts(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
             Assert.AreEqual(pairs[0].Item1, pairs[0].Item2);
@@ -96,7 +96,7 @@ namespace Migrator.Tests.Migrate
             List<int> oldSchemas = new List<int>() { 1, 2, 3, 4 };
             List<int> newSchemas = new List<int>() { 2, 3, 4 };
 
-            List<Tuple<int?, int?>> pairs = Migratorm.PairInts(oldSchemas, newSchemas);
+            List<Tuple<int?, int?>> pairs = TypeMigrator.PairInts(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
             Assert.AreEqual(pairs[0].Item1, pairs[0].Item2);
@@ -112,7 +112,7 @@ namespace Migrator.Tests.Migrate
             List<int> oldSchemas = new List<int>() { 1, 3, 4 };
             List<int> newSchemas = new List<int>() { 2, 3, 4, 1 };
 
-            List<Tuple<int?, int?>> pairs = Migratorm.PairInts(oldSchemas, newSchemas);
+            List<Tuple<int?, int?>> pairs = TypeMigrator.PairInts(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
             Assert.AreEqual(pairs[0].Item1, pairs[0].Item2);

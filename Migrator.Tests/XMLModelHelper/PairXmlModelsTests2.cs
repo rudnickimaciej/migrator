@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Migrator;
 
-namespace Migrator.Tests.Migrate
+namespace Migrator.Tests.XMLModelHelper
 {
     internal class PairXmlModelsTests2
     {
@@ -32,7 +32,7 @@ namespace Migrator.Tests.Migrate
             List<XMLModel> oldSchemas = new List<XMLModel>() {};
             List<XMLModel> newSchemas = new List<XMLModel>() { type1, type2, type3, type4 };
 
-           List<XmlModelPair> pairs =  Migratorm.PairSchemas5(oldSchemas, newSchemas);
+           List<XMLModelPair> pairs = TypeMigrator.PairSchemas5(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
             Assert.IsNull(pairs[0].SchemaPair.Item1);
@@ -52,7 +52,7 @@ namespace Migrator.Tests.Migrate
             List<XMLModel> oldSchemas = new List<XMLModel>() { type1, type2, type3, type4 };
             List<XMLModel> newSchemas = new List<XMLModel>() { };
 
-            List<XmlModelPair> pairs = Migratorm.PairSchemas5(oldSchemas, newSchemas);
+            List<XMLModelPair> pairs = TypeMigrator.PairSchemas5(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
             Assert.IsNull(pairs[0].SchemaPair.Item2);
@@ -72,7 +72,7 @@ namespace Migrator.Tests.Migrate
             List<XMLModel> oldSchemas = new List<XMLModel>() { type1, type2, type3, type4 };
             List<XMLModel> newSchemas = new List<XMLModel>() { type2, type3, type1, type4 };
 
-            List<XmlModelPair> pairs = Migratorm.PairSchemas5(oldSchemas, newSchemas);
+            List<XMLModelPair> pairs = TypeMigrator.PairSchemas5(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
             Assert.AreEqual(pairs[0].SchemaPair.Item1.EntityName, pairs[0].SchemaPair.Item2.EntityName);
@@ -87,7 +87,7 @@ namespace Migrator.Tests.Migrate
             List<XMLModel> oldSchemas = new List<XMLModel>() { type1, type2, type3, type4 };
             List<XMLModel> newSchemas = new List<XMLModel>() { type2, type3, type4 };
 
-            List<XmlModelPair> pairs = Migratorm.PairSchemas5(oldSchemas, newSchemas);
+            List<XMLModelPair> pairs = TypeMigrator.PairSchemas5(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
             Assert.AreEqual(pairs[0].SchemaPair.Item1.EntityName, pairs[0].SchemaPair.Item2.EntityName);
@@ -103,7 +103,7 @@ namespace Migrator.Tests.Migrate
             List<XMLModel> oldSchemas = new List<XMLModel>() { type2, type3, type4 };
             List<XMLModel> newSchemas = new List<XMLModel>() { type2, type3, type4, type1 };
 
-            List<XmlModelPair> pairs = Migratorm.PairSchemas5(oldSchemas, newSchemas);
+            List<XMLModelPair> pairs = TypeMigrator.PairSchemas5(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
             Assert.AreEqual(pairs[0].SchemaPair.Item1.EntityName, pairs[0].SchemaPair.Item2.EntityName);

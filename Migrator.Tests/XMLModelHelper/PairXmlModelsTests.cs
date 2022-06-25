@@ -1,38 +1,36 @@
 ﻿using NUnit.Framework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Migrator;
 
-namespace Migrator.Tests.Migrate
+
+namespace Migrator.Tests.XMLModelHelper
 {
     internal class PairXmlModelsTests
     {
         private XMLModel type1;
+        private XMLModel type11;
+
         private XMLModel type2;
         private XMLModel type3;
         private XMLModel type4;
-
 
         [SetUp]
         public void Setup()
         {
             type1 = new XMLModel() { EntityName = "entity1" };
+            type11 = new XMLModel() { EntityName = "entity1" };
+
             type2 = new XMLModel() { EntityName = "entity2" };
             type3 = new XMLModel() { EntityName = "entity3" };
             type4 = new XMLModel() { EntityName = "entity4" };
         }
 
-
         [Test]
         public void PairXmlModels_InitialMigration_TuplesShouldBeLeftHalfEmpty()
         {
-            List<XMLModel> oldSchemas = new List<XMLModel>() {};
+            List<XMLModel> oldSchemas = new List<XMLModel>() { };
             List<XMLModel> newSchemas = new List<XMLModel>() { type1, type2, type3, type4 };
 
-           List<XmlModelPair> pairs =  Migratorm.PairSchemas(oldSchemas, newSchemas);
+            List<XMLModelPair> pairs = Migrator.XMLModelHelper.PairSchemas(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
             Assert.IsNull(pairs[0].SchemaPair.Item1);
@@ -52,7 +50,7 @@ namespace Migrator.Tests.Migrate
             List<XMLModel> oldSchemas = new List<XMLModel>() { type1, type2, type3, type4 };
             List<XMLModel> newSchemas = new List<XMLModel>() { };
 
-            List<XmlModelPair> pairs = Migratorm.PairSchemas(oldSchemas, newSchemas);
+            List<XMLModelPair> pairs = Migrator.XMLModelHelper.PairSchemas(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
             Assert.IsNull(pairs[0].SchemaPair.Item2);
@@ -70,9 +68,9 @@ namespace Migrator.Tests.Migrate
         public void PairXmlModels_NoTypeAddedNorDeleted_TuplesShouldBeFull()
         {
             List<XMLModel> oldSchemas = new List<XMLModel>() { type1, type2, type3, type4 };
-            List<XMLModel> newSchemas = new List<XMLModel>() { type2, type3, type1, type4 };
+            List<XMLModel> newSchemas = new List<XMLModel>() { type2, type3, type11, type4 };
 
-            List<XmlModelPair> pairs = Migratorm.PairSchemas(oldSchemas, newSchemas);
+            List<XMLModelPair> pairs = Migrator.XMLModelHelper.PairSchemas(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
             Assert.AreEqual(pairs[0].SchemaPair.Item1.EntityName, pairs[0].SchemaPair.Item2.EntityName);
@@ -87,7 +85,7 @@ namespace Migrator.Tests.Migrate
             List<XMLModel> oldSchemas = new List<XMLModel>() { type1, type2, type3, type4 };
             List<XMLModel> newSchemas = new List<XMLModel>() { type2, type3, type4 };
 
-            List<XmlModelPair> pairs = Migratorm.PairSchemas(oldSchemas, newSchemas);
+            List<XMLModelPair> pairs = Migrator.XMLModelHelper.PairSchemas(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
 
@@ -95,7 +93,6 @@ namespace Migrator.Tests.Migrate
             Assert.AreEqual(pairs[1].SchemaPair.Item1.EntityName, pairs[1].SchemaPair.Item2.EntityName);
             Assert.AreEqual(pairs[2].SchemaPair.Item1.EntityName, pairs[2].SchemaPair.Item2.EntityName);
             Assert.IsNull(pairs[3].SchemaPair.Item2);
-
         }
 
         [Test]
@@ -104,14 +101,13 @@ namespace Migrator.Tests.Migrate
             List<XMLModel> oldSchemas = new List<XMLModel>() { type2, type3, type4 };
             List<XMLModel> newSchemas = new List<XMLModel>() { type2, type3, type4, type1 };
 
-            List<XmlModelPair> pairs = Migratorm.PairSchemas(oldSchemas, newSchemas);
+            List<XMLModelPair> pairs = Migrator.XMLModelHelper.PairSchemas(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
             Assert.AreEqual(pairs[0].SchemaPair.Item1.EntityName, pairs[0].SchemaPair.Item2.EntityName);
             Assert.AreEqual(pairs[1].SchemaPair.Item1.EntityName, pairs[1].SchemaPair.Item2.EntityName);
             Assert.AreEqual(pairs[2].SchemaPair.Item1.EntityName, pairs[2].SchemaPair.Item2.EntityName);
             Assert.IsNull(pairs[3].SchemaPair.Item1);
-
         }
     }
 }
