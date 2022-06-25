@@ -1,0 +1,26 @@
+﻿--class Person
+--	[LENGTH(30)]
+--	List<string> Paws  (+)
+
+
+
+--EXAMPLE
+IF NOT EXISTS (SELECT * FROM SYSOBJECTS WHERE NAME='PERSON_PAWS' AND XTYPE='U')
+    CREATE TABLE Personn_Paws
+		(ID INT PRIMARY KEY,
+		PersonID INT FOREIGN KEY REFERENCES Person(ID),
+		Val VARCHAR(30)
+		)
+GO
+
+
+
+---SCHEMA
+
+IF NOT EXISTS (SELECT * FROM SYSOBJECTS WHERE NAME='#table#_#column#' AND XTYPE='U')
+    CREATE TABLE #table#_#column#
+		(ID INT PRIMARY KEY,
+		#table#ID INT FOREIGN KEY REFERENCES #table#(ID),
+		Val #sqlType#
+		)
+GO

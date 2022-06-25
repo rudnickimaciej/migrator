@@ -2,18 +2,17 @@
 
 namespace Migrator
 {
-    internal static class SQLOperationFabric
+    internal static class SQLOperationFabric //TODO\; ZMIENIC NAZWER KLASY
     {
         internal static IEnumerable<ISQLAction> Create(XMLModelPair pair)
         {
             if (pair.SchemaPair.Item1 == null)
-
                 return new List<ISQLAction>() { new CreateTableAction(pair.SchemaPair.Item2) };
 
             if (pair.SchemaPair.Item2 == null)
                 return new List<ISQLAction>() { new DeleteTableAction(pair.SchemaPair.Item1) };
 
-           return ProcessModel(pair);
+           return ProcessModel(pair); //TOODO ZMIENIC NAZWER METODY
         }
 
         internal static IEnumerable<ISQLAction> ProcessModel(XMLModelPair pair)
@@ -33,7 +32,7 @@ namespace Migrator
                 if (newField == null)              
                     yield return new DeleteFieldAction(oldField);
 
-                if(oldField.fieldType != newField.fieldType || oldField.netType != newField.netType)
+                if(oldField != null && newField != null && (oldField.fieldType != newField.fieldType || oldField.netType != newField.netType))
                     yield return new ModifyFieldTypeAction(newField);
             }
         }

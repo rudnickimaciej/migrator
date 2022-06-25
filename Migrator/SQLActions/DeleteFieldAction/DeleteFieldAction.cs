@@ -5,11 +5,11 @@ namespace Migrator
 {
     internal class DeleteFieldAction : ISQLAction
     {
-        public DeleteFieldAction(XMLModelField field)
-        {
-        }
+        private readonly XMLModelField _field;
 
-        public List<SQLOperation> Execute()
+        public DeleteFieldAction(XMLModelField field) => this._field = field;
+
+        public List<SQLOperation> GenerateOperations()
         {
             throw new NotImplementedException();
         }

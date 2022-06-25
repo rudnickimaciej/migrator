@@ -46,15 +46,14 @@
   <ItemGroup>
     <Compile Include="Attributes\Entity.cs" />
     <Compile Include="Attributes\Field.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Migratorm.cs" />
     <Compile Include="Node\Node.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLActions\ModifyFieldTypeAction.cs" />
-    <Compile Include="SQLActions\AddFieldAction.cs" />
-    <Compile Include="SQLActions\DeleteFieldAction.cs" />
+    <Compile Include="SQLActions\AddFieldAction\AddFieldAction.cs" />
+    <Compile Include="SQLActions\DeleteFieldAction\DeleteFieldAction.cs" />
     <Compile Include="SQLActions\CreateTableAction.cs" />
     <Compile Include="SQLActions\DeleteTableAction.cs" />
     <Compile Include="SQLActions\ISQLAction.cs" />
@@ -83,6 +82,14 @@
       <LastGenOutput>sql.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Migrator.Core</CustomToolNamespace>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SQLActions\AddFieldAction\AddFieldActionSimpleList.sql" />
+    <Content Include="SQLActions\DeleteFieldAction\DeleteFieldAction.sql" />
+    <Content Include="SQLOperations\AddFieldOperation\AddFieldOperationSimpleListSchema.sql" />
+    <Content Include="SQLOperations\CreateTableOperation\CreateTableOperationSchema.txt" />
+    <Content Include="SQLOperations\DeleteFieldOperation\DeleteFieldOperationSchema.sql" />
+    <Content Include="SQLOperations\DeleteFKOperation\DeleteFKOperationSchema.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

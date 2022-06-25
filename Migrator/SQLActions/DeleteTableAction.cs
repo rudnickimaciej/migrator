@@ -9,7 +9,7 @@ namespace Migrator
         {
         }
 
-        public List<SQLOperation> Execute()
+        public List<SQLOperation> GenerateOperations()
         {
             throw new NotImplementedException();
         }
