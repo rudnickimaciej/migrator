@@ -32,7 +32,7 @@ namespace Migrator
             var second = pair.SchemaPair.Item2.Fields;
 
             pairs.AddRange(first.Intersect(second, new XmlModelFieldNameEqualityComparer())
-                .Select(match => Tuple.Create(match, second.Where(s=>s.fieldName.Equals(match.fieldName)).FirstOrDefault())));
+                .Select(match => Tuple.Create(match, second.Where(s=>s.Name.Equals(match.Name)).FirstOrDefault())));
 
             pairs.AddRange(first.Except(second, new XmlModelFieldNameEqualityComparer())
                 .Select(inFirst => Tuple.Create(inFirst, (XMLModelField)null)));
@@ -65,7 +65,7 @@ namespace Migrator
 
     internal class XmlModelFieldNameEqualityComparer : IEqualityComparer<XMLModelField>
     {
-        public bool Equals(XMLModelField x, XMLModelField y) => x.fieldName == y.fieldName;
+        public bool Equals(XMLModelField x, XMLModelField y) => x.Name == y.Name;
 
         public int GetHashCode(XMLModelField obj)
         {
@@ -73,8 +73,8 @@ namespace Migrator
             {
                 var hash = 17;
                 //same here, if you only want to get a hashcode on a, remove the line with b
-                hash = hash * 23 + obj.fieldName.GetHashCode();
-                hash = hash * 23 + obj.fieldName.GetHashCode();
+                hash = hash * 23 + obj.Name.GetHashCode();
+                hash = hash * 23 + obj.Name.GetHashCode();
 
                 return hash;
             }

@@ -19,11 +19,11 @@ namespace Migrator
     {
         public int ID { get; set; }
         public string EntityName { get; set; }
-        public FieldType fieldType { get; set; }
-        public string fieldName { get; set; }
-        public string typeNamespace { get; set; }
-        public string netType { get; set; }
-        public SQLType sqlType { get; set; }
+        public FieldType Type { get; set; }
+        public string Name { get; set; }
+        public string Namespace { get; set; }
+        public string NetType { get; set; }
+        public SQLType SqlType { get; set; }
     }
 
     internal enum FieldType

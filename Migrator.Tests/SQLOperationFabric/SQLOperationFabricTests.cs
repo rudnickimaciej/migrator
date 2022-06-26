@@ -22,21 +22,21 @@ namespace Migrator.Tests.SQLOperationFabric
                     {
                         ID = 11,
                         EntityName = "entity1",
-                        fieldName = "field1",
-                        fieldType = FieldType.SIMPLE,
-                        netType = "INT",
-                        sqlType = SQLType.INT,
-                        typeNamespace = "SYSTEM"
+                        Name = "field1",
+                        Type = FieldType.SIMPLE,
+                        NetType = "INT",
+                        SqlType = SQLType.INT,
+                        Namespace = "SYSTEM"
                     },
                     new XMLModelField()
                     {
                         ID = 12,
                         EntityName = "entity1",
-                        fieldName = "field2",
-                        fieldType = FieldType.REFERENCE,
-                        netType = "INT",
-                        sqlType = SQLType.INT,
-                        typeNamespace = "SYSTEM"
+                        Name = "field2",
+                        Type = FieldType.REFERENCE,
+                        NetType = "INT",
+                        SqlType = SQLType.INT,
+                        Namespace = "SYSTEM"
                     }
                 }
             };
@@ -50,21 +50,21 @@ namespace Migrator.Tests.SQLOperationFabric
                         {
                             ID = 21,
                             EntityName = "entity1",
-                            fieldName = "field1",
-                            fieldType = FieldType.SIMPLE,
-                            netType = "INT",
-                            sqlType = SQLType.INT,
-                            typeNamespace = "SYSTEM"
+                            Name = "field1",
+                            Type = FieldType.SIMPLE,
+                            NetType = "INT",
+                            SqlType = SQLType.INT,
+                            Namespace = "SYSTEM"
                         },
                         new XMLModelField()
                         {
                             ID = 22,
                             EntityName = "entity1",
-                            fieldName = "field2",
-                            fieldType = FieldType.REFERENCE,
-                            netType = "INT",
-                            sqlType = SQLType.INT,
-                            typeNamespace = "SYSTEM"
+                            Name = "field2",
+                            Type = FieldType.REFERENCE,
+                            NetType = "INT",
+                            SqlType = SQLType.INT,
+                            Namespace = "SYSTEM"
                         }
                     }
             };
@@ -85,21 +85,21 @@ namespace Migrator.Tests.SQLOperationFabric
                     {
                         ID = 11,
                         EntityName = "entity1",
-                        fieldName = "field1",
-                        fieldType = FieldType.SIMPLE,
-                        netType = "INT",
-                        sqlType = SQLType.INT,
-                        typeNamespace = "SYSTEM"
+                        Name = "field1",
+                        Type = FieldType.SIMPLE,
+                        NetType = "INT",
+                        SqlType = SQLType.INT,
+                        Namespace = "SYSTEM"
                     },
                     new XMLModelField()
                     {
                         ID = 12,
                         EntityName = "entity1",
-                        fieldName = "field2",
-                        fieldType = FieldType.REFERENCE,
-                        netType = "INT",
-                        sqlType = SQLType.INT,
-                        typeNamespace = "SYSTEM"
+                        Name = "field2",
+                        Type = FieldType.REFERENCE,
+                        NetType = "INT",
+                        SqlType = SQLType.INT,
+                        Namespace = "SYSTEM"
                     }
                 }
             };
@@ -113,11 +113,11 @@ namespace Migrator.Tests.SQLOperationFabric
                         {
                             ID = 21,
                             EntityName = "entity1",
-                            fieldName = "field1",
-                            fieldType = FieldType.SIMPLE,
-                            netType = "INT",
-                            sqlType = SQLType.INT,
-                            typeNamespace = "SYSTEM"
+                            Name = "field1",
+                            Type = FieldType.SIMPLE,
+                            NetType = "INT",
+                            SqlType = SQLType.INT,
+                            Namespace = "SYSTEM"
                         }
                     }
             };
@@ -140,11 +140,11 @@ namespace Migrator.Tests.SQLOperationFabric
                     {
                         ID = 11,
                         EntityName = "entity1",
-                        fieldName = "field1",
-                        fieldType = FieldType.SIMPLE,
-                        netType = "INT",
-                        sqlType = SQLType.INT,
-                        typeNamespace = "SYSTEM"
+                        Name = "field1",
+                        Type = FieldType.SIMPLE,
+                        NetType = "INT",
+                        SqlType = SQLType.INT,
+                        Namespace = "SYSTEM"
                     }
                 }
             };
@@ -158,21 +158,21 @@ namespace Migrator.Tests.SQLOperationFabric
                         {
                             ID = 21,
                             EntityName = "entity1",
-                            fieldName = "field1",
-                            fieldType = FieldType.SIMPLE,
-                            netType = "INT",
-                            sqlType = SQLType.INT,
-                            typeNamespace = "SYSTEM"
+                            Name = "field1",
+                            Type = FieldType.SIMPLE,
+                            NetType = "INT",
+                            SqlType = SQLType.INT,
+                            Namespace = "SYSTEM"
                         },
                         new XMLModelField()
                         {
                             ID = 12,
                             EntityName = "entity1",
-                            fieldName = "field2",
-                            fieldType = FieldType.REFERENCE,
-                            netType = "INT",
-                            sqlType = SQLType.INT,
-                            typeNamespace = "SYSTEM"
+                            Name = "field2",
+                            Type = FieldType.REFERENCE,
+                            NetType = "INT",
+                            SqlType = SQLType.INT,
+                            Namespace = "SYSTEM"
                         }
                     }
             };
@@ -194,21 +194,21 @@ namespace Migrator.Tests.SQLOperationFabric
                     {
                         ID = 11,
                         EntityName = "entity1",
-                        fieldName = "field1",
-                        fieldType = FieldType.SIMPLE,
-                        netType = "INT",
-                        sqlType = SQLType.INT,
-                        typeNamespace = "SYSTEM"
+                        Name = "field1",
+                        Type = FieldType.SIMPLE,
+                        NetType = "INT",
+                        SqlType = SQLType.INT,
+                        Namespace = "SYSTEM"
                     },
                     new XMLModelField()
                     {
                         ID = 12,
                         EntityName = "entity1",
-                        fieldName = "field2",
-                        fieldType = FieldType.REFERENCE,
-                        netType = "INT",
-                        sqlType = SQLType.INT,
-                        typeNamespace = "SYSTEM"
+                        Name = "field2",
+                        Type = FieldType.REFERENCE,
+                        NetType = "INT",
+                        SqlType = SQLType.INT,
+                        Namespace = "SYSTEM"
                     }
                 }
             };
@@ -222,21 +222,21 @@ namespace Migrator.Tests.SQLOperationFabric
                         {
                             ID = 21,
                             EntityName = "entity1",
-                            fieldName = "field1",
-                            fieldType = FieldType.SIMPLE,
-                            netType = "INT",
-                            sqlType = SQLType.INT,
-                            typeNamespace = "SYSTEM"
+                            Name = "field1",
+                            Type = FieldType.SIMPLE,
+                            NetType = "INT",
+                            SqlType = SQLType.INT,
+                            Namespace = "SYSTEM"
                         },
                         new XMLModelField()
                         {
                             ID = 22,
                             EntityName = "entity1",
-                            fieldName = "field2",
-                            fieldType = FieldType.SIMPLE,
-                            netType = "STRING",
-                            sqlType = SQLType.INT,
-                            typeNamespace = "SYSTEM"
+                            Name = "field2",
+                            Type = FieldType.SIMPLE,
+                            NetType = "STRING",
+                            SqlType = SQLType.INT,
+                            Namespace = "SYSTEM"
                         }
                     }
             };

@@ -40,20 +40,20 @@ namespace Migrator
         }
         internal List<SQLScript> MapField(XMLModelField field)
         {
-            switch (field.fieldType)
+            switch (field.Type)
             {
                 case FieldType.SIMPLE:
-                    return new List<SQLScript>() { new SQLScript(String.Format("{0} {1} NOT NULL", field.fieldName, field.sqlType), SqlScriptType.ADD_COLUMN) };
+                    return new List<SQLScript>() { new SQLScript(String.Format("{0} {1} NOT NULL", field.Name, field.SqlType), SqlScriptType.ADD_COLUMN) };
 
                 case FieldType.REFERENCE:
-                    return new List<SQLScript>() { new SQLScript(String.Format("{0} INT REFERENCES {1}(Id) NOT NULL", field.fieldName, field.netType), SqlScriptType.ADD_FOREING_KEY) };
+                    return new List<SQLScript>() { new SQLScript(String.Format("{0} INT REFERENCES {1}(Id) NOT NULL", field.Name, field.NetType), SqlScriptType.ADD_FOREING_KEY) };
 
                 case FieldType.SIMPLE_LIST:
 
-                    return new List<SQLScript>() { new SQLScript(String.Format("CREATE TABLE {0}_{1} ( ID INT PRIMARY KEY, {2}ID INT FOREIGN KEY REFERENCE{2}", field.EntityName, field.fieldName + "ID", field.fieldName), SqlScriptType.CREATE_TABLE) };
+                    return new List<SQLScript>() { new SQLScript(String.Format("CREATE TABLE {0}_{1} ( ID INT PRIMARY KEY, {2}ID INT FOREIGN KEY REFERENCE{2}", field.EntityName, field.Name + "ID", field.Name), SqlScriptType.CREATE_TABLE) };
 
                 case FieldType.REFERENCE_LIST:
-                    return new List<SQLScript>() { new SQLScript(String.Format("ALTER TABLE {0} ADD FOREIGN KEY({1}) REFERENCES {2}(ID)", field.EntityName, field.fieldName + "ID", field.fieldName), SqlScriptType.ADD_FOREING_KEY) };
+                    return new List<SQLScript>() { new SQLScript(String.Format("ALTER TABLE {0} ADD FOREIGN KEY({1}) REFERENCES {2}(ID)", field.EntityName, field.Name + "ID", field.Name), SqlScriptType.ADD_FOREING_KEY) };
 
                 case FieldType.UNDEFINED:
                     return null;

@@ -30,11 +30,11 @@ namespace Migrator
                     model.Fields.Add(new XMLModelField()
                     {
                         EntityName =t.Name,
-                        fieldName = f.Name,
-                        fieldType = FieldType.SIMPLE,
-                        typeNamespace = f.PropertyType.GetNamespace(),
-                        netType = f.PropertyType.Name,
-                        sqlType = TypeMapper.ConvertToSQLType(f.PropertyType)
+                        Name = f.Name,
+                        Type = FieldType.SIMPLE,
+                        Namespace = f.PropertyType.GetNamespace(),
+                        NetType = f.PropertyType.Name,
+                        SqlType = TypeMapper.ConvertToSQLType(f.PropertyType)
                     });
                     continue;
                 }
@@ -44,11 +44,11 @@ namespace Migrator
                     model.Fields.Add(new XMLModelField()
                     {
                         EntityName = t.Name,
-                        fieldName = f.Name,
-                        fieldType = FieldType.REFERENCE,
-                        typeNamespace = f.PropertyType.GetNamespace(),
-                        netType = f.PropertyType.Name,
-                        sqlType = SQLType.INT
+                        Name = f.Name,
+                        Type = FieldType.REFERENCE,
+                        Namespace = f.PropertyType.GetNamespace(),
+                        NetType = f.PropertyType.Name,
+                        SqlType = SQLType.INT
                     });
                     continue;
                 }
@@ -57,11 +57,11 @@ namespace Migrator
                     model.Fields.Add(new XMLModelField()
                     {
                         EntityName = t.Name,
-                        fieldName = f.Name,
-                        fieldType = FieldType.SIMPLE_LIST,
-                        typeNamespace = f.PropertyType.GetGenericArguments()[0].GetNamespace(),
-                        netType = f.PropertyType.GetGenericArguments()[0].ToString(),
-                        sqlType = TypeMapper.ConvertToSQLType(f.PropertyType.GetGenericArguments()[0])
+                        Name = f.Name,
+                        Type = FieldType.SIMPLE_LIST,
+                        Namespace = f.PropertyType.GetGenericArguments()[0].GetNamespace(),
+                        NetType = f.PropertyType.GetGenericArguments()[0].ToString(),
+                        SqlType = TypeMapper.ConvertToSQLType(f.PropertyType.GetGenericArguments()[0])
                     });
                     continue;
                 }
@@ -70,11 +70,11 @@ namespace Migrator
                     model.Fields.Add(new XMLModelField()
                     {
                         EntityName = t.Name,
-                        fieldName = f.Name,
-                        fieldType = FieldType.REFERENCE_LIST,
-                        typeNamespace = f.PropertyType.GetGenericArguments()[0].GetNamespace(),
-                        netType = f.PropertyType.GetGenericArguments()[0].ToString(),
-                        sqlType = SQLType.INT
+                        Name = f.Name,
+                        Type = FieldType.REFERENCE_LIST,
+                        Namespace = f.PropertyType.GetGenericArguments()[0].GetNamespace(),
+                        NetType = f.PropertyType.GetGenericArguments()[0].ToString(),
+                        SqlType = SQLType.INT
                     });
                     continue;
                 }
@@ -101,19 +101,19 @@ namespace Migrator
             {
                 XmlElement field = doc.CreateElement(string.Empty, "field", string.Empty);
                 XmlElement fieldName = doc.CreateElement(string.Empty, "name", string.Empty);
-                fieldName.AppendChild(doc.CreateTextNode(f.fieldName));
+                fieldName.AppendChild(doc.CreateTextNode(f.Name));
 
                 XmlElement fieldType = doc.CreateElement(string.Empty, "type", string.Empty);
-                fieldType.AppendChild(doc.CreateTextNode(((int)f.fieldType).ToString()));
+                fieldType.AppendChild(doc.CreateTextNode(((int)f.Type).ToString()));
 
                 XmlElement fieldNamespace = doc.CreateElement(string.Empty, "namespace", string.Empty);
-                fieldNamespace.AppendChild(doc.CreateTextNode(f.typeNamespace));
+                fieldNamespace.AppendChild(doc.CreateTextNode(f.Namespace));
 
-                XmlElement netType = doc.CreateElement(string.Empty, "netType", string.Empty);
-                netType.AppendChild(doc.CreateTextNode(f.netType));
+                XmlElement netType = doc.CreateElement(string.Empty, "NetType", string.Empty);
+                netType.AppendChild(doc.CreateTextNode(f.NetType));
 
-                XmlElement sqlType = doc.CreateElement(string.Empty, "sqlType", string.Empty);
-                sqlType.AppendChild(doc.CreateTextNode(((int)f.sqlType).ToString()));
+                XmlElement sqlType = doc.CreateElement(string.Empty, "SqlType", string.Empty);
+                sqlType.AppendChild(doc.CreateTextNode(((int)f.SqlType).ToString()));
 
                 field.AppendChild(fieldName);
                 field.AppendChild(fieldNamespace);
@@ -138,11 +138,11 @@ namespace Migrator
 
                 model.Fields.Add(new XMLModelField()
                 {
-                    fieldName = f["name"].InnerText,
-                    fieldType = (FieldType)Int32.Parse(f["type"].InnerText),
-                    netType = f["netType"].InnerText,
-                    sqlType = (SQLType)Int32.Parse(f["sqlType"].InnerText),
-                    typeNamespace = f["namespace"].InnerText
+                    Name = f["name"].InnerText,
+                    Type = (FieldType)Int32.Parse(f["type"].InnerText),
+                    NetType = f["NetType"].InnerText,
+                    SqlType = (SQLType)Int32.Parse(f["SqlType"].InnerText),
+                    Namespace = f["namespace"].InnerText
                 });
             }
             return model;

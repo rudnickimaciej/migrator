@@ -7,7 +7,7 @@ namespace Migrator
         internal static IEnumerable<ISQLAction> Create(XMLModelPair pair)
         {
             if (pair.SchemaPair.Item1 == null)
-                return new List<ISQLAction>() { new CreateTableAction(pair.SchemaPair.Item2) };
+                return new List<ISQLAction>() { new AddTableAction(pair.SchemaPair.Item2) };
 
             if (pair.SchemaPair.Item2 == null)
                 return new List<ISQLAction>() { new DeleteTableAction(pair.SchemaPair.Item1) };
@@ -32,7 +32,7 @@ namespace Migrator
                 if (newField == null)              
                     yield return new DeleteFieldAction(oldField);
 
-                if(oldField != null && newField != null && (oldField.fieldType != newField.fieldType || oldField.netType != newField.netType))
+                if(oldField != null && newField != null && (oldField.Type != newField.Type || oldField.NetType != newField.NetType))
                     yield return new ModifyFieldTypeAction(newField);
             }
         }

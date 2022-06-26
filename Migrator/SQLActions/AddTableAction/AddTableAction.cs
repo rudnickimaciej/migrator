@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Migrator
 {
-    internal class CreateTableAction : ISQLAction
+    internal class AddTableAction : ISQLAction
     {
-        public CreateTableAction(XMLModel table)
+        public AddTableAction(XMLModel table)
         {
         }
 
