@@ -4,9 +4,9 @@ namespace Migrator
 {
     internal class AddFieldAction : ISQLAction
     {
-        private readonly XMLModelField _field;
+        private readonly TFieldModel _field;
 
-        public AddFieldAction(XMLModelField field) => _field = field;
+        public AddFieldAction(TFieldModel field) => _field = field;
 
         public SQLOperationCollection GenerateOperations()
         {
@@ -28,7 +28,7 @@ namespace Migrator
                 return new SQLOperationCollection(
                     new CreateTableOperation($"{_field.EntityName}_{_field.Name}"),
                     new AddFKOperation(_field),
-                    new AddFKOperation(_field);
+                    new AddFKOperation(_field));
 
             return null;
         }

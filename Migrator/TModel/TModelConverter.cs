@@ -7,19 +7,19 @@ using System.Xml;
 
 namespace Migrator
 {
-    internal interface IXMLModelConverter
+    internal interface ITypeModelConverter
     {
-        XMLModel ConvertTypeToXMLModel(Type t);
-        XmlDocument ConverXmlModelToXML(XMLModel model);
-        XMLModel ConverXmlToXMLModel(XmlDocument xml);
-        XMLModel ConverXmlToXMLModel(string xmlPath);
+        TModel ConvertTypeToXMLModel(Type t);
+        XmlDocument ConverXmlModelToXML(TModel model);
+        TModel ConverXmlToXMLModel(XmlDocument xml);
+        TModel ConverXmlToXMLModel(string xmlPath);
 
     }
-    internal class XMLModelConverter 
+    internal class TModelConverter 
     {
-        public static XMLModel ConvertTypeToXMLModel(Type t)
+        public static TModel ConvertTypeToTypeModel(Type t)
         {
-            XMLModel model = new XMLModel();
+            TModel model = new TModel();
             model.EntityName = t.Name;
 
             foreach (var f in t.GetProperties())
@@ -27,7 +27,7 @@ namespace Migrator
 
                 if (f.PropertyType.IsSimple())
                 {
-                    model.Fields.Add(new XMLModelField()
+                    model.Fields.Add(new TFieldModel()
                     {
                         EntityName =t.Name,
                         Name = f.Name,
@@ -41,7 +41,7 @@ namespace Migrator
 
                 if (f.PropertyType.IsSingleRefenceType())
                 {
-                    model.Fields.Add(new XMLModelField()
+                    model.Fields.Add(new TFieldModel()
                     {
                         EntityName = t.Name,
                         Name = f.Name,
@@ -54,7 +54,7 @@ namespace Migrator
                 }
                 if (f.PropertyType.IsSimpleList())
                 {
-                    model.Fields.Add(new XMLModelField()
+                    model.Fields.Add(new TFieldModel()
                     {
                         EntityName = t.Name,
                         Name = f.Name,
@@ -67,7 +67,7 @@ namespace Migrator
                 }
                 if (f.PropertyType.IsReferenceList())
                 {
-                    model.Fields.Add(new XMLModelField()
+                    model.Fields.Add(new TFieldModel()
                     {
                         EntityName = t.Name,
                         Name = f.Name,
@@ -81,7 +81,7 @@ namespace Migrator
             }
             return model;
         }
-        public static XmlDocument ConverXmlModelToXML(XMLModel model)
+        public static XmlDocument ConverTypeModelToXML(TModel model)
         {
             XmlDocument doc = new XmlDocument();
             XmlDeclaration xmlDeclaration = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
@@ -126,17 +126,17 @@ namespace Migrator
             return doc;
         }
 
-        public static XMLModel ConverXmlToXMLModel(XmlDocument xml)
+        public static TModel ConverXmlToTypeModel(XmlDocument xml)
         {
             XmlNode node = xml.SelectSingleNode("/entity");
-            XMLModel model = new XMLModel();
+            TModel model = new TModel();
             model.EntityName = node["name"].InnerText;
 
             XmlNodeList fieldNodes = node["fields"].SelectNodes("field");
             foreach (XmlNode f in fieldNodes)
             {
 
-                model.Fields.Add(new XMLModelField()
+                model.Fields.Add(new TFieldModel()
                 {
                     Name = f["name"].InnerText,
                     Type = (FieldType)Int32.Parse(f["type"].InnerText),
@@ -149,11 +149,11 @@ namespace Migrator
 
         }
 
-        public static XMLModel ConverXmlToXMLModel(string xmlPath)
+        public static TModel ConverXmlToTypeModel(string xmlPath)
         {
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(xmlPath);
-            return ConverXmlToXMLModel(xmlDoc);
+            return ConverXmlToTypeModel(xmlDoc);
         }
     }
 }

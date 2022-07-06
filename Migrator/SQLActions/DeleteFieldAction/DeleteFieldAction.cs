@@ -5,9 +5,9 @@ namespace Migrator
 {
     internal class DeleteFieldAction : ISQLAction
     {
-        private readonly XMLModelField _field;
+        private readonly TFieldModel _field;
 
-        public DeleteFieldAction(XMLModelField field) => this._field = field;
+        public DeleteFieldAction(TFieldModel field) => this._field = field;
 
         public List<SQLOperation> GenerateOperations()
         {

@@ -6,20 +6,20 @@ namespace Migrator.Tests.XMLModelHelper
     internal class PairXMLModelFieldsTests
     {
         private string entity1Name = "entity1";
-        private XMLModel type1;
-        private XMLModel type2;
-        private XMLModel type3;
-        private XMLModel type4;
+        private TModel type1;
+        private TModel type2;
+        private TModel type3;
+        private TModel type4;
 
         [Test]
         public void PairXMLModelFields_NumberOfFieldsAndNamesAreExactlyTheSame_TuplesShouldBeFullyMatched()
         {
-            XMLModel schema = new XMLModel()
+            TModel schema = new TModel()
             {
                 EntityName = "entity1",
-                Fields = new List<XMLModelField>()
+                Fields = new List<TFieldModel>()
                 {
-                    new XMLModelField()
+                    new TFieldModel()
                     {
                         EntityName = "entity1",
                         Name = "field1",
@@ -28,7 +28,7 @@ namespace Migrator.Tests.XMLModelHelper
                         SqlType = SQLType.INT,
                         Namespace = "SYSTEM"
                     },
-                    new XMLModelField()
+                    new TFieldModel()
                     {
                         EntityName = "entity1",
                         Name = "field2",
@@ -40,7 +40,7 @@ namespace Migrator.Tests.XMLModelHelper
                 }
             };
 
-            List<XMLModelFieldPair> pairs = Migrator.XMLModelHelper.PairFields(new XMLModelPair(schema, schema));
+            List<TFieldModelPair> pairs = Migrator.TModelHelper.PairFields(new TModelPair(schema, schema));
 
             Assert.AreEqual(2, pairs.Count);
             Assert.AreEqual(pairs[0].FieldPair.Item1.Name, pairs[0].FieldPair.Item2.Name);
@@ -51,12 +51,12 @@ namespace Migrator.Tests.XMLModelHelper
         [Test]
         public void PairXMLModelFields_FieldAddedToSchema_TuplesShouldContaintLeftHalfEmptyTuple()
         {
-            XMLModel oldSchema = new XMLModel()
+            TModel oldSchema = new TModel()
             {
                 EntityName = "entity1",
-                Fields = new List<XMLModelField>()
+                Fields = new List<TFieldModel>()
                 {
-                    new XMLModelField()
+                    new TFieldModel()
                     {
                         ID = 11,
                         EntityName = "entity1",
@@ -66,7 +66,7 @@ namespace Migrator.Tests.XMLModelHelper
                         SqlType = SQLType.INT,
                         Namespace = "SYSTEM"
                     },
-                    new XMLModelField()
+                    new TFieldModel()
                     {
                         ID = 21,
                         EntityName = "entity1",
@@ -79,12 +79,12 @@ namespace Migrator.Tests.XMLModelHelper
                 }
             };
 
-            XMLModel newSchema = new XMLModel()
+            TModel newSchema = new TModel()
             {
                 EntityName = "entity1",
-                Fields = new List<XMLModelField>()
+                Fields = new List<TFieldModel>()
                     {
-                        new XMLModelField()
+                        new TFieldModel()
                         {
                             ID = 21,
                             EntityName = "entity1",
@@ -94,7 +94,7 @@ namespace Migrator.Tests.XMLModelHelper
                             SqlType = SQLType.INT,
                             Namespace = "SYSTEM"
                         },
-                        new XMLModelField()
+                        new TFieldModel()
                         {
                             ID = 22,
                             EntityName = "entity1",
@@ -104,7 +104,7 @@ namespace Migrator.Tests.XMLModelHelper
                             SqlType = SQLType.INT,
                             Namespace = "SYSTEM"
                         },
-                        new XMLModelField()
+                        new TFieldModel()
                         {
                             ID = 32,
                             EntityName = "entity1",
@@ -117,7 +117,7 @@ namespace Migrator.Tests.XMLModelHelper
                     }
             };
 
-            List<XMLModelFieldPair> pairs = Migrator.XMLModelHelper.PairFields(new XMLModelPair(oldSchema, newSchema));
+            List<TFieldModelPair> pairs = Migrator.TModelHelper.PairFields(new TModelPair(oldSchema, newSchema));
 
             Assert.AreEqual(3, pairs.Count);
             Assert.AreEqual(pairs[0].FieldPair.Item1.Name, pairs[0].FieldPair.Item2.Name);
@@ -129,12 +129,12 @@ namespace Migrator.Tests.XMLModelHelper
         [Test]
         public void PairXMLModelFields_FieldRemovedFromSchema_TuplesShouldContaintRightHalfEmptyTuple()
         {
-            XMLModel oldSchema = new XMLModel()
+            TModel oldSchema = new TModel()
             {
                 EntityName = "entity1",
-                Fields = new List<XMLModelField>()
+                Fields = new List<TFieldModel>()
                 {
-                    new XMLModelField()
+                    new TFieldModel()
                     {
                         EntityName = "entity1",
                         Name = "field1",
@@ -143,7 +143,7 @@ namespace Migrator.Tests.XMLModelHelper
                         SqlType = SQLType.INT,
                         Namespace = "SYSTEM"
                     },
-                    new XMLModelField()
+                    new TFieldModel()
                     {
                         EntityName = "entity1",
                         Name = "field2",
@@ -152,7 +152,7 @@ namespace Migrator.Tests.XMLModelHelper
                         SqlType = SQLType.INT,
                         Namespace = "SYSTEM"
                     },
-                    new XMLModelField()
+                    new TFieldModel()
                     {
                        EntityName = "entity1",
                        Name = "field3",
@@ -164,12 +164,12 @@ namespace Migrator.Tests.XMLModelHelper
                 }
             };
 
-            XMLModel newSchema = new XMLModel()
+            TModel newSchema = new TModel()
             {
                 EntityName = "entity1",
-                Fields = new List<XMLModelField>()
+                Fields = new List<TFieldModel>()
                     {
-                        new XMLModelField()
+                        new TFieldModel()
                         {
                             EntityName = "entity1",
                             Name = "field1",
@@ -178,7 +178,7 @@ namespace Migrator.Tests.XMLModelHelper
                             SqlType = SQLType.INT,
                             Namespace = "SYSTEM"
                         },
-                        new XMLModelField()
+                        new TFieldModel()
                         {
                             EntityName = "entity1",
                             Name = "field2",
@@ -190,7 +190,7 @@ namespace Migrator.Tests.XMLModelHelper
                     }
             };
 
-            List<XMLModelFieldPair> pairs = Migrator.XMLModelHelper.PairFields(new XMLModelPair(oldSchema, newSchema));
+            List<TFieldModelPair> pairs = Migrator.TModelHelper.PairFields(new TModelPair(oldSchema, newSchema));
 
             Assert.AreEqual(3, pairs.Count);
             Assert.AreEqual(pairs[0].FieldPair.Item1.Name, pairs[0].FieldPair.Item2.Name);

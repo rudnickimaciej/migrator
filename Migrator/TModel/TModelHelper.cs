@@ -3,31 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleToAttribute("Migrator.Tests.XMLModelHelper")]
+[assembly: InternalsVisibleToAttribute("Migrator.Tests.TModelHelper")]
 
 namespace Migrator
 {
-    internal static class XMLModelHelper
+    internal static class TModelHelper
     {
-        internal static List<XMLModelPair> PairSchemas(List<XMLModel> first, List<XMLModel> second)
+        internal static List<TModelPair> PairSchemas(List<TModel> first, List<TModel> second)
         {
-            var pairs = new List<Tuple<XMLModel, XMLModel>>();
+            var pairs = new List<Tuple<TModel, TModel>>();
 
             pairs.AddRange(first.Intersect(second, new XmlModelNameEqualityComparer())
                 .Select(match => Tuple.Create(match, match)));
 
             pairs.AddRange(first.Except(second, new XmlModelNameEqualityComparer())
-                .Select(inFirst => Tuple.Create(inFirst, (XMLModel)null)));
+                .Select(inFirst => Tuple.Create(inFirst, (TModel)null)));
 
             pairs.AddRange(second.Except(first, new XmlModelNameEqualityComparer())
-                .Select(inSecond => Tuple.Create((XMLModel)null, inSecond)));
+                .Select(inSecond => Tuple.Create((TModel)null, inSecond)));
 
-            return pairs.Select(p => new XMLModelPair(p.Item1, p.Item2)).ToList();
+            return pairs.Select(p => new TModelPair(p.Item1, p.Item2)).ToList();
         }
 
-        internal static List<XMLModelFieldPair> PairFields(XMLModelPair pair)
+        internal static List<TFieldModelPair> PairFields(TModelPair pair)
         {
-            var pairs = new List<Tuple<XMLModelField, XMLModelField>>();
+            var pairs = new List<Tuple<TFieldModel, TFieldModel>>();
             var first = pair.SchemaPair.Item1.Fields;
             var second = pair.SchemaPair.Item2.Fields;
 
@@ -35,21 +35,21 @@ namespace Migrator
                 .Select(match => Tuple.Create(match, second.Where(s=>s.Name.Equals(match.Name)).FirstOrDefault())));
 
             pairs.AddRange(first.Except(second, new XmlModelFieldNameEqualityComparer())
-                .Select(inFirst => Tuple.Create(inFirst, (XMLModelField)null)));
+                .Select(inFirst => Tuple.Create(inFirst, (TFieldModel)null)));
 
             pairs.AddRange(second.Except(first, new XmlModelFieldNameEqualityComparer())
-                .Select(inSecond => Tuple.Create((XMLModelField)null, inSecond)));
+                .Select(inSecond => Tuple.Create((TFieldModel)null, inSecond)));
 
-            return pairs.Select(p => new XMLModelFieldPair(p.Item1, p.Item2)).ToList();
+            return pairs.Select(p => new TFieldModelPair(p.Item1, p.Item2)).ToList();
         }
     }
 
 
-    internal class XmlModelNameEqualityComparer : IEqualityComparer<XMLModel>
+    internal class XmlModelNameEqualityComparer : IEqualityComparer<TModel>
     {
-        public bool Equals(XMLModel x, XMLModel y) => x.EntityName == y.EntityName;
+        public bool Equals(TModel x, TModel y) => x.EntityName == y.EntityName;
 
-        public int GetHashCode(XMLModel obj)
+        public int GetHashCode(TModel obj)
         {
             unchecked
             {
@@ -63,11 +63,11 @@ namespace Migrator
         }
     }
 
-    internal class XmlModelFieldNameEqualityComparer : IEqualityComparer<XMLModelField>
+    internal class XmlModelFieldNameEqualityComparer : IEqualityComparer<TFieldModel>
     {
-        public bool Equals(XMLModelField x, XMLModelField y) => x.Name == y.Name;
+        public bool Equals(TFieldModel x, TFieldModel y) => x.Name == y.Name;
 
-        public int GetHashCode(XMLModelField obj)
+        public int GetHashCode(TFieldModel obj)
         {
             unchecked
             {

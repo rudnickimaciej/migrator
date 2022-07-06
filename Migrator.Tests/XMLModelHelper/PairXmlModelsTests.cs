@@ -6,42 +6,42 @@ namespace Migrator.Tests.XMLModelHelper
 {
     internal class PairXmlModelsTests
     {
-        private XMLModel type1;
-        private XMLModel type11;
+        private TModel type1;
+        private TModel type11;
 
-        private XMLModel type2;
-        private XMLModel type22;
+        private TModel type2;
+        private TModel type22;
 
-        private XMLModel type3;
-        private XMLModel type33;
+        private TModel type3;
+        private TModel type33;
 
-        private XMLModel type4;
-        private XMLModel type44;
+        private TModel type4;
+        private TModel type44;
 
         [SetUp]
         public void Setup()
         {
-            type1 = new XMLModel() { EntityName = "entity1" };
-            type11 = new XMLModel() { EntityName = "entity1" };
+            type1 = new TModel() { EntityName = "entity1" };
+            type11 = new TModel() { EntityName = "entity1" };
 
-            type2 = new XMLModel() { EntityName = "entity2" };
-            type22 = new XMLModel() { EntityName = "entity2" };
+            type2 = new TModel() { EntityName = "entity2" };
+            type22 = new TModel() { EntityName = "entity2" };
 
-            type3 = new XMLModel() { EntityName = "entity3" };
-            type33 = new XMLModel() { EntityName = "entity3" };
+            type3 = new TModel() { EntityName = "entity3" };
+            type33 = new TModel() { EntityName = "entity3" };
 
-            type4 = new XMLModel() { EntityName = "entity4" };
-            type44 = new XMLModel() { EntityName = "entity4" };
+            type4 = new TModel() { EntityName = "entity4" };
+            type44 = new TModel() { EntityName = "entity4" };
 
         }
 
         [Test]
         public void PairXmlModels_InitialMigration_TuplesShouldBeLeftHalfEmpty()
         {
-            List<XMLModel> oldSchemas = new List<XMLModel>() { };
-            List<XMLModel> newSchemas = new List<XMLModel>() { type1, type2, type3, type4 };
+            List<TModel> oldSchemas = new List<TModel>() { };
+            List<TModel> newSchemas = new List<TModel>() { type1, type2, type3, type4 };
 
-            List<XMLModelPair> pairs = Migrator.XMLModelHelper.PairSchemas(oldSchemas, newSchemas);
+            List<TModelPair> pairs = Migrator.TModelHelper.PairSchemas(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
             Assert.IsNull(pairs[0].SchemaPair.Item1);
@@ -58,10 +58,10 @@ namespace Migrator.Tests.XMLModelHelper
         [Test]
         public void PairXmlModels_RemoveAllTypes_TuplesShouldBeRightHalfEmpty()
         {
-            List<XMLModel> oldSchemas = new List<XMLModel>() { type1, type2, type3, type4 };
-            List<XMLModel> newSchemas = new List<XMLModel>() { };
+            List<TModel> oldSchemas = new List<TModel>() { type1, type2, type3, type4 };
+            List<TModel> newSchemas = new List<TModel>() { };
 
-            List<XMLModelPair> pairs = Migrator.XMLModelHelper.PairSchemas(oldSchemas, newSchemas);
+            List<TModelPair> pairs = Migrator.TModelHelper.PairSchemas(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
             Assert.IsNull(pairs[0].SchemaPair.Item2);
@@ -78,10 +78,10 @@ namespace Migrator.Tests.XMLModelHelper
         [Test]
         public void PairXmlModels_NoTypeAddedNorDeleted_TuplesShouldBeFull()
         {
-            List<XMLModel> oldSchemas = new List<XMLModel>() { type1, type2, type3, type4 };
-            List<XMLModel> newSchemas = new List<XMLModel>() { type22, type33, type11, type44 };
+            List<TModel> oldSchemas = new List<TModel>() { type1, type2, type3, type4 };
+            List<TModel> newSchemas = new List<TModel>() { type22, type33, type11, type44 };
 
-            List<XMLModelPair> pairs = Migrator.XMLModelHelper.PairSchemas(oldSchemas, newSchemas);
+            List<TModelPair> pairs = Migrator.TModelHelper.PairSchemas(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
             Assert.AreEqual(pairs[0].SchemaPair.Item1.EntityName, pairs[0].SchemaPair.Item2.EntityName);
@@ -93,10 +93,10 @@ namespace Migrator.Tests.XMLModelHelper
         [Test]
         public void PairXmlModels_TypeDeleted_TuplesShouldContainRightHalfEmptyTuple()
         {
-            List<XMLModel> oldSchemas = new List<XMLModel>() { type1, type2, type3, type4 };
-            List<XMLModel> newSchemas = new List<XMLModel>() { type22, type33, type44 };
+            List<TModel> oldSchemas = new List<TModel>() { type1, type2, type3, type4 };
+            List<TModel> newSchemas = new List<TModel>() { type22, type33, type44 };
 
-            List<XMLModelPair> pairs = Migrator.XMLModelHelper.PairSchemas(oldSchemas, newSchemas);
+            List<TModelPair> pairs = Migrator.TModelHelper.PairSchemas(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
 
@@ -109,10 +109,10 @@ namespace Migrator.Tests.XMLModelHelper
         [Test]
         public void PairXmlModels_TypeAdded_TuplesShouldContainLeftHalfEmptyTuple()
         {
-            List<XMLModel> oldSchemas = new List<XMLModel>() { type2, type3, type4 };
-            List<XMLModel> newSchemas = new List<XMLModel>() { type22, type33, type44, type11 };
+            List<TModel> oldSchemas = new List<TModel>() { type2, type3, type4 };
+            List<TModel> newSchemas = new List<TModel>() { type22, type33, type44, type11 };
 
-            List<XMLModelPair> pairs = Migrator.XMLModelHelper.PairSchemas(oldSchemas, newSchemas);
+            List<TModelPair> pairs = Migrator.TModelHelper.PairSchemas(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
             Assert.AreEqual(pairs[0].SchemaPair.Item1.EntityName, pairs[0].SchemaPair.Item2.EntityName);

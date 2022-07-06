@@ -62,9 +62,9 @@ namespace Migrator
         internal string Migrate(List<Type> types)
         {
             CreateConfigurationTables();
-            List<XMLModel> oldSchemas =  GetSchemasFromDb().Select(doc=>XMLModelConverter.ConverXmlToXMLModel(doc.xml)).ToList();
-            List<XMLModel> newSchemas = types.Select(t => XMLModelConverter.ConvertTypeToXMLModel(t)).ToList();
-            List<XMLModelPair> schemaPairs = XMLModelHelper.PairSchemas(oldSchemas, newSchemas);
+            List<TModel> oldSchemas =  GetSchemasFromDb().Select(doc=>TModelConverter.ConverXmlToTypeModel(doc.xml)).ToList();
+            List<TModel> newSchemas = types.Select(t => TModelConverter.ConvertTypeToTypeModel(t)).ToList();
+            List<TModelPair> schemaPairs = TModelHelper.PairSchemas(oldSchemas, newSchemas);
          
 
 

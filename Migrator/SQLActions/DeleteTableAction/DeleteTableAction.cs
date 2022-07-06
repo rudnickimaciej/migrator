@@ -5,7 +5,7 @@ namespace Migrator
 {
     internal class DeleteTableAction : ISQLAction
     {
-        public DeleteTableAction(XMLModel table)
+        public DeleteTableAction(TModel table)
         {
         }
 

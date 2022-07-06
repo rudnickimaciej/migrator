@@ -5,7 +5,7 @@ namespace Migrator
 {
     internal class ModifyFieldTypeAction : ISQLAction
     {
-        public ModifyFieldTypeAction(XMLModelField field)
+        public ModifyFieldTypeAction(TFieldModel field)
         {
         }
 

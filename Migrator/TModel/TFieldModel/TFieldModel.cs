@@ -1,21 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
-[assembly: InternalsVisibleToAttribute("Migrator.Tests")]
-namespace Migrator
+﻿namespace Migrator
 {
-    internal class XMLModel
-    {
-        public int ID { get; set; }
-        public string EntityName { get; set; }
-        public List<XMLModelField> Fields = new List<XMLModelField>();
-    }
-
-    internal class XMLModelField
+    internal class TFieldModel
     {
         public int ID { get; set; }
         public string EntityName { get; set; }
@@ -25,7 +10,6 @@ namespace Migrator
         public string NetType { get; set; }
         public SQLType SqlType { get; set; }
     }
-
     internal enum FieldType
     {
         SIMPLE,

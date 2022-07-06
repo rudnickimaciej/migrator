@@ -6,7 +6,7 @@ namespace Migrator
     {
         public override SQLOperationType Type => SQLOperationType.CREATE_COLUMN;
 
-        public AddFieldOperation(XMLModelField field) 
+        public AddFieldOperation(TFieldModel field) 
         {  
             _sql = $"ALTER TABLE{field.EntityName} ADD {field.Name} {field.SqlType}"; //TODO: USE SCHEMA FROM FILE
         }

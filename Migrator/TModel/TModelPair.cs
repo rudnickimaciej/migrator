@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Migrator
 {
-    internal class XMLModelPair
+    internal class TModelPair
     {
-        public XMLModelPair(XMLModel oldSchema, XMLModel newSchema)
+        public TModelPair(TModel oldSchema, TModel newSchema)
         {
-            SchemaPair = new Tuple<XMLModel, XMLModel>(oldSchema,newSchema);
+            SchemaPair = new Tuple<TModel, TModel>(oldSchema,newSchema);
         }
-        public Tuple<XMLModel,XMLModel> SchemaPair{ get; set; }
+        public Tuple<TModel,TModel> SchemaPair{ get; set; }
 
          public override string ToString()
         {

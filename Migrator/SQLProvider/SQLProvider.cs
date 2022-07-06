@@ -15,30 +15,30 @@ namespace Migrator
     }
     internal class SQLProvider : ISqlProvider
     {
-        XMLModelConverter converter = new XMLModelConverter();
+        TModelConverter converter = new TModelConverter();
 
         public SQLPackage Parse(Type type)
         {
             XmlDocument migration = GetMigrationFromDb(type.Name);
             if (string.IsNullOrEmpty(migration.InnerText))
-                return InitTable(XMLModelConverter.ConvertTypeToXMLModel(type));
+                return InitTable(TModelConverter.ConvertTypeToTypeModel(type));
                 //Pierwsza inicjalizacja
             else
             {
                 //Tabela już istnieje, trzeba porównać wersje 
-                XMLModel oldXmlModel = XMLModelConverter.ConverXmlToXMLModel(new XmlDocument()) ;
+                TModel oldXmlModel = TModelConverter.ConverXmlToTypeModel(new XmlDocument()) ;
             }
             return null;
         }
 
-        internal SQLPackage InitTable(XMLModel model)
+        internal SQLPackage InitTable(TModel model)
         {
             SQLPackage package = new SQLPackage();
-            foreach (XMLModelField field in model.Fields)
+            foreach (TFieldModel field in model.Fields)
                 package.Add(MapField(field));
             return package;
         }
-        internal List<SQLScript> MapField(XMLModelField field)
+        internal List<SQLScript> MapField(TFieldModel field)
         {
             switch (field.Type)
             {
@@ -63,7 +63,7 @@ namespace Migrator
         }
 
 
-        internal void ComputeTypeDifference(XMLModel newXmlModel, string connectionString)
+        internal void ComputeTypeDifference(TModel newXmlModel, string connectionString)
         {
             
 

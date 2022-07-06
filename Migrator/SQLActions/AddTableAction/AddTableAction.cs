@@ -5,7 +5,7 @@ namespace Migrator
 {
     internal class AddTableAction : ISQLAction
     {
-        public AddTableAction(XMLModel table)
+        public AddTableAction(TModel table)
         {
         }
 

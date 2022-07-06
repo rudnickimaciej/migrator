@@ -13,12 +13,12 @@ namespace Migrator.Tests.SQLOperationFabric
         [Test]
         public void CreateActions_FieldTypeNotChanged_ReturnEmptyActionList()
         {
-            XMLModel oldSchema = new XMLModel()
+            TModel oldSchema = new TModel()
             {
                 EntityName = "entity1",
-                Fields = new List<XMLModelField>()
+                Fields = new List<TFieldModel>()
                 {
-                    new XMLModelField()
+                    new TFieldModel()
                     {
                         ID = 11,
                         EntityName = "entity1",
@@ -28,7 +28,7 @@ namespace Migrator.Tests.SQLOperationFabric
                         SqlType = SQLType.INT,
                         Namespace = "SYSTEM"
                     },
-                    new XMLModelField()
+                    new TFieldModel()
                     {
                         ID = 12,
                         EntityName = "entity1",
@@ -41,12 +41,12 @@ namespace Migrator.Tests.SQLOperationFabric
                 }
             };
 
-            XMLModel newSchema = new XMLModel()
+            TModel newSchema = new TModel()
             {
                 EntityName = "entity1",
-                Fields = new List<XMLModelField>()
+                Fields = new List<TFieldModel>()
                     {
-                        new XMLModelField()
+                        new TFieldModel()
                         {
                             ID = 21,
                             EntityName = "entity1",
@@ -56,7 +56,7 @@ namespace Migrator.Tests.SQLOperationFabric
                             SqlType = SQLType.INT,
                             Namespace = "SYSTEM"
                         },
-                        new XMLModelField()
+                        new TFieldModel()
                         {
                             ID = 22,
                             EntityName = "entity1",
@@ -69,19 +69,19 @@ namespace Migrator.Tests.SQLOperationFabric
                     }
             };
 
-            IEnumerable<ISQLAction> actions = Migrator.SQLOperationFabric.Create(new XMLModelPair(oldSchema, newSchema));
+            IEnumerable<ISQLAction> actions = Migrator.SQLOperationFabric.Create(new TModelPair(oldSchema, newSchema));
 
             Assert.AreEqual(0, actions.Count());
         }
         [Test]
         public void CreateActions_FieldRemoved_ReturnDeleteFieldAction()
         {
-            XMLModel oldSchema = new XMLModel()
+            TModel oldSchema = new TModel()
             {
                 EntityName = "entity1",
-                Fields = new List<XMLModelField>()
+                Fields = new List<TFieldModel>()
                 {
-                    new XMLModelField()
+                    new TFieldModel()
                     {
                         ID = 11,
                         EntityName = "entity1",
@@ -91,7 +91,7 @@ namespace Migrator.Tests.SQLOperationFabric
                         SqlType = SQLType.INT,
                         Namespace = "SYSTEM"
                     },
-                    new XMLModelField()
+                    new TFieldModel()
                     {
                         ID = 12,
                         EntityName = "entity1",
@@ -104,12 +104,12 @@ namespace Migrator.Tests.SQLOperationFabric
                 }
             };
 
-            XMLModel newSchema = new XMLModel()
+            TModel newSchema = new TModel()
             {
                 EntityName = "entity1",
-                Fields = new List<XMLModelField>()
+                Fields = new List<TFieldModel>()
                     {
-                        new XMLModelField()
+                        new TFieldModel()
                         {
                             ID = 21,
                             EntityName = "entity1",
@@ -122,7 +122,7 @@ namespace Migrator.Tests.SQLOperationFabric
                     }
             };
 
-            IEnumerable<ISQLAction> actions = Migrator.SQLOperationFabric.Create(new XMLModelPair(oldSchema, newSchema));
+            IEnumerable<ISQLAction> actions = Migrator.SQLOperationFabric.Create(new TModelPair(oldSchema, newSchema));
 
             Assert.AreEqual(1, actions.Count());
             Assert.IsTrue(actions.ToList()[0].GetType().Equals(typeof(DeleteFieldAction)));
@@ -131,12 +131,12 @@ namespace Migrator.Tests.SQLOperationFabric
         [Test]
         public void CreateActions_FieldAdded_ReturnAddFieldAction()
         {
-            XMLModel oldSchema = new XMLModel()
+            TModel oldSchema = new TModel()
             {
                 EntityName = "entity1",
-                Fields = new List<XMLModelField>()
+                Fields = new List<TFieldModel>()
                 {
-                    new XMLModelField()
+                    new TFieldModel()
                     {
                         ID = 11,
                         EntityName = "entity1",
@@ -149,12 +149,12 @@ namespace Migrator.Tests.SQLOperationFabric
                 }
             };
 
-            XMLModel newSchema = new XMLModel()
+            TModel newSchema = new TModel()
             {
                 EntityName = "entity1",
-                Fields = new List<XMLModelField>()
+                Fields = new List<TFieldModel>()
                     {
-                        new XMLModelField()
+                        new TFieldModel()
                         {
                             ID = 21,
                             EntityName = "entity1",
@@ -164,7 +164,7 @@ namespace Migrator.Tests.SQLOperationFabric
                             SqlType = SQLType.INT,
                             Namespace = "SYSTEM"
                         },
-                        new XMLModelField()
+                        new TFieldModel()
                         {
                             ID = 12,
                             EntityName = "entity1",
@@ -177,7 +177,7 @@ namespace Migrator.Tests.SQLOperationFabric
                     }
             };
 
-            IEnumerable<ISQLAction> actions = Migrator.SQLOperationFabric.Create(new XMLModelPair(oldSchema, newSchema));
+            IEnumerable<ISQLAction> actions = Migrator.SQLOperationFabric.Create(new TModelPair(oldSchema, newSchema));
 
             Assert.AreEqual(1, actions.Count());
             Assert.IsTrue(actions.ToList()[0].GetType().Equals(typeof(AddFieldAction)));
@@ -185,12 +185,12 @@ namespace Migrator.Tests.SQLOperationFabric
         [Test]
         public void CreateActions_FieldTypeChanged_ReturnModifyFieldTypeAction()
         {
-            XMLModel oldSchema = new XMLModel()
+            TModel oldSchema = new TModel()
             {
                 EntityName = "entity1",
-                Fields = new List<XMLModelField>()
+                Fields = new List<TFieldModel>()
                 {
-                    new XMLModelField()
+                    new TFieldModel()
                     {
                         ID = 11,
                         EntityName = "entity1",
@@ -200,7 +200,7 @@ namespace Migrator.Tests.SQLOperationFabric
                         SqlType = SQLType.INT,
                         Namespace = "SYSTEM"
                     },
-                    new XMLModelField()
+                    new TFieldModel()
                     {
                         ID = 12,
                         EntityName = "entity1",
@@ -213,12 +213,12 @@ namespace Migrator.Tests.SQLOperationFabric
                 }
             };
 
-            XMLModel newSchema = new XMLModel()
+            TModel newSchema = new TModel()
             {
                 EntityName = "entity1",
-                Fields = new List<XMLModelField>()
+                Fields = new List<TFieldModel>()
                     {
-                        new XMLModelField()
+                        new TFieldModel()
                         {
                             ID = 21,
                             EntityName = "entity1",
@@ -228,7 +228,7 @@ namespace Migrator.Tests.SQLOperationFabric
                             SqlType = SQLType.INT,
                             Namespace = "SYSTEM"
                         },
-                        new XMLModelField()
+                        new TFieldModel()
                         {
                             ID = 22,
                             EntityName = "entity1",
@@ -241,7 +241,7 @@ namespace Migrator.Tests.SQLOperationFabric
                     }
             };
 
-            IEnumerable<ISQLAction> actions = Migrator.SQLOperationFabric.Create(new XMLModelPair(oldSchema, newSchema));
+            IEnumerable<ISQLAction> actions = Migrator.SQLOperationFabric.Create(new TModelPair(oldSchema, newSchema));
             
             Assert.AreEqual(1, actions.Count());
             Assert.IsTrue(actions.ToList()[0].GetType().Equals(typeof(ModifyFieldTypeAction)));

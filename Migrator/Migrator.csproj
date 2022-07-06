@@ -74,13 +74,14 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="SQLProvider\SQLProvider.cs" />
+    <Compile Include="TModel\TFieldModel\TFieldModel.cs" />
     <Compile Include="TypeMapping\TypeMapper.cs" />
     <Compile Include="XmlDoc\XmlDoc.cs" />
-    <Compile Include="XMLModel\XMLModel.cs" />
-    <Compile Include="XMLModel\XMLModelConverter.cs" />
-    <Compile Include="XMLModel\XMLModelFieldPair.cs" />
-    <Compile Include="XMLModel\XMLModelHelper.cs" />
-    <Compile Include="XMLModel\XMLModelPair.cs" />
+    <Compile Include="TModel\TModel.cs" />
+    <Compile Include="TModel\TModelConverter.cs" />
+    <Compile Include="TModel\TFieldModel\TFieldModelPair.cs" />
+    <Compile Include="TModel\TModelHelper.cs" />
+    <Compile Include="TModel\TModelPair.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

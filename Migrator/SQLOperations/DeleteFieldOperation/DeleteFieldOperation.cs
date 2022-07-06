@@ -6,7 +6,7 @@ namespace Migrator
     {
         public override SQLOperationType Type => SQLOperationType.DROP_COLUMN;
 
-        public DeleteFieldOperation(XMLModelField field)
+        public DeleteFieldOperation(TFieldModel field)
         {
             _sql = $"ALTER TABLE {field.EntityName} DROP COLUMN {field.Name}"; //TODO: USE SCHEMA FROM FILE
         }
