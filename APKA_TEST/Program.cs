@@ -10,6 +10,14 @@ namespace APKA_TEST
     {
         static void Main(string[] args)
         {
+
+
+            List<string> list = new List<string>();
+
+            for (int i = 0; i < 6; i++)
+            {
+                list.Add((i == 2 || i == 4 || i == 6) ? i.ToString() : null);
+            }
         }
     }
 }

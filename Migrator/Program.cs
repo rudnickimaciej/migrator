@@ -15,8 +15,8 @@ namespace Migrator.Program
         static void Main(string[] args)
         {
 
-            string sql = new TypeMigrator().Migrate(LoadAllBinDirectoryAssemblies());
-            Console.WriteLine(sql); 
+            //string sql = new TypeMigrator().Migrate(LoadAllBinDirectoryAssemblies());
+            //Console.WriteLine(sql); 
         }
 
         private static List<Type> LoadAllBinDirectoryAssemblies()

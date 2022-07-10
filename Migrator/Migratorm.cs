@@ -59,34 +59,60 @@ namespace Migrator
 
     internal class TypeMigrator
     {
+        ISqlProvider _sqlProvider;
+
+        public TypeMigrator(ISqlProvider sqlProvider)
+        {
+            _sqlProvider = sqlProvider;
+        }
+
         internal string Migrate(List<Type> types)
         {
-            CreateConfigurationTables();
-            List<TModel> oldSchemas =  GetSchemasFromDb().Select(doc=>TModelConverter.ConverXmlToTypeModel(doc.xml)).ToList();
+            _sqlProvider.CreateConfigurationTables();
+            List<TModel> oldSchemas = _sqlProvider.GetSchemasFromDb().Select(doc=>TModelConverter.ConverXmlToTypeModel(doc.xml)).ToList();
             List<TModel> newSchemas = types.Select(t => TModelConverter.ConvertTypeToTypeModel(t)).ToList();
             List<TModelPair> schemaPairs = TModelHelper.PairSchemas(oldSchemas, newSchemas);
-         
 
 
-            ISqlProvider sqlProvider = new SQLProvider();
-            List<Node> nodes = types.Select(t => new Node(t)).ToList();
-            List<Node> sortedNoted = new List<Node>();
+            IEnumerable<ISQLAction> actions = FlattenActions(schemaPairs.Select(p => SQLOperationFabric.Create(p)));
+
+            // ISqlProvider sqlProvider = new SQLProvider();
+            // List<Node> nodes = types.Select(t => new Node(t)).ToList();
+            // List<Node> sortedNoted = new List<Node>();
             // SortEntities(0, nodes, ref sortedNoted);
 
-            List<SQLPackage> packages = nodes.Select(n => sqlProvider.Parse(n.Type)).ToList();
+            //List<SQLPackage> packages = nodes.Select(n => sqlProvider.Parse(n.Type)).ToList();
 
-            List<SQLScript> scripts = SortByType(FlattenPackages(packages));
-
+            // List<SQLScript> scripts = SortByType(FlattenPackages(packages));
+            var operations = FlattenOperations(actions.Select(a => a.GenerateOperations()));
             return "Full SQL";
         }
-        internal static string ToSQL(List<SQLScript> scripts)
+        private static string ToSQL(List<SQLScript> scripts)
         {
             StringBuilder sb = new StringBuilder();
             scripts.ForEach(s => sb.AppendLine(s.Sql + "GO;"));
             sb.Replace("\r\n", " ");
             return sb.ToString();
         }
-        internal static List<SQLScript> FlattenPackages(List<SQLPackage> packages)
+        private static IEnumerable<ISQLAction> FlattenActions(IEnumerable<IEnumerable<ISQLAction>> actions)
+        {
+            List<ISQLAction> flat = new List<ISQLAction>();
+
+            foreach (var a in actions)
+                foreach (var a2 in a)
+                    flat.Add(a2);
+            return flat;
+        }
+        private static IEnumerable<SQLOperation> FlattenOperations(IEnumerable<IEnumerable<SQLOperation>> operations)
+        {
+            List<SQLOperation> flat = new List<SQLOperation>();
+
+            foreach (var a in operations)
+                foreach (var a2 in a)
+                    flat.Add(a2);
+            return flat;
+        }
+        private static List<SQLScript> FlattenPackages(List<SQLPackage> packages)
         {
             List<SQLScript> flat = new List<SQLScript>();
 
@@ -95,10 +121,10 @@ namespace Migrator
                     flat.Add(script);
             return flat;
         }
-        internal static List<SQLScript> SortByType(List<SQLScript> list) => list.OrderBy(c => c.SqlScriptType).ToList();
+        private static List<SQLScript> SortByType(List<SQLScript> list) => list.OrderBy(c => c.SqlScriptType).ToList();
 
 
-        internal static void SortEntities(int i, List<Node> list, ref List<Node> sortedList)
+        private static void SortEntities(int i, List<Node> list, ref List<Node> sortedList)
         {
             while (i < list.Count)
             {
@@ -110,35 +136,6 @@ namespace Migrator
                     sortedList.Add(list[i]);
                 //ProcessEntities(++i, ref list, ref sortedList);
                 i++;
-            }
-        }
-
-        internal List<XmlDoc> GetSchemasFromDb()
-        {
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Migrator"].ConnectionString))
-            {
-                connection.Open();
-
-                using (IDataReader reader = new SqlCommand(sql.SelectSchemas.Replace('\t', ' ').Replace('\n', ' ').Replace('\r', ' '), connection).ExecuteReader())
-                {
-                    return reader.Select(r => new XmlDoc(r["EntitySchemaXML"] is DBNull ? null : r["EntitySchemaXML"].ToString())
-                  ).ToList();
-                }            
-            }
-        }
-
-        private void CreateConfigurationTables()
-        {
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Migrator"].ConnectionString))
-            {
-                connection.Open();
-
-
-                using (SqlCommand command = new SqlCommand(sql.InitMigratorTables.Replace('\t', ' ').Replace('\n', ' ').Replace('\r', ' '), connection))
-                {
-                    command.ExecuteNonQuery();
-
-                }
             }
         }
     }

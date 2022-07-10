@@ -58,14 +58,12 @@
     <Compile Include="SQLActions\DeleteTableAction\DeleteTableAction.cs" />
     <Compile Include="SQLActions\ISQLAction.cs" />
     <Compile Include="SQLOperations\AddFieldOperation\AddFieldOperation.cs" />
-    <Compile Include="SQLOperations\AddFKOperation\DeleteFKOperation.cs" />
+    <Compile Include="SQLOperations\DeleteFKOperation\DeleteFKOperation.cs" />
     <Compile Include="SQLOperations\CreateSimpleListTableOperation\CreateSimpleListTableOperation.cs" />
     <Compile Include="SQLOperations\DeleteTableOperation\AddFKOperation.cs" />
     <Compile Include="SQLOperations\CreateTableOperation\CreateTableOperation.cs" />
     <Compile Include="SQLOperations\DeleteFieldOperation\DeleteFieldOperation.cs" />
-    <Compile Include="SQLOperations\DeleteFKOperation\DeleteFKOperation.cs" />
     <Compile Include="SQLOperations\SQLOperation.cs" />
-    <Compile Include="SQLOperations\SQLOperationCollection.cs" />
     <Compile Include="SQLOperations\SQLOperationFabric.cs" />
     <Compile Include="SQLOperations\SQLOperationSchemaReader.cs" />
     <Compile Include="SQLProvider\sql.Designer.cs">
@@ -98,12 +96,14 @@
     <Content Include="SQLActions\DeleteFieldAction\DeleteFieldAction.sql" />
     <Content Include="SQLOperations\AddFieldOperation\AddFieldOperationSchema.sql" />
     <Content Include="SQLOperations\AddFieldOperation\AddFieldOperationSimpleListSchema.sql" />
-    <Content Include="SQLOperations\AddFKOperation\DeleteFKOperationSchema.sql" />
     <Content Include="SQLOperations\CreateSimpleListTableOperation\CreateTableOperationSchema.txt" />
     <Content Include="SQLOperations\DeleteTableOperation\AddFKOperationSchema.txt" />
     <Content Include="SQLOperations\CreateTableOperation\CreateTableOperationSchema.txt" />
     <Content Include="SQLOperations\DeleteFieldOperation\DeleteFieldOperationSchema.sql" />
     <Content Include="SQLOperations\DeleteFKOperation\DeleteFKOperationSchema.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SQLOperations\AddFKOperation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

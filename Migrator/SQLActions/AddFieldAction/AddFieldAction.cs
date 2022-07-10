@@ -8,27 +8,27 @@ namespace Migrator
 
         public AddFieldAction(TFieldModel field) => _field = field;
 
-        public SQLOperationCollection GenerateOperations()
+        public List<SQLOperation> GenerateOperations()
         {
             if (_field.Type.Equals(FieldType.SIMPLE))
-                return new SQLOperationCollection(
-                    new AddFieldOperation(_field));
+                return new List<SQLOperation>(){
+                    new AddFieldOperation(_field)};
 
             if (_field.Type.Equals(FieldType.REFERENCE))
-                return new SQLOperationCollection(
+                return new List<SQLOperation>(){
                     new AddFieldOperation(_field),
-                    new AddFKOperation(_field));
+                    new AddFKOperation(_field) };
 
             if (_field.Type.Equals(FieldType.SIMPLE_LIST))
-                return new SQLOperationCollection(
+                return new List<SQLOperation>(){
                     new CreateTableOperation($"{_field.EntityName}_{_field.Name}"),
-                    new AddFKOperation(_field));
+                    new AddFKOperation(_field) };
 
             if (_field.Type.Equals(FieldType.REFERENCE_LIST))
-                return new SQLOperationCollection(
+                return new List<SQLOperation>(){
                     new CreateTableOperation($"{_field.EntityName}_{_field.Name}"),
                     new AddFKOperation(_field),
-                    new AddFKOperation(_field));
+                    new AddFKOperation(_field) };
 
             return null;
         }

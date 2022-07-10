@@ -8,7 +8,7 @@
 DECLARE @SQL nvarchar(1000) SET @SQL =  'ALTER Person DROP CONSTRAINT ' + 
 												(SELECT NAME FROM  sys.foreign_keys
 												 WHERE NAME LIKE 'FK__Person__animalId%')
- 
+  
 EXEC (@SQL)
 
 ALTER TABLE Person DROP COLUMN animalId

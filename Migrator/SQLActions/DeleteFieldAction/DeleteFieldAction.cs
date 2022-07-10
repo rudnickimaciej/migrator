@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Migrator
 {
@@ -11,7 +10,11 @@ namespace Migrator
 
         public List<SQLOperation> GenerateOperations()
         {
-            throw new NotImplementedException();
+            return new List<SQLOperation>()
+          {
+              new DeleteFKOperation(_field),
+              new DeleteFieldOperation(_field)
+          };
         }
     }
 }

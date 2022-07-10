@@ -4,7 +4,7 @@ namespace Migrator
 {
     internal interface ISQLAction
     {
-        SQLOperationCollection GenerateOperations();
+         List<SQLOperation> GenerateOperations();
     }
 
     

@@ -15,7 +15,7 @@ namespace Migrator
            return ProcessModel(pair); //TOODO ZMIENIC NAZWER METODY
         }
 
-        internal static IEnumerable<ISQLAction> ProcessModel(TModelPair pair)
+        private static IEnumerable<ISQLAction> ProcessModel(TModelPair pair)
         {
 
             List<TFieldModelPair> fieldsPairs = TModelHelper.PairFields(pair);

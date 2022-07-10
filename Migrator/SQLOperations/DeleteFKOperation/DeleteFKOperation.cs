@@ -8,7 +8,9 @@ namespace Migrator
 
         public DeleteFKOperation(TFieldModel field)
         {
-            _sql = $"ALTER TABLE {field.EntityName} DROP COLUMN {field.Name}"; //TODO: USE SCHEMA FROM FILE
+            _sql = $"DECLARE @SQL nvarchar(1000) SET @SQL = 'ALTER {field.EntityName} " +
+                   $"DROP CONSTRAINT  (SELECT NAME FROM  sys.foreign_keysWHERE NAME LIKE 'FK__{field.EntityName}__{field.Name}% ')' " +
+                   $"EXEC (@SQL)";
         }
 
     }

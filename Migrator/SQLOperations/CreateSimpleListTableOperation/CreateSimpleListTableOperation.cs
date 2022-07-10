@@ -4,7 +4,7 @@ namespace Migrator
 {
     internal class CreateSimpleListTableOperation : SQLOperation
     {
-        public override SQLOperationType Type => SQLOperationType.a;
+        public override SQLOperationType Type => SQLOperationType.CREATE_TABLE;
 
         public CreateSimpleListTableOperation(TModel entity)
         {

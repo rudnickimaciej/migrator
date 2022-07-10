@@ -1,10 +1,6 @@
-﻿using System;
+﻿using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
-
 
 namespace Migrator.Tests.SQLOperationFabric
 {
@@ -73,6 +69,7 @@ namespace Migrator.Tests.SQLOperationFabric
 
             Assert.AreEqual(0, actions.Count());
         }
+
         [Test]
         public void CreateActions_FieldRemoved_ReturnDeleteFieldAction()
         {
@@ -182,6 +179,7 @@ namespace Migrator.Tests.SQLOperationFabric
             Assert.AreEqual(1, actions.Count());
             Assert.IsTrue(actions.ToList()[0].GetType().Equals(typeof(AddFieldAction)));
         }
+
         [Test]
         public void CreateActions_FieldTypeChanged_ReturnModifyFieldTypeAction()
         {
@@ -235,19 +233,94 @@ namespace Migrator.Tests.SQLOperationFabric
                             Name = "field2",
                             Type = FieldType.SIMPLE,
                             NetType = "STRING",
-                            SqlType = SQLType.INT,
+                            SqlType = SQLType.VARCHAR,
                             Namespace = "SYSTEM"
                         }
                     }
             };
 
             IEnumerable<ISQLAction> actions = Migrator.SQLOperationFabric.Create(new TModelPair(oldSchema, newSchema));
-            
+
             Assert.AreEqual(1, actions.Count());
             Assert.IsTrue(actions.ToList()[0].GetType().Equals(typeof(ModifyFieldTypeAction)));
         }
 
+        [Test]
+        public void CreateActions_TypeAdded_ReturnCreateTableAction()
+        {
+            TModel oldSchema = null;
 
-    
+            TModel newSchema = new TModel()
+            {
+                EntityName = "entity1",
+                Fields = new List<TFieldModel>()
+                    {
+                        new TFieldModel()
+                        {
+                            ID = 21,
+                            EntityName = "entity1",
+                            Name = "field1",
+                            Type = FieldType.SIMPLE,
+                            NetType = "INT",
+                            SqlType = SQLType.INT,
+                            Namespace = "SYSTEM"
+                        },
+                        new TFieldModel()
+                        {
+                            ID = 22,
+                            EntityName = "entity1",
+                            Name = "field2",
+                            Type = FieldType.SIMPLE,
+                            NetType = "STRING",
+                            SqlType = SQLType.VARCHAR,
+                            Namespace = "SYSTEM"
+                        }
+                    }
+            };
+
+            IEnumerable<ISQLAction> actions = Migrator.SQLOperationFabric.Create(new TModelPair(oldSchema, newSchema));
+
+            Assert.AreEqual(1, actions.Count());
+            Assert.IsTrue(actions.ToList()[0].GetType().Equals(typeof(AddTableAction)));
+        }
+
+        [Test]
+        public void CreateActions_TypeRemoved_ReturnDeleteTableAction()
+        {
+            TModel oldSchema = new TModel()
+            {
+                EntityName = "entity1",
+                Fields = new List<TFieldModel>()
+                    {
+                        new TFieldModel()
+                        {
+                            ID = 21,
+                            EntityName = "entity1",
+                            Name = "field1",
+                            Type = FieldType.SIMPLE,
+                            NetType = "INT",
+                            SqlType = SQLType.INT,
+                            Namespace = "SYSTEM"
+                        },
+                        new TFieldModel()
+                        {
+                            ID = 22,
+                            EntityName = "entity1",
+                            Name = "field2",
+                            Type = FieldType.SIMPLE,
+                            NetType = "STRING",
+                            SqlType = SQLType.VARCHAR,
+                            Namespace = "SYSTEM"
+                        }
+                    }
+            };
+
+            TModel newSchema = null;
+
+            IEnumerable<ISQLAction> actions = Migrator.SQLOperationFabric.Create(new TModelPair(oldSchema, newSchema));
+
+            Assert.AreEqual(1, actions.Count());
+            Assert.IsTrue(actions.ToList()[0].GetType().Equals(typeof(DeleteTableAction)));
+        }
     }
 }
