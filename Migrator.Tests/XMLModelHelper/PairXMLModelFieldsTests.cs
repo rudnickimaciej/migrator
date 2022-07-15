@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Migrator.Commons;
+using NUnit.Framework;
 using System.Collections.Generic;
 
 namespace Migrator.Tests.XMLModelHelper
@@ -40,7 +41,7 @@ namespace Migrator.Tests.XMLModelHelper
                 }
             };
 
-            List<TFieldModelPair> pairs = Migrator.TModelHelper.PairFields(new TModelPair(schema, schema));
+            List<TFieldModelPair> pairs = TModelHelper.PairFields(new TModelPair(schema, schema));
 
             Assert.AreEqual(2, pairs.Count);
             Assert.AreEqual(pairs[0].FieldPair.Item1.Name, pairs[0].FieldPair.Item2.Name);
@@ -117,7 +118,7 @@ namespace Migrator.Tests.XMLModelHelper
                     }
             };
 
-            List<TFieldModelPair> pairs = Migrator.TModelHelper.PairFields(new TModelPair(oldSchema, newSchema));
+            List<TFieldModelPair> pairs = TModelHelper.PairFields(new TModelPair(oldSchema, newSchema));
 
             Assert.AreEqual(3, pairs.Count);
             Assert.AreEqual(pairs[0].FieldPair.Item1.Name, pairs[0].FieldPair.Item2.Name);
@@ -190,7 +191,7 @@ namespace Migrator.Tests.XMLModelHelper
                     }
             };
 
-            List<TFieldModelPair> pairs = Migrator.TModelHelper.PairFields(new TModelPair(oldSchema, newSchema));
+            List<TFieldModelPair> pairs = TModelHelper.PairFields(new TModelPair(oldSchema, newSchema));
 
             Assert.AreEqual(3, pairs.Count);
             Assert.AreEqual(pairs[0].FieldPair.Item1.Name, pairs[0].FieldPair.Item2.Name);

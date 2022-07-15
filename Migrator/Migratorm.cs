@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Migrator.Commons;
+using Migrator.ISQLProviderNamespace;
+using Migrator.SQLServerProviderNamespace.SQLOperations;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -57,24 +60,27 @@ namespace Migrator
         DELETE_TABLE
     }
 
-    internal class TypeMigrator
+    public class TypeMigrator
     {
-        ISqlProvider _sqlProvider;
+        ISQLProvider _sqlProvider;
+        private readonly string _projectName = "Migrator";
 
-        public TypeMigrator(ISqlProvider sqlProvider)
+        public TypeMigrator(ISQLProvider sqlProvider)
         {
             _sqlProvider = sqlProvider;
         }
 
-        internal string Migrate(List<Type> types)
+        public string Migrate(List<Type> types)
         {
-            _sqlProvider.CreateConfigurationTables();
-            List<TModel> oldSchemas = _sqlProvider.GetSchemasFromDb().Select(doc=>TModelConverter.ConverXmlToTypeModel(doc.xml)).ToList();
+            _sqlProvider.CreateConfigurationTables(ConfigurationManager.ConnectionStrings[_projectName].ConnectionString);
+            List<TModel> oldSchemas = _sqlProvider.GetSchemasFromDb(ConfigurationManager.ConnectionStrings[_projectName].ConnectionString)
+                                                   .Select(doc=>TModelConverter.ConverXmlToTypeModel(doc.xml))
+                                                   .ToList();
+
             List<TModel> newSchemas = types.Select(t => TModelConverter.ConvertTypeToTypeModel(t)).ToList();
             List<TModelPair> schemaPairs = TModelHelper.PairSchemas(oldSchemas, newSchemas);
 
-
-            IEnumerable<ISQLAction> actions = FlattenActions(schemaPairs.Select(p => SQLOperationFabric.Create(p)));
+            IEnumerable<ISQLAction> actions = FlattenActions(schemaPairs.Select(p => _sqlProvider.Create(p)));
 
             // ISqlProvider sqlProvider = new SQLProvider();
             // List<Node> nodes = types.Select(t => new Node(t)).ToList();
@@ -84,7 +90,9 @@ namespace Migrator
             //List<SQLPackage> packages = nodes.Select(n => sqlProvider.Parse(n.Type)).ToList();
 
             // List<SQLScript> scripts = SortByType(FlattenPackages(packages));
-            var operations = FlattenOperations(actions.Select(a => a.GenerateOperations()));
+            var operations = SortByType(FlattenOperations(actions.Select(a => a.GenerateOperations())));
+
+            
             return "Full SQL";
         }
         private static string ToSQL(List<SQLScript> scripts)
@@ -121,22 +129,22 @@ namespace Migrator
                     flat.Add(script);
             return flat;
         }
-        private static List<SQLScript> SortByType(List<SQLScript> list) => list.OrderBy(c => c.SqlScriptType).ToList();
+        private static IEnumerable<SQLOperation> SortByType(IEnumerable<SQLOperation> list) => list.OrderBy(c => c.Type).ToList();
 
 
-        private static void SortEntities(int i, List<Node> list, ref List<Node> sortedList)
-        {
-            while (i < list.Count)
-            {
-                Node node = list[i];
-                if (list[i].HasReference())
-                    SortEntities(i + 1, list, ref sortedList);
+        //private static void SortEntities(int i, List<Node> list, ref List<Node> sortedList)
+        //{
+        //    while (i < list.Count)
+        //    {
+        //        Node node = list[i];
+        //        if (list[i].HasReference())
+        //            SortEntities(i + 1, list, ref sortedList);
 
-                if (!sortedList.Any(n => n.Type.Equals(node.Type)))
-                    sortedList.Add(list[i]);
-                //ProcessEntities(++i, ref list, ref sortedList);
-                i++;
-            }
-        }
+        //        if (!sortedList.Any(n => n.Type.Equals(node.Type)))
+        //            sortedList.Add(list[i]);
+        //        //ProcessEntities(++i, ref list, ref sortedList);
+        //        i++;
+        //    }
+        //}
     }
 }

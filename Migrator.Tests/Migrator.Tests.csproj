@@ -15,7 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\APKA_TEST.Domain\APKA_TEST.Domain.csproj" />
+    <ProjectReference Include="..\Migrator.Commons\Migrator.Commons.csproj" />
+    <ProjectReference Include="..\Migrator.ISQLProvider\Migrator.ISQLProvider.csproj" />
+    <ProjectReference Include="..\Migrator.SQLServerProvider\Migrator.SQLServerProvider.csproj" />
     <ProjectReference Include="..\Migrator\Migrator.csproj" />
   </ItemGroup>
 

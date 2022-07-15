@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Migrator.Commons;
+using NUnit.Framework;
 using System.Collections.Generic;
 
 
@@ -41,7 +42,7 @@ namespace Migrator.Tests.XMLModelHelper
             List<TModel> oldSchemas = new List<TModel>() { };
             List<TModel> newSchemas = new List<TModel>() { type1, type2, type3, type4 };
 
-            List<TModelPair> pairs = Migrator.TModelHelper.PairSchemas(oldSchemas, newSchemas);
+            List<TModelPair> pairs = TModelHelper.PairSchemas(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
             Assert.IsNull(pairs[0].SchemaPair.Item1);
@@ -61,7 +62,7 @@ namespace Migrator.Tests.XMLModelHelper
             List<TModel> oldSchemas = new List<TModel>() { type1, type2, type3, type4 };
             List<TModel> newSchemas = new List<TModel>() { };
 
-            List<TModelPair> pairs = Migrator.TModelHelper.PairSchemas(oldSchemas, newSchemas);
+            List<TModelPair> pairs = TModelHelper.PairSchemas(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
             Assert.IsNull(pairs[0].SchemaPair.Item2);
@@ -81,7 +82,7 @@ namespace Migrator.Tests.XMLModelHelper
             List<TModel> oldSchemas = new List<TModel>() { type1, type2, type3, type4 };
             List<TModel> newSchemas = new List<TModel>() { type22, type33, type11, type44 };
 
-            List<TModelPair> pairs = Migrator.TModelHelper.PairSchemas(oldSchemas, newSchemas);
+            List<TModelPair> pairs = TModelHelper.PairSchemas(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
             Assert.AreEqual(pairs[0].SchemaPair.Item1.EntityName, pairs[0].SchemaPair.Item2.EntityName);
@@ -96,7 +97,7 @@ namespace Migrator.Tests.XMLModelHelper
             List<TModel> oldSchemas = new List<TModel>() { type1, type2, type3, type4 };
             List<TModel> newSchemas = new List<TModel>() { type22, type33, type44 };
 
-            List<TModelPair> pairs = Migrator.TModelHelper.PairSchemas(oldSchemas, newSchemas);
+            List<TModelPair> pairs = TModelHelper.PairSchemas(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
 
@@ -112,7 +113,7 @@ namespace Migrator.Tests.XMLModelHelper
             List<TModel> oldSchemas = new List<TModel>() { type2, type3, type4 };
             List<TModel> newSchemas = new List<TModel>() { type22, type33, type44, type11 };
 
-            List<TModelPair> pairs = Migrator.TModelHelper.PairSchemas(oldSchemas, newSchemas);
+            List<TModelPair> pairs = TModelHelper.PairSchemas(oldSchemas, newSchemas);
 
             Assert.AreEqual(4, pairs.Count);
             Assert.AreEqual(pairs[0].SchemaPair.Item1.EntityName, pairs[0].SchemaPair.Item2.EntityName);

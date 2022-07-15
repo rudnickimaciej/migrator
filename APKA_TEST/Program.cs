@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Migrator;
 
 namespace APKA_TEST
 {
@@ -10,8 +11,7 @@ namespace APKA_TEST
     {
         static void Main(string[] args)
         {
-
-
+            
             List<string> list = new List<string>();
 
             for (int i = 0; i < 6; i++)

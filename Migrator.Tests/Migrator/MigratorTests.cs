@@ -1,4 +1,4 @@
-﻿using APKA_TEST.Domain;//DO USUNIĘCIA!!!
+﻿
 using Moq;
 using NUnit.Framework;
 using System;
@@ -9,20 +9,20 @@ namespace Migrator.Tests
 {
     internal class MigratorTests
     {
-        private  Mock<ISqlProvider> _sqlProviderMock;
+        //private  Mock<ISqlProvider> _sqlProviderMock;
 
-        [SetUp]
-        public void Setup()
-        {
-            _sqlProviderMock = new Mock<ISqlProvider>();
-        }
-        [Test]
-        public void ProcessTypes_AddNewType()
-        {
-            _sqlProviderMock.Setup(p => p.GetSchemasFromDb()).Returns(new List<XmlDoc>() {  });
+        //[SetUp]
+        //public void Setup()
+        //{
+        //    _sqlProviderMock = new Mock<ISqlProvider>();
+        //}
+        //[Test]
+        //public void ProcessTypes_AddNewType()
+        //{
+        //    _sqlProviderMock.Setup(p => p.GetSchemasFromDb()).Returns(new List<XmlDoc>() {  });
 
-            new Migrator.TypeMigrator(_sqlProviderMock.Object).Migrate(new List<Type>() { typeof(Animal) });
+        //    new Migrator.TypeMigrator(_sqlProviderMock.Object).Migrate(new List<Type>() { typeof(Animal) });
 
-        }
+        //}
     }
 }

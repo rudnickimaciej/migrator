@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9E8C493E-234B-492F-87F9-43DF48F91EE3}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Migrator</RootNamespace>
-    <AssemblyName>Migrator</AssemblyName>
+    <ProjectGuid>{27F7304F-FD36-4911-8F6E-A193250A9F39}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Migrator.ISQLProvider</RootNamespace>
+    <AssemblyName>Migrator.ISQLProvider</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,9 +30,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>mykey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,30 +47,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\Entity.cs" />
-    <Compile Include="Attributes\Field.cs" />
-    <Compile Include="Extensions\Extensions.cs" />
-    <Compile Include="Migratorm.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="ISQLAction.cs" />
+    <Compile Include="ISQProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLOperation.cs" />
+    <Compile Include="XmlDoc.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Migrator.Commons\Migrator.Commons.csproj">
-      <Project>{08EE5EEE-8575-48E2-823F-50A027993013}</Project>
+      <Project>{08ee5eee-8575-48e2-823f-50a027993013}</Project>
       <Name>Migrator.Commons</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Migrator.ISQLProvider\Migrator.ISQLProvider.csproj">
-      <Project>{27f7304f-fd36-4911-8f6e-a193250a9f39}</Project>
-      <Name>Migrator.ISQLProvider</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Migrator.SQLServerProvider\Migrator.SQLServerProvider.csproj">
-      <Project>{3BE02667-1EB0-4671-8992-C2C8E1AD7606}</Project>
-      <Name>Migrator.SQLServerProvider</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="mykey.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
