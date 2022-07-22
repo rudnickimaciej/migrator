@@ -47,6 +47,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="SQLActions\AddFieldAction\AddFieldAction.cs" />
+    <Compile Include="SQLActions\AddTableAction\AddSimpleListTableAction.cs" />
     <Compile Include="SQLActions\AddTableAction\AddTableAction.cs" />
     <Compile Include="SQLActions\DeleteFieldAction\DeleteFieldAction.cs" />
     <Compile Include="SQLActions\DeleteTableAction\DeleteTableAction.cs" />

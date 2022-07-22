@@ -23,9 +23,15 @@ namespace Migrator.SQLServerProviderNamespace.SQLActions
                     new AddFKOperation(_field) };
 
             if (_field.Type.Equals(FieldType.SIMPLE_LIST))
-                return new List<SQLOperation>(){
-                    new CreateTableOperation($"{_field.EntityName}_{_field.Name}"),
-                    new AddFKOperation(_field) };
+            {
+                List<SQLOperation> list = new List<SQLOperation>()
+                {
+                    new AddFieldOperation(_field),
+                    new AddFKOperation(_field) 
+                };
+                list.AddRange(new AddSimpleListTableAction(_field).GenerateOperations());
+                return list;
+            }
 
             if (_field.Type.Equals(FieldType.REFERENCE_LIST))
                 return new List<SQLOperation>(){

@@ -133,7 +133,7 @@ namespace Migrator.Tests.Actions
         }
 
         [Test]
-        public void CreateAction_ReferenceFieldAdded_ReturnAddFieldAction3()
+        public void CreateAction_SimpleListFieldAdded_ReturnAddFieldAction()
         {
             string tableName = "Person";
 
@@ -176,7 +176,7 @@ namespace Migrator.Tests.Actions
                             EntityName =tableName,
                             Name = "CarIds",
                             Type = FieldType.SIMPLE_LIST,
-                            NetType = "Sex",
+                            NetType = "System.Int32",
                             SqlType = SQLType.INT,
                             Namespace = "SYSTEM"
                         }
@@ -190,7 +190,7 @@ namespace Migrator.Tests.Actions
 
             IEnumerable<IEnumerable<SQLOperation>> operations = actions.Select(a => a.GenerateOperations()).ToList();
             IEnumerable<SQLOperation> flattenOperations = Migrator.OperationActionHelper.FlattenOperations(operations);
-            Assert.AreEqual(2, flattenOperations.Count());
+            Assert.AreEqual(3, flattenOperations.Count());
         }
     }
 }
