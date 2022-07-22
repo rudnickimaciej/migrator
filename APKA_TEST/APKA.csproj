@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Animal.cs" />
+    <Compile Include="Domain\Car.cs" />
+    <Compile Include="Domain\Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -50,10 +53,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\APKA_TEST.Domain\APKA_TEST.Domain.csproj">
-      <Project>{10c74590-5e94-4ad2-9455-8779d2cbbbfe}</Project>
-      <Name>APKA_TEST.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Migrator\Migrator.csproj">
       <Project>{9e8c493e-234b-492f-87f9-43df48f91ee3}</Project>
       <Name>Migrator</Name>
