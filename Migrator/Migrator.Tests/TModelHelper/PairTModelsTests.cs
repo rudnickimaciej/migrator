@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Migrator.Tests.XMLModelHelper
 {
-    internal class PairXmlModelsTests
+    internal class PairTModelsTests
     {
         private TModel type1;
         private TModel type11;

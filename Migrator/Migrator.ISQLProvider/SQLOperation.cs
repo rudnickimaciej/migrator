@@ -19,5 +19,11 @@ namespace Migrator.ISQLProviderNamespace
         protected string _sql;
         abstract public SQLOperationType Type { get; }
         public string Execute() => _sql;
+        public override string ToString()
+        {
+            return _sql;
+        }
     }
+
+    
 }

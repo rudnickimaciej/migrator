@@ -80,7 +80,7 @@ namespace Migrator
             List<TModel> newSchemas = types.Select(t => TModelConverter.ConvertTypeToTypeModel(t)).ToList();
             List<TModelPair> schemaPairs = TModelHelper.PairSchemas(oldSchemas, newSchemas);
 
-            IEnumerable<ISQLAction> actions = FlattenActions(schemaPairs.Select(p => _sqlProvider.Create(p)));
+            IEnumerable<ISQLAction> actions = OperationActionHelper.FlattenActions(schemaPairs.Select(p => _sqlProvider.CreateActions(p)));
 
             // ISqlProvider sqlProvider = new SQLProvider();
             // List<Node> nodes = types.Select(t => new Node(t)).ToList();
@@ -90,46 +90,13 @@ namespace Migrator
             //List<SQLPackage> packages = nodes.Select(n => sqlProvider.Parse(n.Type)).ToList();
 
             // List<SQLScript> scripts = SortByType(FlattenPackages(packages));
-            var operations = SortByType(FlattenOperations(actions.Select(a => a.GenerateOperations())));
-
+            var sortedOperations = OperationActionHelper.SortByType(OperationActionHelper.FlattenOperations(actions.Select(a => a.GenerateOperations())));
+            //Merge into FULL SQL
             
             return "Full SQL";
         }
-        private static string ToSQL(List<SQLScript> scripts)
-        {
-            StringBuilder sb = new StringBuilder();
-            scripts.ForEach(s => sb.AppendLine(s.Sql + "GO;"));
-            sb.Replace("\r\n", " ");
-            return sb.ToString();
-        }
-        private static IEnumerable<ISQLAction> FlattenActions(IEnumerable<IEnumerable<ISQLAction>> actions)
-        {
-            List<ISQLAction> flat = new List<ISQLAction>();
 
-            foreach (var a in actions)
-                foreach (var a2 in a)
-                    flat.Add(a2);
-            return flat;
-        }
-        private static IEnumerable<SQLOperation> FlattenOperations(IEnumerable<IEnumerable<SQLOperation>> operations)
-        {
-            List<SQLOperation> flat = new List<SQLOperation>();
-
-            foreach (var a in operations)
-                foreach (var a2 in a)
-                    flat.Add(a2);
-            return flat;
-        }
-        private static List<SQLScript> FlattenPackages(List<SQLPackage> packages)
-        {
-            List<SQLScript> flat = new List<SQLScript>();
-
-            foreach (var package in packages)
-                foreach (var script in package.Scripts)
-                    flat.Add(script);
-            return flat;
-        }
-        private static IEnumerable<SQLOperation> SortByType(IEnumerable<SQLOperation> list) => list.OrderBy(c => c.Type).ToList();
+      
 
 
         //private static void SortEntities(int i, List<Node> list, ref List<Node> sortedList)

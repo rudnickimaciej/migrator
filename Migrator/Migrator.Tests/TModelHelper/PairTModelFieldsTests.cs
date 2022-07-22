@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Migrator.Tests.XMLModelHelper
 {
-    internal class PairXMLModelFieldsTests
+    internal class PairTModelFieldsTests
     {
         private string entity1Name = "entity1";
         private TModel type1;

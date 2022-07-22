@@ -51,12 +51,14 @@
     <Compile Include="SQLActions\DeleteFieldAction\DeleteFieldAction.cs" />
     <Compile Include="SQLActions\DeleteTableAction\DeleteTableAction.cs" />
     <Compile Include="SQLActions\ModifyFieldTypeAction.cs" />
+    <Compile Include="SQLOperations\AddFKFieldOperation\AddFKFieldOperation.cs" />
     <Compile Include="SQLOperations\AddFieldOperation\AddFieldOperation.cs" />
     <Compile Include="SQLOperations\CreateSimpleListTableOperation\CreateSimpleListTableOperation.cs" />
     <Compile Include="SQLOperations\CreateTableOperation\CreateTableOperation.cs" />
     <Compile Include="SQLOperations\DeleteFieldOperation\DeleteFieldOperation.cs" />
     <Compile Include="SQLOperations\DeleteFKOperation\DeleteFKOperation.cs" />
-    <Compile Include="SQLOperations\DeleteTableOperation\AddFKOperation.cs" />
+    <Compile Include="SQLOperations\AddFKOperation\AddFKOperation.cs" />
+    <Compile Include="SQLOperations\DeleteTableOperation\CreateTableOperation.cs" />
     <Compile Include="SQLOperations\SQLOperationSchemaReader.cs" />
     <Compile Include="SQLProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,10 +90,8 @@
     <Content Include="SQLOperations\CreateTableOperation\CreateTableOperationSchema.txt" />
     <Content Include="SQLOperations\DeleteFieldOperation\DeleteFieldOperationSchema.sql" />
     <Content Include="SQLOperations\DeleteFKOperation\DeleteFKOperationSchema.sql" />
-    <Content Include="SQLOperations\DeleteTableOperation\AddFKOperationSchema.txt" />
+    <Content Include="SQLOperations\AddFKOperation\AddFKOperationSchema.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SQLOperations\AddFKOperation\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

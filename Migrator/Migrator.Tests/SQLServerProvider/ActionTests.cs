@@ -6,9 +6,9 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Migrator.Tests.SQLServerProviderTests
+namespace Migrator.Tests.ActionTests
 {
-    internal class SQLServerProviderTests
+    internal class OperationTests
     {
         [Test]
         public void CreateActions_FieldTypeNotChanged_ReturnEmptyActionList()
@@ -69,7 +69,7 @@ namespace Migrator.Tests.SQLServerProviderTests
                     }
             };
 
-            IEnumerable<ISQLAction> actions = new SQLServerProvider().Create(new TModelPair(oldSchema, newSchema));
+            IEnumerable<ISQLAction> actions = new SQLServerProvider().CreateActions(new TModelPair(oldSchema, newSchema));
 
             Assert.AreEqual(0, actions.Count());
         }
@@ -123,7 +123,7 @@ namespace Migrator.Tests.SQLServerProviderTests
                     }
             };
 
-            IEnumerable<ISQLAction> actions = new SQLServerProvider().Create(new TModelPair(oldSchema, newSchema));
+            IEnumerable<ISQLAction> actions = new SQLServerProvider().CreateActions(new TModelPair(oldSchema, newSchema));
 
             Assert.AreEqual(1, actions.Count());
             Assert.IsTrue(actions.ToList()[0].GetType().Equals(typeof(DeleteFieldAction)));
@@ -178,7 +178,7 @@ namespace Migrator.Tests.SQLServerProviderTests
                     }
             };
 
-            IEnumerable<ISQLAction> actions = new SQLServerProvider().Create(new TModelPair(oldSchema, newSchema));
+            IEnumerable<ISQLAction> actions = new SQLServerProvider().CreateActions(new TModelPair(oldSchema, newSchema));
 
             Assert.AreEqual(1, actions.Count());
             Assert.IsTrue(actions.ToList()[0].GetType().Equals(typeof(AddFieldAction)));
@@ -243,7 +243,7 @@ namespace Migrator.Tests.SQLServerProviderTests
                     }
             };
 
-            IEnumerable<ISQLAction> actions = new SQLServerProvider().Create(new TModelPair(oldSchema, newSchema));
+            IEnumerable<ISQLAction> actions = new SQLServerProvider().CreateActions(new TModelPair(oldSchema, newSchema));
 
             Assert.AreEqual(1, actions.Count());
             Assert.IsTrue(actions.ToList()[0].GetType().Equals(typeof(ModifyFieldTypeAction)));
@@ -282,7 +282,7 @@ namespace Migrator.Tests.SQLServerProviderTests
                     }
             };
 
-            IEnumerable<ISQLAction> actions = new SQLServerProvider().Create(new TModelPair(oldSchema, newSchema));
+            IEnumerable<ISQLAction> actions = new SQLServerProvider().CreateActions(new TModelPair(oldSchema, newSchema));
 
             Assert.AreEqual(1, actions.Count());
             Assert.IsTrue(actions.ToList()[0].GetType().Equals(typeof(AddTableAction)));
@@ -321,7 +321,7 @@ namespace Migrator.Tests.SQLServerProviderTests
 
             TModel newSchema = null;
 
-            IEnumerable<ISQLAction> actions = new SQLServerProvider().Create(new TModelPair(oldSchema, newSchema));
+            IEnumerable<ISQLAction> actions = new SQLServerProvider().CreateActions(new TModelPair(oldSchema, newSchema));
 
             Assert.AreEqual(1, actions.Count());
             Assert.IsTrue(actions.ToList()[0].GetType().Equals(typeof(DeleteTableAction)));

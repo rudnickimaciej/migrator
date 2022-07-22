@@ -12,7 +12,7 @@ namespace Migrator.SQLServerProviderNamespace
 {
     public class SQLServerProvider : ISQLProvider
     {
-        public IEnumerable<ISQLAction> Create(TModelPair pair)
+        public IEnumerable<ISQLAction> CreateActions(TModelPair pair)
         {
             if (pair.SchemaPair.Item1 == null)
                 return new List<ISQLAction>() { new AddTableAction(pair.SchemaPair.Item2) };

@@ -15,6 +15,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 [assembly: InternalsVisibleTo("Migrator.ISQLProvider")]
 [assembly: InternalsVisibleTo("Migrator.SQLServerProvider")]
+[assembly: InternalsVisibleTo("Migrator.Tests")]
 
 
 // Setting ComVisible to false makes the types in this assembly not visible

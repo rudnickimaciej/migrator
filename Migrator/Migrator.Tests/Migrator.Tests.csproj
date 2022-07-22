@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="Core\" />
+    <Folder Include="Operations\" />
   </ItemGroup>
 
 </Project>

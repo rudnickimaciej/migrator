@@ -5,7 +5,7 @@ namespace Migrator.ISQLProviderNamespace
 {
     public interface ISQLProvider
     {
-        IEnumerable<ISQLAction> Create(TModelPair modelPair);
+        IEnumerable<ISQLAction> CreateActions(TModelPair modelPair);
 
         void CreateConfigurationTables(string connectionString);
 

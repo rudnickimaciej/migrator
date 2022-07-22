@@ -17,7 +17,7 @@ namespace Migrator.Commons
         TModel ConverXmlToXMLModel(string xmlPath);
 
     }
-    public class TModelConverter 
+    public static class TModelConverter 
     {
         public static TModel ConvertTypeToTypeModel(Type t)
         {

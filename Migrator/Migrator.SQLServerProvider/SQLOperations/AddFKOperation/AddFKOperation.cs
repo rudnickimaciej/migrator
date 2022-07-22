@@ -9,7 +9,7 @@ namespace Migrator.SQLServerProviderNamespace.SQLOperations
         public override SQLOperationType Type => SQLOperationType.ADD_FK;  
         public AddFKOperation(TFieldModel field)
         {
-            _sql = "ADD FOREIGN KEY????"; //TODO: USE SCHEMA FROM FILE
+            _sql = $"ALTER TABLE {field.EntityName} ADD FOREIGN KEY ({field.NetType}) REFERENCES {field.NetType}(ID)"; //TODO: USE SCHEMA FROM FILE
         }
 
     }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Migrator
 {
+    //CZY IMPLEMENTACJA NIE BEDZIE ZBYT BOLESNA?
     public class Field : Attribute
     {
         public Field()
