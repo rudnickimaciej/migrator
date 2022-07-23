@@ -21,9 +21,13 @@
 
     public enum SQLType
     {
+        SMALLINT,
         INT,
+        BIGINT,
+        FLOAT,
+        DECIMAL,
         VARCHAR,
         DATETIME,
-        BOOL
+        BIT
     }
 }

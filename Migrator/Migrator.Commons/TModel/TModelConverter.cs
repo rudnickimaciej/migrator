@@ -62,7 +62,7 @@ namespace Migrator.Commons
                         Name = f.Name,
                         Type = FieldType.SIMPLE_LIST,
                         Namespace = f.PropertyType.GetGenericArguments()[0].GetNamespace(),
-                        NetType = f.PropertyType.GetGenericArguments()[0].ToString(),
+                        NetType = f.PropertyType.GetGenericArguments()[0].Name,
                         SqlType = TypeMapper.ConvertToSQLType(f.PropertyType.GetGenericArguments()[0])
                     });
                     continue;
@@ -75,7 +75,7 @@ namespace Migrator.Commons
                         Name = f.Name,
                         Type = FieldType.REFERENCE_LIST,
                         Namespace = f.PropertyType.GetGenericArguments()[0].GetNamespace(),
-                        NetType = f.PropertyType.GetGenericArguments()[0].ToString(),
+                        NetType = f.PropertyType.GetGenericArguments()[0].Name,
                         SqlType = SQLType.INT
                     });
                     continue;
