@@ -27,7 +27,7 @@ namespace Migrator.Commons
             foreach (var f in t.GetProperties())
             {
 
-                if (f.PropertyType.IsSimple())
+                if (f.PropertyType.IsSimple() || f.PropertyType.IsEnum)
                 {
                     model.Fields.Add(new TFieldModel()
                     {

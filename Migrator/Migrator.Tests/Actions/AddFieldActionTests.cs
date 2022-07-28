@@ -190,7 +190,7 @@ namespace Migrator.Tests.Actions
 
             IEnumerable<IEnumerable<SQLOperation>> operations = actions.Select(a => a.GenerateOperations()).ToList();
             IEnumerable<SQLOperation> flattenOperations = Migrator.OperationActionHelper.FlattenOperations(operations);
-            Assert.AreEqual(3, flattenOperations.Count());
+            Assert.AreEqual(5, flattenOperations.Count());
         }
     }
 }

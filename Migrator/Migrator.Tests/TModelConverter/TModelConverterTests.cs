@@ -3,7 +3,6 @@ using Migrator.Tests.Domain;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Migrator.Tests.Domain
 {
@@ -47,7 +46,15 @@ namespace Migrator.Tests.Domain
         public List<Pet> Pets { get; set; }
         #endregion reference list fields
 
-
+        #region enums
+    
+        #endregion enums
+    }
+    internal enum Level
+    {
+        Low,
+        Medium,
+        High
     }
 }
 
@@ -80,55 +87,6 @@ namespace Migrator.Tests.TModelConverterNamespace
             Assert.AreEqual(model.Fields[index].NetType, netType);
             Assert.AreEqual(model.Fields[index].SqlType, sqlType);
             Assert.AreEqual(model.Fields[index].Type, fieldType);
-        }
-            [Test]
-        public void ConvertType()
-        {
-            TModel model = TModelConverter.ConvertTypeToTypeModel(typeof(Person));
-            Assert.AreEqual(model.EntityName, "Person");
-            Assert.AreEqual(model.Fields.Count(), 6);
-
-            Assert.AreEqual(model.Fields[0].Name, "Age");
-            Assert.AreEqual(model.Fields[0].Namespace, "System");
-            Assert.AreEqual(model.Fields[0].EntityName, "Person");
-            Assert.AreEqual(model.Fields[0].NetType, "Int32");
-            Assert.AreEqual(model.Fields[0].SqlType,  SQLType.INT);
-            Assert.AreEqual(model.Fields[0].Type, FieldType.SIMPLE);
-
-            Assert.AreEqual(model.Fields[1].Name, "Name");
-            Assert.AreEqual(model.Fields[1].Namespace, "System");
-            Assert.AreEqual(model.Fields[1].EntityName, "Person");
-            Assert.AreEqual(model.Fields[1].NetType, "String");
-            Assert.AreEqual(model.Fields[1].SqlType, SQLType.VARCHAR);
-            Assert.AreEqual(model.Fields[1].Type, FieldType.SIMPLE);
-
-            Assert.AreEqual(model.Fields[2].Name, "Sex");
-            Assert.AreEqual(model.Fields[2].Namespace, "Migrator.Tests.Domain");
-            Assert.AreEqual(model.Fields[2].EntityName, "Person");
-            Assert.AreEqual(model.Fields[2].NetType, "Sex");
-            Assert.AreEqual(model.Fields[2].SqlType, SQLType.INT);
-            Assert.AreEqual(model.Fields[2].Type, FieldType.REFERENCE);
-
-            Assert.AreEqual(model.Fields[3].Name, "Scores");
-            Assert.AreEqual(model.Fields[3].Namespace, "System");
-            Assert.AreEqual(model.Fields[3].EntityName, "Person");
-            Assert.AreEqual(model.Fields[3].NetType, "Int32");
-            Assert.AreEqual(model.Fields[3].SqlType, SQLType.INT);
-            Assert.AreEqual(model.Fields[3].Type, FieldType.SIMPLE_LIST);
-
-            Assert.AreEqual(model.Fields[4].Name, "Pets");
-            Assert.AreEqual(model.Fields[4].Namespace, "Migrator.Tests.Domain");
-            Assert.AreEqual(model.Fields[4].EntityName, "Person");
-            Assert.AreEqual(model.Fields[4].NetType, "Pet");
-            Assert.AreEqual(model.Fields[4].SqlType, SQLType.INT);
-            Assert.AreEqual(model.Fields[4].Type, FieldType.REFERENCE_LIST);
-
-            Assert.AreEqual(model.Fields[5].Name, "Strings");
-            Assert.AreEqual(model.Fields[5].Namespace, "System");
-            Assert.AreEqual(model.Fields[5].EntityName, "Person");
-            Assert.AreEqual(model.Fields[5].NetType, "String");
-            Assert.AreEqual(model.Fields[5].SqlType, SQLType.VARCHAR);
-            Assert.AreEqual(model.Fields[5].Type, FieldType.SIMPLE_LIST);
-        }
+        }  
     }
 }
