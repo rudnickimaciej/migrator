@@ -4,7 +4,7 @@ Database migration tool for C# types
 ## What it does
 
 
-##Features 
+## Features 
 
 
 ## How to install and test 
