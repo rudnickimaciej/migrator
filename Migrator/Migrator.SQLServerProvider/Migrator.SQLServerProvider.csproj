@@ -54,7 +54,9 @@
     <Compile Include="SQLActions\Fields\ModifyFieldType\ModifyFieldTypeAction.cs" />
     <Compile Include="SQLOperations\Fields\AddFKField\AddFKFieldOperation.cs" />
     <Compile Include="SQLOperations\Fields\AddField\AddFieldOperation.cs" />
+    <Compile Include="SQLOperations\Fields\ModifyFieldType\MigrateColumnOperation.cs" />
     <Compile Include="SQLOperations\Fields\ModifyFieldType\ModifyFieldTypeOperation.cs" />
+    <Compile Include="SQLOperations\Fields\RenameField\RenameFieldOperation.cs" />
     <Compile Include="SQLOperations\Tables\CreateSimpleListTable\CreateSimpleListTableOperation.cs" />
     <Compile Include="SQLOperations\Tables\CreateTable\CreateTableOperation.cs" />
     <Compile Include="SQLOperations\Fields\DeleteField\DeleteFieldOperation.cs" />
@@ -85,7 +87,7 @@
   <ItemGroup>
     <Content Include="SQLActions\Enums\AddEnumTable\AddEnumTableAction.sql" />
     <Content Include="SQLActions\Fields\AddField\AddFieldActionSimpleList.sql" />
-    <Content Include="SQLActions\Fields\ModifyFieldType\ModifyFieldType.sql" />
+    <Content Include="SQLActions\Fields\ModifyFieldType\ModifyFieldTypeAction.sql" />
     <Content Include="SQLActions\Tables\AddTable\AddTableAction.sql" />
     <Content Include="SQLActions\Fields\DeleteField\DeleteFieldAction.sql" />
     <Content Include="SQLActions\Enums\UpdateEnumTable\UpdateEnumTableAction.sql" />
@@ -97,6 +99,8 @@
     <Content Include="SQLOperations\FK\DeleteFK\DeleteFKOperationSchema.sql" />
     <Content Include="SQLOperations\FK\AddFK\AddFKOperationSchema.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="SQLOperations\DataMigrations\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

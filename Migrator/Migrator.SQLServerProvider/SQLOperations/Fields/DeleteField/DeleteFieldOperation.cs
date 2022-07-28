@@ -13,5 +13,9 @@ namespace Migrator.SQLServerProviderNamespace.SQLOperations
             _sql = $"ALTER TABLE {field.EntityName} DROP COLUMN {field.Name}"; //TODO: USE SCHEMA FROM FILE
         }
 
+        public DeleteFieldOperation(string table, string fieldName)
+        {
+            _sql = $"ALTER TABLE {table} DROP COLUMN {fieldName}"; 
+        }
     }
 }

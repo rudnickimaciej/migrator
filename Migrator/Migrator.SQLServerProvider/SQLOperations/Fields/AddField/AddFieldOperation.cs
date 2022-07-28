@@ -1,6 +1,5 @@
 ﻿using Migrator.Commons;
 using Migrator.ISQLProviderNamespace;
-using System.Collections.Generic;
 
 namespace Migrator.SQLServerProviderNamespace.SQLOperations
 {
@@ -8,9 +7,14 @@ namespace Migrator.SQLServerProviderNamespace.SQLOperations
     {
         public override SQLOperationType Type => SQLOperationType.CREATE_COLUMN;
 
-        public AddFieldOperation(TFieldModel field) 
-        {  
+        public AddFieldOperation(TFieldModel field, )
+        {
             _sql = $"ALTER TABLE {field.EntityName} ADD {field.Name} {field.SqlType}"; //TODO: USE SCHEMA FROM FILE
         }
-    }
+
+        public AddFieldOperation(TFieldModel field, string fieldName)
+        {
+            _sql = $"ALTER TABLE {field.EntityName} ADD {fieldName} {field.SqlType}"; //TODO: USE SCHEMA FROM FILE
+        }
+    } 
 }

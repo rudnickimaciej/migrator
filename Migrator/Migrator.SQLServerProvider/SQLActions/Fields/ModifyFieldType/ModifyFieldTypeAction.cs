@@ -1,7 +1,6 @@
 ﻿using Migrator.Commons;
 using Migrator.ISQLProviderNamespace;
 using Migrator.SQLServerProviderNamespace.SQLOperations;
-using System;
 using System.Collections.Generic;
 
 namespace Migrator.SQLServerProviderNamespace.SQLActions
@@ -16,7 +15,10 @@ namespace Migrator.SQLServerProviderNamespace.SQLActions
         {
             return new List<SQLOperation>()
           {
-              new ModifyFieldTypeOperation(_field)
+             new AddFieldOperation(_field, $"{_field.Name}_temp"),
+             new MigrateColumnOperation(_field),
+             new RenameFieldOperation(_field.EntityName, $"{_field.Name}_temp",_field.Name),
+             new DeleteFieldOperation(_field.EntityName, $"{_field.Name}_temp")
           };
         }
     }

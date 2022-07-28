@@ -11,7 +11,9 @@ namespace Migrator.ISQLProviderNamespace
         DROP_COLUMN = 2,
         ALTER_COLUMN_TYPE = 3,
         DROP_FK = 4,
-        ADD_FK =5
+        ADD_FK =5,
+        MIGRATE_COLUMN = 6,
+        CHANGE_COLUMN_NAME = 7
     }
 
     public abstract class SQLOperation
