@@ -1,4 +1,5 @@
-﻿using Migrator.Commons;
+﻿using Migrator;
+using Migrator.Commons;
 using Migrator.ISQLProviderNamespace;
 using Migrator.SQLServerProviderNamespace;
 using Migrator.SQLServerProviderNamespace.SQLActions;
@@ -6,7 +7,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Migrator.Tests.Actions
+namespace Migrator.Tests.Actions.Tables
 {
     internal class DropTableActionTests
     {
@@ -50,7 +51,7 @@ namespace Migrator.Tests.Actions
             Assert.IsTrue(actions.ToList()[0].GetType().Equals(typeof(DeleteTableAction)));
 
             IEnumerable<IEnumerable<SQLOperation>> operations = actions.Select(a => a.GenerateOperations()).ToList();
-            IEnumerable<SQLOperation> flattenOperations = Migrator.OperationActionHelper.FlattenOperations(operations);
+            IEnumerable<SQLOperation> flattenOperations = OperationActionHelper.FlattenOperations(operations);
             Assert.AreEqual(1, flattenOperations.Count());
         }
     }

@@ -8,13 +8,16 @@ namespace Migrator.SQLServerProviderNamespace.SQLActions
 {
     public class ModifyFieldTypeAction : ISQLAction
     {
-        public ModifyFieldTypeAction(TFieldModel field)
-        {
-        }
+        private readonly TFieldModel _field;
+
+        public ModifyFieldTypeAction(TFieldModel field) => this._field = field;
 
         public List<SQLOperation> GenerateOperations()
         {
-            throw new NotImplementedException();
+            return new List<SQLOperation>()
+          {
+              new ModifyFieldTypeOperation(_field)
+          };
         }
     }
 }

@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="Core\" />
+    <Folder Include="Migrator\Cases\UpdateSchema\AddField\" />
     <Folder Include="Operations\" />
   </ItemGroup>
 

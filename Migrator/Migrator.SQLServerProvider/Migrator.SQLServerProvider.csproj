@@ -52,14 +52,15 @@
     <Compile Include="SQLActions\Fields\DeleteField\DeleteFieldAction.cs" />
     <Compile Include="SQLActions\Tables\DeleteTable\DeleteTableAction.cs" />
     <Compile Include="SQLActions\Fields\ModifyFieldType\ModifyFieldTypeAction.cs" />
-    <Compile Include="SQLOperations\Fields\AddFKFieldOperation\AddFKFieldOperation.cs" />
-    <Compile Include="SQLOperations\Fields\AddFieldOperation\AddFieldOperation.cs" />
-    <Compile Include="SQLOperations\Tables\CreateSimpleListTableOperation\CreateSimpleListTableOperation.cs" />
-    <Compile Include="SQLOperations\Tables\CreateTableOperation\CreateTableOperation.cs" />
-    <Compile Include="SQLOperations\Fields\DeleteFieldOperation\DeleteFieldOperation.cs" />
-    <Compile Include="SQLOperations\FK\DeleteFKOperation\DeleteFKOperation.cs" />
-    <Compile Include="SQLOperations\FK\AddFKOperation\AddFKOperation.cs" />
-    <Compile Include="SQLOperations\Tables\DeleteTableOperation\DeleteTableOperation.cs" />
+    <Compile Include="SQLOperations\Fields\AddFKField\AddFKFieldOperation.cs" />
+    <Compile Include="SQLOperations\Fields\AddField\AddFieldOperation.cs" />
+    <Compile Include="SQLOperations\Fields\ModifyFieldType\ModifyFieldTypeOperation.cs" />
+    <Compile Include="SQLOperations\Tables\CreateSimpleListTable\CreateSimpleListTableOperation.cs" />
+    <Compile Include="SQLOperations\Tables\CreateTable\CreateTableOperation.cs" />
+    <Compile Include="SQLOperations\Fields\DeleteField\DeleteFieldOperation.cs" />
+    <Compile Include="SQLOperations\FK\DeleteFK\DeleteFKOperation.cs" />
+    <Compile Include="SQLOperations\FK\AddFK\AddFKOperation.cs" />
+    <Compile Include="SQLOperations\Tables\DeleteTable\DeleteTableOperation.cs" />
     <Compile Include="SQLOperations\SQLOperationSchemaReader.cs" />
     <Compile Include="SQLProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,13 +89,13 @@
     <Content Include="SQLActions\Tables\AddTable\AddTableAction.sql" />
     <Content Include="SQLActions\Fields\DeleteField\DeleteFieldAction.sql" />
     <Content Include="SQLActions\Enums\UpdateEnumTable\UpdateEnumTableAction.sql" />
-    <Content Include="SQLOperations\Fields\AddFieldOperation\AddFieldOperationSchema.sql" />
-    <Content Include="SQLOperations\Fields\AddFieldOperation\AddFieldOperationSimpleListSchema.sql" />
-    <Content Include="SQLOperations\Tables\CreateSimpleListTableOperation\CreateTableOperationSchema.txt" />
-    <Content Include="SQLOperations\Tables\CreateTableOperation\CreateTableOperationSchema.txt" />
-    <Content Include="SQLOperations\Fields\DeleteFieldOperation\DeleteFieldOperationSchema.sql" />
-    <Content Include="SQLOperations\FK\DeleteFKOperation\DeleteFKOperationSchema.sql" />
-    <Content Include="SQLOperations\FK\AddFKOperation\AddFKOperationSchema.txt" />
+    <Content Include="SQLOperations\Fields\AddField\AddFieldOperationSchema.sql" />
+    <Content Include="SQLOperations\Fields\AddField\AddFieldOperationSimpleListSchema.sql" />
+    <Content Include="SQLOperations\Tables\CreateSimpleListTable\CreateTableOperationSchema.txt" />
+    <Content Include="SQLOperations\Tables\CreateTable\CreateTableOperationSchema.txt" />
+    <Content Include="SQLOperations\Fields\DeleteField\DeleteFieldOperationSchema.sql" />
+    <Content Include="SQLOperations\FK\DeleteFK\DeleteFKOperationSchema.sql" />
+    <Content Include="SQLOperations\FK\AddFK\AddFKOperationSchema.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
