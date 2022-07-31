@@ -14,7 +14,7 @@ namespace Migrator.Commons
             var pairs = new List<Tuple<TModel, TModel>>();
 
             pairs.AddRange(first.Intersect(second, new XmlModelNameEqualityComparer())
-                .Select(match => Tuple.Create(match, match)));
+                .Select(match => Tuple.Create(match, second.Where(e=>e.EntityName.Equals(match.EntityName)).FirstOrDefault())));
 
             pairs.AddRange(first.Except(second, new XmlModelNameEqualityComparer())
                 .Select(inFirst => Tuple.Create(inFirst, (TModel)null)));

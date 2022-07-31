@@ -4,6 +4,7 @@ using Migrator.ISQLProviderNamespace;
 using Migrator.SQLServerProviderNamespace;
 using Migrator.SQLServerProviderNamespace.SQLActions;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,7 +25,7 @@ namespace Migrator.Tests.Actions.Fields
                     {
                         new TFieldModel()
                         {
-                            ID = 21,
+                            ID = Guid.NewGuid(),
                             EntityName = tableName,
                             Name = "Age",
                             Type = FieldType.SIMPLE,
@@ -42,7 +43,7 @@ namespace Migrator.Tests.Actions.Fields
                     {
                         new TFieldModel()
                         {
-                            ID = 21,
+                            ID = Guid.NewGuid(),
                             EntityName = tableName,
                             Name = "Age",
                             Type = FieldType.SIMPLE,

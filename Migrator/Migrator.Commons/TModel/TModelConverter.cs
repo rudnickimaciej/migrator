@@ -15,6 +15,7 @@ namespace Migrator.Commons
         XmlDocument ConverXmlModelToXML(TModel model);
         TModel ConverXmlToXMLModel(XmlDocument xml);
         TModel ConverXmlToXMLModel(string xmlPath);
+        XmlDocument ConvertTypeToXML(Type t);
 
     }
     public static class TModelConverter 
@@ -23,6 +24,7 @@ namespace Migrator.Commons
         {
             TModel model = new TModel();
             model.EntityName = t.Name;
+            model.ID = Guid.NewGuid();
 
             foreach (var f in t.GetProperties())
             {
@@ -31,6 +33,7 @@ namespace Migrator.Commons
                 {
                     model.Fields.Add(new TFieldModel()
                     {
+                        ID = Guid.NewGuid(),
                         EntityName =t.Name,
                         Name = f.Name,
                         Type = FieldType.SIMPLE,
@@ -45,6 +48,7 @@ namespace Migrator.Commons
                 {
                     model.Fields.Add(new TFieldModel()
                     {
+                        ID = Guid.NewGuid(),
                         EntityName = t.Name,
                         Name = f.Name,
                         Type = FieldType.REFERENCE,
@@ -58,6 +62,7 @@ namespace Migrator.Commons
                 {
                     model.Fields.Add(new TFieldModel()
                     {
+                        ID = Guid.NewGuid(),
                         EntityName = t.Name,
                         Name = f.Name,
                         Type = FieldType.SIMPLE_LIST,
@@ -71,6 +76,7 @@ namespace Migrator.Commons
                 {
                     model.Fields.Add(new TFieldModel()
                     {
+                        ID = Guid.NewGuid(),
                         EntityName = t.Name,
                         Name = f.Name,
                         Type = FieldType.REFERENCE_LIST,
@@ -133,13 +139,14 @@ namespace Migrator.Commons
             XmlNode node = xml.SelectSingleNode("/entity");
             TModel model = new TModel();
             model.EntityName = node["name"].InnerText;
-
+            model.ID = Guid.NewGuid();
             XmlNodeList fieldNodes = node["fields"].SelectNodes("field");
             foreach (XmlNode f in fieldNodes)
             {
 
                 model.Fields.Add(new TFieldModel()
                 {
+                    ID = Guid.NewGuid(),
                     Name = f["name"].InnerText,
                     Type = (FieldType)Int32.Parse(f["type"].InnerText),
                     NetType = f["NetType"].InnerText,
@@ -156,6 +163,11 @@ namespace Migrator.Commons
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(xmlPath);
             return ConverXmlToTypeModel(xmlDoc);
+        }
+
+        public static XmlDocument ConvertTypeToXML(Type t)
+        {
+          return  ConverTypeModelToXML(ConvertTypeToTypeModel(t));
         }
     }
 }

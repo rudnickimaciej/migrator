@@ -1,8 +1,10 @@
-﻿namespace Migrator.Commons
+﻿using System;
+
+namespace Migrator.Commons
 {
     public class TFieldModel
     {
-        public int ID { get; set; }
+        public Guid ID { get; set; }
         public string EntityName { get; set; }
         public FieldType Type { get; set; }
         public string Name { get; set; }

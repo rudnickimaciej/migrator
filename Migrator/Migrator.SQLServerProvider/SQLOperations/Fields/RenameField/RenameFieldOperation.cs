@@ -8,7 +8,7 @@ namespace Migrator.SQLServerProviderNamespace.SQLOperations
 
         public RenameFieldOperation(string table, string oldName, string newName)
         {
-            _sql = $"EXEC sp_rename '{table}.{oldName}','{newName}', 'COLUMN'";
+            Sql = $"EXEC sp_rename '{table}.{oldName}','{newName}', 'COLUMN'";
         }
     }
 }

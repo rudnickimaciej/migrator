@@ -10,12 +10,12 @@ namespace Migrator.SQLServerProviderNamespace.SQLOperations
 
         public DeleteFieldOperation(TFieldModel field)
         {
-            _sql = $"ALTER TABLE {field.EntityName} DROP COLUMN {field.Name}"; //TODO: USE SCHEMA FROM FILE
+            Sql = $"ALTER TABLE {field.EntityName} DROP COLUMN {field.Name}"; //TODO: USE SCHEMA FROM FILE
         }
 
         public DeleteFieldOperation(string table, string fieldName)
         {
-            _sql = $"ALTER TABLE {table} DROP COLUMN {fieldName}"; 
+            Sql = $"ALTER TABLE {table} DROP COLUMN {fieldName}"; 
         }
     }
 }

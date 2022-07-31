@@ -10,7 +10,7 @@ namespace Migrator.SQLServerProviderNamespace.SQLOperations
 
         public CreateSimpleListTableOperation(TModel entity)
         {
-            _sql = $"CREATE TABLE {entity.EntityName} (ID INT PRIMARY KEY)"; //TODO: USE SCHEMA FROM FILE
+            Sql = $"CREATE TABLE {entity.EntityName} (ID INT PRIMARY KEY)"; //TODO: USE SCHEMA FROM FILE
         }
 
     }

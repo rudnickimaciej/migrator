@@ -9,7 +9,7 @@ namespace Migrator.SQLServerProviderNamespace.SQLOperations
 
         public DeleteTableOperation(string name)
         {
-            _sql = $"DROP TABLE {name}"; //TODO: USE SCHEMA FROM FILE
+            Sql = $"DROP TABLE {name}"; //TODO: USE SCHEMA FROM FILE
         }
 
     }

@@ -23,7 +23,7 @@ namespace Migrator.Tests
         [SetUp]
         public void Setup()
         {
-            _sqlProviderMock = new Mock<ISqlProvider>();
+        //    _sqlProviderMock = new Mock<ISqlProvider>();
         }
         [Test]
         public void ProcessTypes_AddNewType()
@@ -37,7 +37,7 @@ namespace Migrator.Tests
                     {
                         new TFieldModel()
                         {
-                            ID = 21,
+                            ID = Guid.NewGuid(),
                             EntityName = "entity1",
                             Name = "field1",
                             Type = FieldType.SIMPLE,
@@ -47,7 +47,7 @@ namespace Migrator.Tests
                         },
                         new TFieldModel()
                         {
-                            ID = 22,
+                            ID = Guid.NewGuid(),
                             EntityName = "entity1",
                             Name = "field2",
                             Type = FieldType.SIMPLE,
@@ -60,10 +60,10 @@ namespace Migrator.Tests
 
 
 
-            _sqlProviderMock.Setup(p => p.GetSchemasFromDb()).Returns(new List<XmlDoc>() { });
-            OperationActionHelper.
+            //_sqlProviderMock.Setup(p => p.GetSchemasFromDb()).Returns(new List<XmlDoc>() { });
+            //OperationActionHelper.
 
-            new Migrator.TypeMigrator(_sqlProviderMock.Object).Migrate(new List<Type>() { typeof(Animal) });
+            //new Migrator.TypeMigrator(_sqlProviderMock.Object).Migrate(new List<Type>() { typeof(Animal) });
 
         }
     }

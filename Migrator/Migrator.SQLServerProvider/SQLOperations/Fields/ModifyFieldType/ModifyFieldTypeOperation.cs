@@ -10,7 +10,7 @@ namespace Migrator.SQLServerProviderNamespace.SQLOperations
 
         public ModifyFieldTypeOperation(TFieldModel field)
         {
-            _sql = $"ALTER TABLE {field.EntityName} ALTER COLUMN {field.Name} {field.SqlType}";
+            Sql = $"ALTER TABLE {field.EntityName} ALTER COLUMN {field.Name} {field.SqlType}";
         }
 
     }

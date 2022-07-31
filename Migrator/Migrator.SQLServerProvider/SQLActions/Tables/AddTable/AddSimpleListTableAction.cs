@@ -15,7 +15,7 @@ namespace Migrator.SQLServerProviderNamespace.SQLActions
         {
             List <SQLOperation> list = new List<SQLOperation>() { new CreateTableOperation($"{_field.EntityName }_{ _field.Name }")};
             list.AddRange(
-                    new AddFieldAction(new TFieldModel() { EntityName = _field.EntityName, Name= $"{_field.EntityName}Id", SqlType = _field.SqlType, Type = FieldType.REFERENCE})
+                    new AddFieldAction(new TFieldModel() { EntityName = $"{_field.EntityName}_{_field.Name}", Name= $"{_field.EntityName}Id", SqlType = _field.SqlType, Type = FieldType.REFERENCE})
                  .GenerateOperations());
             return list;
         }

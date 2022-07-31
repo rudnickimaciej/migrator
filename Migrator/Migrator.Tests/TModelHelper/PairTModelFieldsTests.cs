@@ -1,5 +1,6 @@
 ﻿using Migrator.Commons;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 
 namespace Migrator.Tests.XMLModelHelper
@@ -48,7 +49,6 @@ namespace Migrator.Tests.XMLModelHelper
             Assert.AreEqual(pairs[1].FieldPair.Item1.Name, pairs[1].FieldPair.Item2.Name);
         }
 
-
         [Test]
         public void PairXMLModelFields_FieldAddedToSchema_TuplesShouldContaintLeftHalfEmptyTuple()
         {
@@ -59,7 +59,7 @@ namespace Migrator.Tests.XMLModelHelper
                 {
                     new TFieldModel()
                     {
-                        ID = 11,
+                        ID = Guid.NewGuid(),
                         EntityName = "entity1",
                         Name = "field1",
                         Type = FieldType.SIMPLE,
@@ -69,7 +69,7 @@ namespace Migrator.Tests.XMLModelHelper
                     },
                     new TFieldModel()
                     {
-                        ID = 21,
+                            ID = Guid.NewGuid(),
                         EntityName = "entity1",
                         Name = "field2",
                         Type = FieldType.REFERENCE,
@@ -87,7 +87,7 @@ namespace Migrator.Tests.XMLModelHelper
                     {
                         new TFieldModel()
                         {
-                            ID = 21,
+                            ID = Guid.NewGuid(),
                             EntityName = "entity1",
                             Name = "field1",
                             Type = FieldType.SIMPLE,
@@ -97,7 +97,7 @@ namespace Migrator.Tests.XMLModelHelper
                         },
                         new TFieldModel()
                         {
-                            ID = 22,
+                            ID = Guid.NewGuid(),
                             EntityName = "entity1",
                             Name = "field2",
                             Type = FieldType.REFERENCE,
@@ -107,7 +107,7 @@ namespace Migrator.Tests.XMLModelHelper
                         },
                         new TFieldModel()
                         {
-                            ID = 32,
+                            ID = Guid.NewGuid(),
                             EntityName = "entity1",
                             Name = "field3",
                             Type = FieldType.SIMPLE,
@@ -198,6 +198,6 @@ namespace Migrator.Tests.XMLModelHelper
             Assert.AreEqual(pairs[1].FieldPair.Item1.Name, pairs[1].FieldPair.Item2.Name);
             Assert.IsNotNull(pairs[2].FieldPair.Item1);
             Assert.IsNull(pairs[2].FieldPair.Item2);
-        }     
+        }
     }
 }

@@ -118,34 +118,38 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="InitMigratorTables" xml:space="preserve">
-    <value>BEGIN TRANSACTION
+    <value>BEGIN TRANSACTION   
+	IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = N'migrator')  
+	BEGIN
+		EXEC ('CREATE SCHEMA [migrator]'); 
+	END
 
-IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = N'migrator')
-    EXEC ('CREATE SCHEMA [migrator]');
+	IF NOT EXISTS  (select * from sysobjects where name = 'SchemaVersion')   
+	BEGIN
+		CREATE TABLE [migrator].[SchemaVersion]     
+		(         
+			[VersionId] [int] PRIMARY KEY IDENTITY(100, 1) NOT NULL,        
+			[Created] [datetime] NOT NULL     
+		)   
+	END
 
-if not exists (select * from sysobjects where name = 'SchemaVersion')
-    CREATE TABLE [migrator].[SchemaVersion]
-    (
-        [VersionId] [int] PRIMARY KEY IDENTITY(100, 1) NOT NULL,
-        [Created] [datetime] NOT NULL
-    )
-
-if not exists (select * from sysobjects where name = 'Schema')
-    CREATE TABLE [migrator].[Migrations]
-    (
-        [ID] [int] IDENTITY(1, 1) NOT NULL,
-        [VersionId] [int]
-            FOREIGN KEY REFERENCES [migrator].[SchemaVersion] (VersionId),
-        [EntityName] [varchar](100) NOT NULL,
-        [EntitySchemaXML] [xml] NOT NULL,
-        [CreatedOn] [datetime] NOT NULL,
-    )
-
+	IF NOT EXISTS (select * from sysobjects where name = 'Migrations') 
+	BEGIN
+		CREATE TABLE [migrator].[Migrations]   
+		( 
+			[ID] [int] IDENTITY(1, 1) NOT NULL,       
+			[VersionId] [int]          
+			FOREIGN KEY REFERENCES [migrator].[SchemaVersion] (VersionId),   
+			[EntityName] [varchar](100) NOT NULL,       
+			[EntitySchemaXML] [xml] NOT NULL,        
+			[CreatedOn] [datetime] NOT NULL     
+		)  
+	END
 
 COMMIT TRANSACTION</value>
   </data>
   <data name="SelectSchemas" xml:space="preserve">
-    <value>SELECT EntitySchemaXML FROM [migrator].[Schema] 
+    <value>SELECT EntitySchemaXML FROM [migrator].[Migrations] 
 WHERE VersionId = (SELECT TOP 1 VersionId FROM [migrator].[SchemaVersion] 
 					ORDER BY CREATED DESC)</value>
   </data>

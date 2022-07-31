@@ -12,9 +12,22 @@ namespace Migrator.Program
 {
     class Program
     {
+        internal class Person
+        {
+            public string Name { get; set; }
+            public int Age { get; set; }
+            public Pet Pet { get; set; }
+        }
+
+        internal class Pet
+        {
+            public string Name { get; set; }
+            public int Age { get; set; }
+        }
+
         static void Main(string[] args)
         {
-
+            new Migrator.TypeMigrator(new SQLServerProviderNamespace.SQLServerProvider()).Migrate(new List<Type>() { typeof(Person), typeof(Pet) });
             //string sql = new TypeMigrator().Migrate(LoadAllBinDirectoryAssemblies());
             //Console.WriteLine(sql); 
         }

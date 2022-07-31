@@ -8,8 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Migrator.SQLServerProviderNamespace
-{
+namespace Migrator.Core {
     using System;
     
     
@@ -40,7 +39,7 @@ namespace Migrator.SQLServerProviderNamespace
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Migrator.SQLProvider.sql", typeof(sql).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Migrator.SQLServerProvider.sql", typeof(sql).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,22 +61,24 @@ namespace Migrator.SQLServerProviderNamespace
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to BEGIN TRANSACTION
+        ///   Looks up a localized string similar to BEGIN TRANSACTION   
+        ///	IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = N&apos;migrator&apos;)  
+        ///	BEGIN
+        ///		EXEC (&apos;CREATE SCHEMA [migrator]&apos;); 
+        ///	END
         ///
-        ///IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = N&apos;migrator&apos;)
-        ///    EXEC (&apos;CREATE SCHEMA [migrator]&apos;);
+        ///	IF NOT EXISTS  (select * from sysobjects where name = &apos;SchemaVersion&apos;)   
+        ///	BEGIN
+        ///		CREATE TABLE [migrator].[SchemaVersion]     
+        ///		(         
+        ///			[VersionId] [int] PRIMARY KEY IDENTITY(100, 1) NOT NULL,        
+        ///			[Created] [datetime] NOT NULL     
+        ///		)   
+        ///	END
         ///
-        ///if not exists (select * from sysobjects where name = &apos;SchemaVersion&apos;)
-        ///    CREATE TABLE [migrator].[SchemaVersion]
-        ///    (
-        ///        [VersionId] [int] PRIMARY KEY IDENTITY(100, 1) NOT NULL,
-        ///        [Created] [datetime] NOT NULL
-        ///    )
-        ///
-        ///if not exists (select * from sysobjects where name = &apos;Schema&apos;)
-        ///    CREATE TABLE [migrator].[Migrations]
-        ///    (
-        ///        [ID] [int] IDENTITY(1,  [rest of string was truncated]&quot;;.
+        ///	IF NOT EXISTS (select * from sysobjects where name = &apos;Migrations&apos;) 
+        ///	BEGIN
+        ///		CREATE TABLE [ [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string InitMigratorTables {
             get {
@@ -86,7 +87,7 @@ namespace Migrator.SQLServerProviderNamespace
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT EntitySchemaXML FROM [migrator].[Schema] 
+        ///   Looks up a localized string similar to SELECT EntitySchemaXML FROM [migrator].[Migrations] 
         ///WHERE VersionId = (SELECT TOP 1 VersionId FROM [migrator].[SchemaVersion] 
         ///					ORDER BY CREATED DESC).
         /// </summary>

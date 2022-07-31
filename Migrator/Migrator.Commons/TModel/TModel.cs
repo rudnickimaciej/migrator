@@ -10,7 +10,7 @@ namespace Migrator.Commons
 {
     public class TModel
     {
-        public int ID { get; set; }
+        public Guid ID { get; set; }
         public string EntityName { get; set; }
         public List<TFieldModel> Fields = new List<TFieldModel>();
     }

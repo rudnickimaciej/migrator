@@ -10,7 +10,7 @@ namespace Migrator.SQLServerProviderNamespace.SQLOperations
 
         public AddFKFieldOperation(TFieldModel field) 
         {  
-            _sql = $"ALTER TABLE {field.EntityName} ADD {field.Name}Id {field.SqlType}"; //TODO: USE SCHEMA FROM FILE
+            Sql = $"ALTER TABLE {field.EntityName} ADD {field.Name}Id {field.SqlType}"; //TODO: USE SCHEMA FROM FILE
         }
     }
 }

@@ -18,13 +18,21 @@ namespace Migrator.ISQLProviderNamespace
 
     public abstract class SQLOperation
     {
-        protected string _sql;
+        public string Sql { get; protected set; }
+
+       // protected string _wrapSql;
+
         abstract public SQLOperationType Type { get; }
-        public string Execute() => _sql;
+        public string Execute() => Sql;
         public override string ToString()
         {
-            return _sql;
+            return Sql;
         }
+
+        //protected string WrapOperation(string sql)
+        //{
+        //    return string.Format(_wrapSql, sql);
+        //}
     }
 
     

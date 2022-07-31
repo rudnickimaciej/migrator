@@ -19,25 +19,25 @@ namespace Migrator.SQLServerProviderNamespace.SQLActions
 
             if (_field.Type.Equals(FieldType.REFERENCE))
                 return new List<SQLOperation>(){
-                    new AddFieldOperation(_field),
-                    new AddFKOperation(_field) };
+                    new AddFieldOperation(_field.EntityName, _field.Name, SQLType.INT),
+                    new AddFKOperation(_field.EntityName, _field.Name, _field.NetType) };
 
             if (_field.Type.Equals(FieldType.SIMPLE_LIST))
             {
-                List<SQLOperation> list = new List<SQLOperation>()
-                {
-                    new AddFieldOperation(_field),
-                    new AddFKOperation(_field) 
-                };
-                list.AddRange(new AddSimpleListTableAction(_field).GenerateOperations());
-                return list;
+                return new List<SQLOperation>(){
+                    new CreateTableOperation($"{_field.EntityName}_{_field.Name}"),
+                    new AddFieldOperation($"{_field.EntityName}_{_field.Name}", $"{_field.EntityName}Id",SQLType.INT),
+                    new AddFieldOperation($"{_field.EntityName}_{_field.Name}", $"Value",_field.SqlType),
+                    new AddFKOperation($"{_field.EntityName}_{_field.Name}",$"{_field.EntityName}Id",$"{_field.EntityName}") };
             }
 
             if (_field.Type.Equals(FieldType.REFERENCE_LIST))
                 return new List<SQLOperation>(){
-                    new CreateTableOperation($"{_field.EntityName}_{_field.Name}"),
-                    new AddFKOperation(_field),
-                    new AddFKOperation(_field) };
+                    new CreateTableOperation($"{_field.EntityName}_{_field.NetType}"),
+                    new AddFieldOperation($"{_field.EntityName}_{_field.NetType}", $"{_field.EntityName}Id",SQLType.INT),
+                    new AddFieldOperation($"{_field.EntityName}_{_field.NetType}", $"{_field.NetType}Id",SQLType.INT),
+                    new AddFKOperation($"{_field.EntityName}_{_field.NetType}",$"{_field.EntityName}Id",$"{_field.EntityName}"),
+                    new AddFKOperation($"{_field.EntityName}_{_field.NetType}",$"{_field.NetType}Id",$"{_field.NetType}") };
 
             return null;
         }

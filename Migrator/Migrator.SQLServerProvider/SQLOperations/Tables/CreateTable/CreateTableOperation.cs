@@ -9,7 +9,7 @@ namespace Migrator.SQLServerProviderNamespace.SQLOperations
 
         public CreateTableOperation(string name)
         {
-            _sql = $"CREATE TABLE {name} (ID INT PRIMARY KEY)"; //TODO: USE SCHEMA FROM FILE
+            Sql = $"CREATE TABLE {name} (ID INT PRIMARY KEY)"; //TODO: USE SCHEMA FROM FILE
         }
 
     }

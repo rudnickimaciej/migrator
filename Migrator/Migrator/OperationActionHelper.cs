@@ -30,7 +30,14 @@ namespace Migrator
 
         internal static IEnumerable<SQLOperation> SortByType(IEnumerable<SQLOperation> list) => list.OrderBy(c => c.Type).ToList();
 
-        internal static string ToSQL(List<SQLScript> scripts)
+     
+
+        internal static List<SQLOperation> RemoveDuplicates(IEnumerable<SQLOperation> list)
+        {
+            return list.GroupBy(o => o.Sql).Select(o => o.First()).ToList();
+        }
+
+         internal static string ToSQL(List<SQLScript> scripts)
         {
             StringBuilder sb = new StringBuilder();
             scripts.ForEach(s => sb.AppendLine(s.Sql + "GO;"));
@@ -38,14 +45,5 @@ namespace Migrator
             return sb.ToString();
         }
 
-        internal static List<SQLScript> FlattenPackages(List<SQLPackage> packages)
-        {
-            List<SQLScript> flat = new List<SQLScript>();
-
-            foreach (var package in packages)
-                foreach (var script in package.Scripts)
-                    flat.Add(script);
-            return flat;
-        }
     }
 }

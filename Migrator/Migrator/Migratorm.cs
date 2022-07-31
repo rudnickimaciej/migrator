@@ -70,12 +70,14 @@ namespace Migrator
             _sqlProvider = sqlProvider;
         }
 
+
+
         public string Migrate(List<Type> types)
         {
             _sqlProvider.CreateConfigurationTables(ConfigurationManager.ConnectionStrings[_projectName].ConnectionString);
             List<TModel> oldSchemas = _sqlProvider.GetSchemasFromDb(ConfigurationManager.ConnectionStrings[_projectName].ConnectionString)
                                                    .Select(doc=>TModelConverter.ConverXmlToTypeModel(doc.xml))
-                                                   .ToList();
+                                                   .ToList();   
 
             List<TModel> newSchemas = types.Select(t => TModelConverter.ConvertTypeToTypeModel(t)).ToList();
             List<TModelPair> schemaPairs = TModelHelper.PairSchemas(oldSchemas, newSchemas);
@@ -90,7 +92,11 @@ namespace Migrator
             //List<SQLPackage> packages = nodes.Select(n => sqlProvider.Parse(n.Type)).ToList();
 
             // List<SQLScript> scripts = SortByType(FlattenPackages(packages));
-            var sortedOperations = OperationActionHelper.SortByType(OperationActionHelper.FlattenOperations(actions.Select(a => a.GenerateOperations())));
+            var operations = actions.Select(a => a.GenerateOperations());
+            var flattenOperations = OperationActionHelper.FlattenOperations(operations);
+            var filteredOperations = OperationActionHelper.RemoveDuplicates(flattenOperations);
+            var sortedOperations = OperationActionHelper.SortByType(filteredOperations);
+          
             //Merge into FULL SQL
             
             return "Full SQL";

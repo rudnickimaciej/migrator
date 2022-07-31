@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Migrator.Tests.Migrator.Cases.InitialMigration
+namespace Migrator.Tests.SQLServerProviderTests
 {
-    internal class DomainClasses
+    internal class GetSchemasTests
     {
     }
 }

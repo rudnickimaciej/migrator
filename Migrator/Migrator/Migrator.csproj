@@ -50,7 +50,7 @@
     <Compile Include="Attributes\Length.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Migratorm.cs" />
-    <Compile Include="OperationHelper.cs" />
+    <Compile Include="OperationActionHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

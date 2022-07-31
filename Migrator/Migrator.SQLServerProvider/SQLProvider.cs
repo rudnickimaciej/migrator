@@ -7,11 +7,16 @@ using System.Linq;
 using Migrator.Commons;
 using Migrator.SQLServerProviderNamespace.SQLActions;
 using Migrator.Commons.Extensions;
+using Migrator.Core;
 
 namespace Migrator.SQLServerProviderNamespace
 {
     public class SQLServerProvider : ISQLProvider
     {
+        public SQLServerProvider()
+        {
+        }
+
         public IEnumerable<ISQLAction> CreateActions(TModelPair pair)
         {
             if (pair.SchemaPair.Item1 == null)
@@ -50,8 +55,9 @@ namespace Migrator.SQLServerProviderNamespace
             {
                 connection.Open();
 
-
-                using (SqlCommand command = new SqlCommand(sql.InitMigratorTables.Replace('\t', ' ').Replace('\n', ' ').Replace('\r', ' '), connection))
+                var sqlEx = sql.InitMigratorTables.Replace('\t', ' ').Replace('\n', ' ').Replace('\r', ' ');
+                Console.WriteLine(sqlEx);
+                using (SqlCommand command = new SqlCommand(sqlEx, connection))
                 {
                     command.ExecuteNonQuery();
 
@@ -59,7 +65,7 @@ namespace Migrator.SQLServerProviderNamespace
             }
         }
 
-        public void ExecuteScript(string sql)
+        public void ExecuteScript(string sql, List<XmlDoc> xmls)
         {
             throw new NotImplementedException();
         }
@@ -70,12 +76,19 @@ namespace Migrator.SQLServerProviderNamespace
             {
                 connection.Open();
 
-                using (IDataReader reader = new SqlCommand(sql.SelectSchemas.Replace('\t', ' ').Replace('\n', ' ').Replace('\r', ' '), connection).ExecuteReader())
+                var sqlEx = sql.SelectSchemas.Replace('\t', ' ').Replace('\n', ' ').Replace('\r', ' ');
+                Console.WriteLine(sqlEx);
+                using (IDataReader reader = new SqlCommand(sqlEx, connection).ExecuteReader())
                 {
                     return reader.Select(r => new XmlDoc(r["EntitySchemaXML"] is DBNull ? null : r["EntitySchemaXML"].ToString())
                   ).ToList();
                 }
             }
+        }
+
+        public void ExecuteScript(string sql)
+        {
+            throw new NotImplementedException();
         }
     }
 }
