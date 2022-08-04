@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Migrator
+namespace Migrator.Commons.Attributes
 {
-    //CZY IMPLEMENTACJA NIE BEDZIE ZBYT BOLESNA?
-    public class Field : Attribute
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+    public class Entity : Attribute
     {
-        public Field()
+        public Entity()
         {
         }
 
-        public Field(string name)
+        public Entity(string name)
         {
             Name = name;
         }

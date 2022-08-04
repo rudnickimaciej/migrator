@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Migrator
+namespace Migrator.Commons.Attributes
 {
-    public class Required : Attribute
+    public abstract class BaseAttribute : Attribute
     {
-        public Required()
-        {
-        }
     }
 }

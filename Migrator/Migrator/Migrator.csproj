@@ -44,10 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\Entity.cs" />
-    <Compile Include="Attributes\Field.cs" />
-    <Compile Include="Attributes\Required.cs" />
-    <Compile Include="Attributes\Length.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Migratorm.cs" />
     <Compile Include="OperationActionHelper.cs" />

@@ -1,8 +1,10 @@
-﻿using Migrator.Commons.Extensions;
+﻿using Migrator.Commons.Attributes;
+using Migrator.Commons.Extensions;
 using Migrator.Commons.TypeMapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -39,7 +41,9 @@ namespace Migrator.Commons
                         Type = FieldType.SIMPLE,
                         Namespace = f.PropertyType.GetNamespace(),
                         NetType = f.PropertyType.Name,
-                        SqlType = TypeMapper.ConvertToSQLType(f.PropertyType)
+                        SqlType = TypeMapper.ConvertToSQLType(f.PropertyType),
+                        IsRequired = fieldIsRequired(f),
+                        FieldLength = getFieldLength(f)
                     });
                     continue;
                 }
@@ -54,7 +58,8 @@ namespace Migrator.Commons
                         Type = FieldType.REFERENCE,
                         Namespace = f.PropertyType.GetNamespace(),
                         NetType = f.PropertyType.Name,
-                        SqlType = SQLType.INT
+                        SqlType = SQLType.INT,
+                        IsRequired = fieldIsRequired(f)
                     });
                     continue;
                 }
@@ -68,7 +73,8 @@ namespace Migrator.Commons
                         Type = FieldType.SIMPLE_LIST,
                         Namespace = f.PropertyType.GetGenericArguments()[0].GetNamespace(),
                         NetType = f.PropertyType.GetGenericArguments()[0].Name,
-                        SqlType = TypeMapper.ConvertToSQLType(f.PropertyType.GetGenericArguments()[0])
+                        SqlType = TypeMapper.ConvertToSQLType(f.PropertyType.GetGenericArguments()[0]),
+                        FieldLength = getFieldLength(f)
                     });
                     continue;
                 }
@@ -123,11 +129,20 @@ namespace Migrator.Commons
                 XmlElement sqlType = doc.CreateElement(string.Empty, "SqlType", string.Empty);
                 sqlType.AppendChild(doc.CreateTextNode(((int)f.SqlType).ToString()));
 
+                XmlElement isRequired = doc.CreateElement(string.Empty, "IsRequired", string.Empty);
+                sqlType.AppendChild(doc.CreateTextNode(f.IsRequired.ToString()));
+
+                XmlElement fieldLength = doc.CreateElement(string.Empty, "FieldLength", string.Empty);
+                sqlType.AppendChild(doc.CreateTextNode(f.FieldLength.ToString()));
+
                 field.AppendChild(fieldName);
                 field.AppendChild(fieldNamespace);
                 field.AppendChild(fieldType);
                 field.AppendChild(netType);
                 field.AppendChild(sqlType);
+                field.AppendChild(isRequired);
+                field.AppendChild(fieldLength);
+
                 fields.AppendChild(field);
             }
 
@@ -151,7 +166,10 @@ namespace Migrator.Commons
                     Type = (FieldType)Int32.Parse(f["type"].InnerText),
                     NetType = f["NetType"].InnerText,
                     SqlType = (SQLType)Int32.Parse(f["SqlType"].InnerText),
-                    Namespace = f["namespace"].InnerText
+                    Namespace = f["namespace"].InnerText,
+                    IsRequired = bool.Parse(f["isRequired"].InnerText),
+                    FieldLength = int.Parse(f["FieldLength"].InnerText)
+
                 });
             }
             return model;
@@ -168,6 +186,24 @@ namespace Migrator.Commons
         public static XmlDocument ConvertTypeToXML(Type t)
         {
           return  ConverTypeModelToXML(ConvertTypeToTypeModel(t));
+        }
+
+        private static bool fieldIsRequired(PropertyInfo field)
+        {
+            Attribute requiredAttribute = field.GetCustomAttributes(typeof(Required)).FirstOrDefault();
+            return requiredAttribute != null;
+        }
+        //private static void validateDefaultValue(PropertyInfo field)
+        //{
+        //    Attribute requiredAttribute = field.GetCustomAttributes(typeof(Required)).FirstOrDefault();
+
+        //    return requiredAttribute != null;
+        //}
+        private static int getFieldLength(PropertyInfo field)
+        {
+            Attribute lengthAttribute = field.GetCustomAttributes(typeof(Length)).FirstOrDefault();
+
+            return lengthAttribute != null ? (lengthAttribute as Length).Len : -1;       
         }
     }
 }

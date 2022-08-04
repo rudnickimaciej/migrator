@@ -1,16 +1,18 @@
 ﻿using Migrator;
+using Migrator.Commons.Attributes;
 using System;
+using System.ComponentModel;
 
 namespace APKA.Domain
 {
     [Entity]
+
     public class Person
     {
-        [Required]
+        [Required(2)]
         public int Age { get; set; }
 
-        [Length(29)]
-        public string Name { get; set; }
+        [Length(39)]
         public DateTime Birthday { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Migrator.Commons;
+using Migrator.Commons.Attributes;
 using Migrator.Tests.Domain;
 using NUnit.Framework;
 using System;
@@ -15,7 +16,9 @@ namespace Migrator.Tests.Domain
     internal class Person
     {
         #region simple fields
+        [Required]
         public int Age { get; set; }
+        [Length(60)]
         public string Name { get; set; }
         public DateTime Date { get; set; }
         public bool Flag { get; set; }
@@ -64,7 +67,7 @@ namespace Migrator.Tests.TModelConverterNamespace
     {
        
         [TestCase(0, "Person","Age", "System","Int32",SQLType.INT, FieldType.SIMPLE)]
-        [TestCase(1, "Person", "Name", "System", "String", SQLType.VARCHAR, FieldType.SIMPLE)]
+        [TestCase(1, "Person", "FieldName", "System", "String", SQLType.VARCHAR, FieldType.SIMPLE)]
         [TestCase(2, "Person", "Date", "System", "DateTime", SQLType.DATETIME, FieldType.SIMPLE)]
         [TestCase(3, "Person", "Flag", "System", "Boolean", SQLType.BIT, FieldType.SIMPLE)]
         [TestCase(4, "Person", "Int16", "System", "Int16", SQLType.SMALLINT, FieldType.SIMPLE)]

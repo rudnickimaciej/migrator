@@ -1,11 +1,11 @@
-﻿Person
-	string val
+﻿--Person
+--	string val
 
 
----->
+------>
 
-Person
-	int val
+----Person
+--	int val
 
 
 

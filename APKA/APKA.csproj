@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Klasa.cs" />
     <Compile Include="Domain\Animal.cs" />
     <Compile Include="Domain\Car.cs" />
     <Compile Include="Domain\Person.cs" />
@@ -53,6 +54,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Migrator\Migrator.Commons\Migrator.Commons.csproj">
+      <Project>{08EE5EEE-8575-48E2-823F-50A027993013}</Project>
+      <Name>Migrator.Commons</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Migrator\Migrator\Migrator.csproj">
       <Project>{9e8c493e-234b-492f-87f9-43df48f91ee3}</Project>
       <Name>Migrator</Name>

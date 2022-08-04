@@ -11,6 +11,9 @@ namespace Migrator.Commons
         public string Namespace { get; set; }
         public string NetType { get; set; }
         public SQLType SqlType { get; set; }
+        public bool IsRequired { get; set; }
+        public int FieldLength { get; set; }
+
     }
     public enum FieldType
     {

@@ -1,4 +1,5 @@
 ﻿using Migrator;
+using Migrator.Commons.Attributes;
 using System;
 using System.Collections.Generic;
 
@@ -12,7 +13,7 @@ namespace APKA.Domain
         public string Name { get; set; }
         public DateTime Born { get; set; }
 
-        [Field("Value")]
+        [Name("Value")]
         public List<int> ListofInts { get; set; }
         public Person Person { get; set; }
         public Person Person2 { get; set; }

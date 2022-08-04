@@ -47,6 +47,12 @@ namespace Migrator.SQLServerProviderNamespace
 
                 if (oldField != null && newField != null && (oldField.Type != newField.Type || oldField.NetType != newField.NetType))
                     yield return new ModifyFieldTypeAction(newField);
+
+                if (oldField.FieldLength != newField.FieldLength)
+                    yield return new ModifyFieldTypeAction(newField);
+
+                if (oldField.IsRequired != newField.IsRequired)
+                    yield return new ModifyFieldTypeAction(newField);
             }
         }
         public void CreateConfigurationTables(string connectionString)

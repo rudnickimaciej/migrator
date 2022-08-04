@@ -41,6 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\AttributesExceptions\LengthAttributeTooBig.cs" />
+    <Compile Include="Attributes\AttributesExceptions\LengthAttributeTooSmall.cs" />
+    <Compile Include="Attributes\BaseAttribute.cs" />
+    <Compile Include="Attributes\Entity.cs" />
+    <Compile Include="Attributes\Field.cs" />
+    <Compile Include="Attributes\Length.cs" />
+    <Compile Include="Attributes\Required.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

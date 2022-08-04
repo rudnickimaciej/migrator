@@ -10,7 +10,12 @@ namespace Migrator.SQLServerProviderNamespace.SQLOperations
 
         public ModifyFieldTypeOperation(TFieldModel field)
         {
-            Sql = $"ALTER TABLE {field.EntityName} ALTER COLUMN {field.Name} {field.SqlType}";
+            bool fieldLength = field.FieldLength != -1;
+            bool fieldRequired = field.IsRequired;
+
+            Sql = "ALTER TABLE " + field.EntityName +
+                  " ALTER COLUMN " + field.Name + " " + field.SqlType + (fieldLength ? "(" + field.FieldLength + ")" : " ") +
+                  " " + (fieldRequired ? "NOT NULL" : " ");
         }
 
     }
