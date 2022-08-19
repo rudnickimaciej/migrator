@@ -1,5 +1,4 @@
-﻿using Migrator;
-using Migrator.Commons.Attributes;
+﻿using Migrator.Attributes;
 using System;
 using System.Collections.Generic;
 

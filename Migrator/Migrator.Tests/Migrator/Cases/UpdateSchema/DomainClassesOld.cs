@@ -1,4 +1,4 @@
-﻿using Migrator.Commons.Attributes;
+﻿using Migrator.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +21,6 @@ namespace Migrator.Tests.Migrator.Cases.UpdateSchema.OldSchema
         public Gender Gender { get; set; }
 
     }
-    [Entity]
     internal enum Level
     {
         Low,

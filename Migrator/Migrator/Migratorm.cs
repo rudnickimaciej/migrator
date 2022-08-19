@@ -5,13 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 
 
 [assembly: InternalsVisibleToAttribute("Migrator.Program")]
@@ -72,10 +67,11 @@ namespace Migrator
 
 
 
-        public string Migrate(List<Type> types)
+        public void Migrate(List<Type> types)
         {
-            _sqlProvider.CreateConfigurationTables(ConfigurationManager.ConnectionStrings[_projectName].ConnectionString);
-            List<TModel> oldSchemas = _sqlProvider.GetSchemasFromDb(ConfigurationManager.ConnectionStrings[_projectName].ConnectionString)
+            string connString = ConfigurationManager.ConnectionStrings[_projectName].ConnectionString;
+            _sqlProvider.CreateConfigurationTables(connString);
+            List<TModel> oldSchemas = _sqlProvider.GetSchemasFromDb(connString)
                                                    .Select(doc=>TModelConverter.ConverXmlToTypeModel(doc.xml))
                                                    .ToList();   
 
@@ -96,10 +92,9 @@ namespace Migrator
             var flattenOperations = OperationActionHelper.FlattenOperations(operations);
             var filteredOperations = OperationActionHelper.RemoveDuplicates(flattenOperations);
             var sortedOperations = OperationActionHelper.SortByType(filteredOperations);
-          
-            //Merge into FULL SQL
-            
-            return "Full SQL";
+            string sql = OperationActionHelper.Merge(sortedOperations);
+            Console.WriteLine(sql);
+            _sqlProvider.ExecuteScript(connString, sql);
         }
 
       

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using APKA.Domain;
-using Migrator;
 
 
 namespace APKA_TEST
@@ -20,6 +19,7 @@ namespace APKA_TEST
             {
                 list.Add((i == 2 || i == 4 || i == 6) ? i.ToString() : null);
             }
+
         }
     }
 }

@@ -1,7 +1,5 @@
-﻿using Migrator;
-using Migrator.Commons.Attributes;
-using System;
-using System.Collections.Generic;
+﻿using Migrator.Attributes;
+
 
 namespace APKA.Domain
 {

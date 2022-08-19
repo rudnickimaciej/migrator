@@ -1,7 +1,5 @@
-﻿using Migrator;
-using Migrator.Commons.Attributes;
+﻿using Migrator.Attributes;
 using System;
-using System.ComponentModel;
 
 namespace APKA.Domain
 {
@@ -9,10 +7,11 @@ namespace APKA.Domain
 
     public class Person
     {
-        [Required(2)]
+        [Required(43.3f)]
+
         public int Age { get; set; }
 
-        [Length(39)]
+        [Length()]
         public DateTime Birthday { get; set; }
     }
 }

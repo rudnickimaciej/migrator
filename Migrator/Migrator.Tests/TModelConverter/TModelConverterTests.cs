@@ -1,5 +1,5 @@
-﻿using Migrator.Commons;
-using Migrator.Commons.Attributes;
+﻿using Migrator.Attributes;
+using Migrator.Commons;
 using Migrator.Tests.Domain;
 using NUnit.Framework;
 using System;
@@ -16,7 +16,7 @@ namespace Migrator.Tests.Domain
     internal class Person
     {
         #region simple fields
-        [Required]
+        [Required(2)]
         public int Age { get; set; }
         [Length(60)]
         public string Name { get; set; }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Migrator.Commons.Attributes
+namespace ClassLibrary1
 {
-    public abstract class BaseAttribute : Attribute
+    public class Class1
     {
     }
 }

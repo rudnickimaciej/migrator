@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Migrator.Commons.Attributes
+namespace Migrator.Attributes.Exceptions
 {
     internal class LengthAttributeTooSmall : Exception
     {

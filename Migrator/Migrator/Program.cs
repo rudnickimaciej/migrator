@@ -1,11 +1,13 @@
-﻿using Migrator.Commons.Attributes;
+﻿using Migrator.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 
@@ -28,7 +30,10 @@ namespace Migrator.Program
 
         static void Main(string[] args)
         {
-            new Migrator.TypeMigrator(new SQLServerProviderNamespace.SQLServerProvider()).Migrate(new List<Type>() { typeof(Person), typeof(Pet) });
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-us");
+            // new TypeMigrator(new SQLServerProviderNamespace.SQLServerProvider()).Migrate(new List<Type>() { typeof(Person), typeof(Pet) });
+            new TypeMigrator(new SQLServerProviderNamespace.SQLServerProvider()).Migrate(LoadAllBinDirectoryAssemblies());
+
             //string sql = new TypeMigrator().Migrate(LoadAllBinDirectoryAssemblies());
             //Console.WriteLine(sql); 
         }
@@ -42,7 +47,9 @@ namespace Migrator.Program
                 {
                     Assembly loadedAssembly = Assembly.LoadFile(dll);
                     //if (AssemblyContainsEntity(loadedAssembly))
-                    entityTypes.AddRange(loadedAssembly.GetTypes().Where(t => t.IsDefined(typeof(Entity))));               
+                    entityTypes.AddRange(loadedAssembly.GetTypes().Where(t => t.IsDefined(typeof(Entity))));    
+                    //entityTypes.AddRange(loadedAssembly.GetTypes().Where(t => t.Attributes.co(typeof(Entity))));
+
                 }
                 catch (FileLoadException loadEx)
                 { } // The Assembly has already been loaded.

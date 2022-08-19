@@ -10,6 +10,6 @@ namespace Migrator.ISQLProviderNamespace
         void CreateConfigurationTables(string connectionString);
 
         List<XmlDoc> GetSchemasFromDb(string connectionString);
-        void ExecuteScript(string sql);
+        void ExecuteScript(string sql, string connectionString);
     }
 }

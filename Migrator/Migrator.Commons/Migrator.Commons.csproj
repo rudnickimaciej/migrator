@@ -41,13 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\AttributesExceptions\LengthAttributeTooBig.cs" />
-    <Compile Include="Attributes\AttributesExceptions\LengthAttributeTooSmall.cs" />
-    <Compile Include="Attributes\BaseAttribute.cs" />
-    <Compile Include="Attributes\Entity.cs" />
-    <Compile Include="Attributes\Field.cs" />
-    <Compile Include="Attributes\Length.cs" />
-    <Compile Include="Attributes\Required.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,6 +51,12 @@
     <Compile Include="TModel\TModelHelper.cs" />
     <Compile Include="TModel\TModelPair.cs" />
     <Compile Include="TypeMapping\TypeMapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Migrator.Attributes\Migrator.Attributes.csproj">
+      <Project>{06369554-715A-4F24-AFA7-1FFD2DAB7F2B}</Project>
+      <Name>Migrator.Attributes</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

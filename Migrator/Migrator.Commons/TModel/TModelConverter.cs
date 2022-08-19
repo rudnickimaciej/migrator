@@ -1,4 +1,4 @@
-﻿using Migrator.Commons.Attributes;
+﻿using Migrator.Attributes;
 using Migrator.Commons.Extensions;
 using Migrator.Commons.TypeMapping;
 using System;
@@ -193,12 +193,20 @@ namespace Migrator.Commons
             Attribute requiredAttribute = field.GetCustomAttributes(typeof(Required)).FirstOrDefault();
             return requiredAttribute != null;
         }
-        //private static void validateDefaultValue(PropertyInfo field)
-        //{
-        //    Attribute requiredAttribute = field.GetCustomAttributes(typeof(Required)).FirstOrDefault();
+        private static void validateDefaultValue(PropertyInfo field)
+        {
+            //if (!field.PropertyType.IsSimple())
+            //{
+            //    throw new DefaultSetOnNonSimpleFieldException();
+            //}
 
-        //    return requiredAttribute != null;
-        //}
+            //Attribute requiredAttribute = field.GetCustomAttributes(typeof(Required)).FirstOrDefault();
+            //Type t = field.GetType();
+            //t.
+            //(requiredAttribute as Required).Default
+
+            //return requiredAttribute != null;
+        }
         private static int getFieldLength(PropertyInfo field)
         {
             Attribute lengthAttribute = field.GetCustomAttributes(typeof(Length)).FirstOrDefault();

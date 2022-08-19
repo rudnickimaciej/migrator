@@ -92,9 +92,15 @@ namespace Migrator.SQLServerProviderNamespace
             }
         }
 
-        public void ExecuteScript(string sql)
+        public void ExecuteScript(string connectionString, string sql)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                Console.WriteLine(sql);
+                int i = new SqlCommand(sql, connection).ExecuteNonQuery();
+            }
         }
     }
 }

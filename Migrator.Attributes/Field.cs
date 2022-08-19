@@ -4,16 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Migrator.Commons.Attributes
+namespace Migrator.Attributes
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    public class Required : Attribute
+    public class Name : Attribute
     {
-        public Required(object defaultValue)
+        public Name()
         {
-            Default = defaultValue;
         }
 
-        public object Default { get; private set; }
+        public Name(string name)
+        {
+            FieldName = name;
+        }
+
+        public string FieldName { get; private set; }
     }
 }

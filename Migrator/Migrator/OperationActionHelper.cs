@@ -45,5 +45,14 @@ namespace Migrator
             return sb.ToString();
         }
 
+        internal static string Merge(IEnumerable<SQLOperation> sortedOperations)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("set xact_abort on");
+            sb.AppendLine("BEGIN TRAN;");
+            sortedOperations.ToList().ForEach(o => sb.AppendLine(o.Sql));
+            sb.AppendLine("COMMIT TRAN;");
+            return sb.ToString();
+        }
     }
 }

@@ -94,6 +94,7 @@ namespace Migrator.Tests.Migrator.Cases.InitialMigration
            var flattenOpperations= OperationActionHelper.FlattenOperations(flattenActions.Select(a => a.GenerateOperations()));
            var filteredOpeartions = OperationActionHelper.RemoveDuplicates(flattenOpperations);
            var sortedOperations = OperationActionHelper.SortByType(filteredOpeartions);
+           string sql = OperationActionHelper.Merge(sortedOperations);
         }
     }
 }
