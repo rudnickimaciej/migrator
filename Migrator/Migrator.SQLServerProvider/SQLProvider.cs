@@ -8,13 +8,18 @@ using Migrator.Commons;
 using Migrator.SQLServerProviderNamespace.SQLActions;
 using Migrator.Commons.Extensions;
 using Migrator.Core;
+using System.Text;
+using Migrator.Commons.Logger;
 
 namespace Migrator.SQLServerProviderNamespace
 {
     public class SQLServerProvider : ISQLProvider
     {
-        public SQLServerProvider()
+        private readonly ILogger _logger;
+
+        public SQLServerProvider(ILogger logger)
         {
+            _logger = logger;
         }
 
         public IEnumerable<ISQLAction> CreateActions(TModelPair pair)
@@ -45,36 +50,29 @@ namespace Migrator.SQLServerProviderNamespace
                 if (newField == null)
                     yield return new DeleteFieldAction(oldField);
 
-                if (oldField != null && newField != null && (oldField.Type != newField.Type || oldField.NetType != newField.NetType))
-                    yield return new ModifyFieldTypeAction(newField);
-
-                if (oldField.FieldLength != newField.FieldLength)
-                    yield return new ModifyFieldTypeAction(newField);
-
-                if (oldField.IsRequired != newField.IsRequired)
+                if (oldField != null && newField != null && (
+                    oldField.Type != newField.Type ||
+                    oldField.NetType != newField.NetType ||
+                    oldField.FieldLength != newField.FieldLength ||
+                    oldField.IsRequired != newField.IsRequired))
                     yield return new ModifyFieldTypeAction(newField);
             }
         }
-        public void CreateConfigurationTables(string connectionString)
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
+        //public void CreateConfigurationTables(string connectionString)
+        //{
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        connection.Open();
 
-                var sqlEx = sql.InitMigratorTables.Replace('\t', ' ').Replace('\n', ' ').Replace('\r', ' ');
-                Console.WriteLine(sqlEx);
-                using (SqlCommand command = new SqlCommand(sqlEx, connection))
-                {
-                    command.ExecuteNonQuery();
+        //        var sqlEx = sql.InitMigratorTables.Clean();
+        //        Console.WriteLine(sqlEx);
+        //        using (SqlCommand command = new SqlCommand(sqlEx, connection))
+        //        {
+        //            command.ExecuteNonQuery();
 
-                }
-            }
-        }
-
-        public void ExecuteScript(string sql, List<XmlDoc> xmls)
-        {
-            throw new NotImplementedException();
-        }
+        //        }
+        //    }
+        //}
 
         public List<XmlDoc> GetSchemasFromDb(string connectionString)
         {
@@ -82,7 +80,7 @@ namespace Migrator.SQLServerProviderNamespace
             {
                 connection.Open();
 
-                var sqlEx = sql.SelectSchemas.Replace('\t', ' ').Replace('\n', ' ').Replace('\r', ' ');
+                var sqlEx = @sql.SelectSchemas.Clean();
                 Console.WriteLine(sqlEx);
                 using (IDataReader reader = new SqlCommand(sqlEx, connection).ExecuteReader())
                 {
@@ -92,14 +90,27 @@ namespace Migrator.SQLServerProviderNamespace
             }
         }
 
-        public void ExecuteScript(string connectionString, string sql)
+        public void ExecuteScript(string connectionString, string sqls, IEnumerable<TModel> newSchemas)
         {
+            StringBuilder migrationInserts = new StringBuilder();
+            newSchemas
+                .ToList()
+                .ForEach(s => migrationInserts.AppendLine($"INSERT INTO migrator.Migrations SELECT @Version, '{s.EntityName}', '{TModelConverter.ConverTypeModelToXML(s).InnerXml}', GETDATE()"));
+
+            string formattedSql = string.Format(sql.Transaction.Clean(),
+                sql.InitMigratorTables.Clean(),
+                sqls,
+                sql.IncrementSchemaVersion.Clean(),
+                sql.DeclareVersionVariable.Clean(),
+                migrationInserts.ToString());
+
+            _logger.Log(formattedSql);
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-
-                Console.WriteLine(sql);
-                int i = new SqlCommand(sql, connection).ExecuteNonQuery();
+                Console.WriteLine(formattedSql);
+                int i = new SqlCommand(formattedSql, connection).ExecuteNonQuery();
             }
         }
     }

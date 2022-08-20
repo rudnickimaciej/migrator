@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Migrator.Commons
+namespace Migrator
 {
-    public class Class1
+    internal class ContainerConfiguration
     {
     }
 }

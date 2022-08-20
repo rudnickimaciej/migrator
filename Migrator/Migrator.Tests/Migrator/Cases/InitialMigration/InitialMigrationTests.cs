@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Migrator.Tests.Migrator.Cases.InitialMigration
 {
@@ -94,7 +95,9 @@ namespace Migrator.Tests.Migrator.Cases.InitialMigration
            var flattenOpperations= OperationActionHelper.FlattenOperations(flattenActions.Select(a => a.GenerateOperations()));
            var filteredOpeartions = OperationActionHelper.RemoveDuplicates(flattenOpperations);
            var sortedOperations = OperationActionHelper.SortByType(filteredOpeartions);
-           string sql = OperationActionHelper.Merge(sortedOperations);
+            IEnumerable<Tuple<XmlDocument, string>> newSchemasXmls = newModels.Select(s => new Tuple<XmlDocument, string>(TModelConverter.ConverTypeModelToXML(s), s.EntityName));
+
+            string sql = OperationActionHelper.Merge(sortedOperations);
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
-
+using System.Xml;
 
 [assembly: InternalsVisibleToAttribute("Migrator.Program")]
 
@@ -55,7 +55,7 @@ namespace Migrator
         DELETE_TABLE
     }
 
-    public class TypeMigrator
+    internal class TypeMigrator
     {
         ISQLProvider _sqlProvider;
         private readonly string _projectName = "Migrator";
@@ -67,10 +67,9 @@ namespace Migrator
 
 
 
-        public void Migrate(List<Type> types)
+        internal void Migrate(List<Type> types)
         {
             string connString = ConfigurationManager.ConnectionStrings[_projectName].ConnectionString;
-            _sqlProvider.CreateConfigurationTables(connString);
             List<TModel> oldSchemas = _sqlProvider.GetSchemasFromDb(connString)
                                                    .Select(doc=>TModelConverter.ConverXmlToTypeModel(doc.xml))
                                                    .ToList();   
@@ -80,39 +79,15 @@ namespace Migrator
 
             IEnumerable<ISQLAction> actions = OperationActionHelper.FlattenActions(schemaPairs.Select(p => _sqlProvider.CreateActions(p)));
 
-            // ISqlProvider sqlProvider = new SQLProvider();
-            // List<Node> nodes = types.Select(t => new Node(t)).ToList();
-            // List<Node> sortedNoted = new List<Node>();
-            // SortEntities(0, nodes, ref sortedNoted);
-
-            //List<SQLPackage> packages = nodes.Select(n => sqlProvider.Parse(n.Type)).ToList();
-
-            // List<SQLScript> scripts = SortByType(FlattenPackages(packages));
             var operations = actions.Select(a => a.GenerateOperations());
             var flattenOperations = OperationActionHelper.FlattenOperations(operations);
             var filteredOperations = OperationActionHelper.RemoveDuplicates(flattenOperations);
             var sortedOperations = OperationActionHelper.SortByType(filteredOperations);
+          
+            //IEnumerable<Tuple<XmlDocument,string>> newSchemasXmls = newSchemas.Select(s => new Tuple<XmlDocument, string>(TModelConverter.ConverTypeModelToXML(s),s.EntityName));
             string sql = OperationActionHelper.Merge(sortedOperations);
             Console.WriteLine(sql);
-            _sqlProvider.ExecuteScript(connString, sql);
+            _sqlProvider.ExecuteScript(connString, sql, newSchemas);
         }
-
-      
-
-
-        //private static void SortEntities(int i, List<Node> list, ref List<Node> sortedList)
-        //{
-        //    while (i < list.Count)
-        //    {
-        //        Node node = list[i];
-        //        if (list[i].HasReference())
-        //            SortEntities(i + 1, list, ref sortedList);
-
-        //        if (!sortedList.Any(n => n.Type.Equals(node.Type)))
-        //            sortedList.Add(list[i]);
-        //        //ProcessEntities(++i, ref list, ref sortedList);
-        //        i++;
-        //    }
-        //}
     }
 }

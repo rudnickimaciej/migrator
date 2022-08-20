@@ -98,9 +98,9 @@ namespace Migrator.Commons
         public static XmlDocument ConverTypeModelToXML(TModel model)
         {
             XmlDocument doc = new XmlDocument();
-            XmlDeclaration xmlDeclaration = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
+           // XmlDeclaration xmlDeclaration = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
             XmlElement root = doc.DocumentElement;
-            doc.InsertBefore(xmlDeclaration, root);
+            //doc.InsertBefore(xmlDeclaration, root);
 
             XmlElement entity = doc.CreateElement(string.Empty, "entity", string.Empty);
             XmlElement name = doc.CreateElement(string.Empty, "name", string.Empty);
@@ -130,10 +130,10 @@ namespace Migrator.Commons
                 sqlType.AppendChild(doc.CreateTextNode(((int)f.SqlType).ToString()));
 
                 XmlElement isRequired = doc.CreateElement(string.Empty, "IsRequired", string.Empty);
-                sqlType.AppendChild(doc.CreateTextNode(f.IsRequired.ToString()));
+                isRequired.AppendChild(doc.CreateTextNode(f.IsRequired.ToString()));
 
                 XmlElement fieldLength = doc.CreateElement(string.Empty, "FieldLength", string.Empty);
-                sqlType.AppendChild(doc.CreateTextNode(f.FieldLength.ToString()));
+                fieldLength.AppendChild(doc.CreateTextNode(f.FieldLength.ToString()));
 
                 field.AppendChild(fieldName);
                 field.AppendChild(fieldNamespace);
@@ -162,14 +162,14 @@ namespace Migrator.Commons
                 model.Fields.Add(new TFieldModel()
                 {
                     ID = Guid.NewGuid(),
+                    EntityName = model.EntityName,
                     Name = f["name"].InnerText,
                     Type = (FieldType)Int32.Parse(f["type"].InnerText),
                     NetType = f["NetType"].InnerText,
                     SqlType = (SQLType)Int32.Parse(f["SqlType"].InnerText),
                     Namespace = f["namespace"].InnerText,
-                    IsRequired = bool.Parse(f["isRequired"].InnerText),
+                    IsRequired = bool.Parse(f["IsRequired"].InnerText),
                     FieldLength = int.Parse(f["FieldLength"].InnerText)
-
                 });
             }
             return model;

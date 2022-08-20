@@ -8,6 +8,8 @@ namespace APKA.Domain
     {
         public int Pole1 { get; set; }
         public int Pole2 { get; set; }
+        public string Pole3 { get; set; }
+
     }
 
 

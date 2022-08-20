@@ -117,14 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DeclareVersionVariable" xml:space="preserve">
+    <value>DECLARE @Version INT =(SELECT TOP 1 VersionId FROM [migrator].[SchemaVersion] ORDER BY CREATED DESC)</value>
+  </data>
+  <data name="IncrementSchemaVersion" xml:space="preserve">
+    <value>INSERT INTO migrator.SchemaVersion SELECT GETDATE();</value>
+  </data>
   <data name="InitMigratorTables" xml:space="preserve">
-    <value>BEGIN TRANSACTION   
-	IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = N'migrator')  
+    <value>IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = N'migrator')  
 	BEGIN
 		EXEC ('CREATE SCHEMA [migrator]'); 
 	END
 
-	IF NOT EXISTS  (select * from sysobjects where name = 'SchemaVersion')   
+IF NOT EXISTS  (select * from sysobjects where name = 'SchemaVersion')   
 	BEGIN
 		CREATE TABLE [migrator].[SchemaVersion]     
 		(         
@@ -133,7 +138,7 @@
 		)   
 	END
 
-	IF NOT EXISTS (select * from sysobjects where name = 'Migrations') 
+IF NOT EXISTS (select * from sysobjects where name = 'Migrations') 
 	BEGIN
 		CREATE TABLE [migrator].[Migrations]   
 		( 
@@ -144,13 +149,40 @@
 			[EntitySchemaXML] [xml] NOT NULL,        
 			[CreatedOn] [datetime] NOT NULL     
 		)  
-	END
-
-COMMIT TRANSACTION</value>
+	END</value>
   </data>
   <data name="SelectSchemas" xml:space="preserve">
-    <value>SELECT EntitySchemaXML FROM [migrator].[Migrations] 
-WHERE VersionId = (SELECT TOP 1 VersionId FROM [migrator].[SchemaVersion] 
-					ORDER BY CREATED DESC)</value>
+    <value>IF EXISTS (select * from sysobjects where name = 'Migrations')  
+	BEGIN
+		SELECT EntitySchemaXML FROM [migrator].[Migrations] 
+		WHERE VersionId = (SELECT TOP 1 VersionId FROM [migrator].[SchemaVersion] 
+							ORDER BY CREATED DESC)
+	END</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>BEGIN TRY
+    BEGIN TRANSACTION
+
+       {0} 
+       {1}
+       {2}
+       {3}
+
+    COMMIT TRAN
+END TRY
+BEGIN CATCH
+    IF @@TRANCOUNT &gt; 0
+        ROLLBACK TRAN
+    DECLARE @ErrorMessage NVARCHAR(4000);  
+    DECLARE @ErrorSeverity INT;  
+    DECLARE @ErrorState INT;  
+
+    SELECT   
+       @ErrorMessage = ERROR_MESSAGE(),  
+       @ErrorSeverity = ERROR_SEVERITY(),  
+       @ErrorState = ERROR_STATE();  
+
+    RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);  
+END CATCH</value>
   </data>
 </root>

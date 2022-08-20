@@ -61,5 +61,9 @@ namespace Migrator.Commons.Extensions
                 yield return projection(reader);
             }
         }
+        public static string Clean(this string s)
+        {
+            return s.Replace('\t', ' ').Replace('\n', ' ').Replace('\r', ' ');
+        }
     }
 }

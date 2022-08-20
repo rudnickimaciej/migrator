@@ -15,5 +15,7 @@ namespace APKA.Domain
         public string Pole2 { get; set; }
         public DateTime Pole3 { get; set; }
 
+       
     }
+
 }

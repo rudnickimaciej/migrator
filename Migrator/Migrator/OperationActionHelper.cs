@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Migrator
 {
@@ -48,10 +49,7 @@ namespace Migrator
         internal static string Merge(IEnumerable<SQLOperation> sortedOperations)
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("set xact_abort on");
-            sb.AppendLine("BEGIN TRAN;");
             sortedOperations.ToList().ForEach(o => sb.AppendLine(o.Sql));
-            sb.AppendLine("COMMIT TRAN;");
             return sb.ToString();
         }
     }

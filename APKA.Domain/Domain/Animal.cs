@@ -10,7 +10,6 @@ namespace APKA.Domain
         public List<Person> Persons{ get; set; }
         public int Paws { get; set; }
         public string Name { get; set; }
-        public DateTime Born { get; set; }
 
         [Name("Value")]
         public List<int> ListofInts { get; set; }

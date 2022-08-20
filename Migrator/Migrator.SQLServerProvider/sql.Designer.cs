@@ -61,13 +61,30 @@ namespace Migrator.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to BEGIN TRANSACTION   
-        ///	IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = N&apos;migrator&apos;)  
+        ///   Looks up a localized string similar to DECLARE @Version INT =(SELECT TOP 1 VersionId FROM [migrator].[SchemaVersion] ORDER BY CREATED DESC).
+        /// </summary>
+        internal static string DeclareVersionVariable {
+            get {
+                return ResourceManager.GetString("DeclareVersionVariable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO migrator.SchemaVersion SELECT GETDATE();.
+        /// </summary>
+        internal static string IncrementSchemaVersion {
+            get {
+                return ResourceManager.GetString("IncrementSchemaVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = N&apos;migrator&apos;)  
         ///	BEGIN
         ///		EXEC (&apos;CREATE SCHEMA [migrator]&apos;); 
         ///	END
         ///
-        ///	IF NOT EXISTS  (select * from sysobjects where name = &apos;SchemaVersion&apos;)   
+        ///IF NOT EXISTS  (select * from sysobjects where name = &apos;SchemaVersion&apos;)   
         ///	BEGIN
         ///		CREATE TABLE [migrator].[SchemaVersion]     
         ///		(         
@@ -76,9 +93,9 @@ namespace Migrator.Core {
         ///		)   
         ///	END
         ///
-        ///	IF NOT EXISTS (select * from sysobjects where name = &apos;Migrations&apos;) 
+        ///IF NOT EXISTS (select * from sysobjects where name = &apos;Migrations&apos;) 
         ///	BEGIN
-        ///		CREATE TABLE [ [rest of string was truncated]&quot;;.
+        ///		CREATE TABLE [migrator].[Migrations]    [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string InitMigratorTables {
             get {
@@ -87,13 +104,48 @@ namespace Migrator.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT EntitySchemaXML FROM [migrator].[Migrations] 
-        ///WHERE VersionId = (SELECT TOP 1 VersionId FROM [migrator].[SchemaVersion] 
-        ///					ORDER BY CREATED DESC).
+        ///   Looks up a localized string similar to IF EXISTS (select * from sysobjects where name = &apos;Migrations&apos;)  
+        ///	BEGIN
+        ///		SELECT EntitySchemaXML FROM [migrator].[Migrations] 
+        ///		WHERE VersionId = (SELECT TOP 1 VersionId FROM [migrator].[SchemaVersion] 
+        ///							ORDER BY CREATED DESC)
+        ///	END.
         /// </summary>
         internal static string SelectSchemas {
             get {
                 return ResourceManager.GetString("SelectSchemas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BEGIN TRY
+        ///    BEGIN TRANSACTION
+        ///
+        ///       {0} 
+        ///       {1}
+        ///       {2}
+        ///       {3}
+        ///
+        ///    COMMIT TRAN
+        ///END TRY
+        ///BEGIN CATCH
+        ///    IF @@TRANCOUNT &gt; 0
+        ///        ROLLBACK TRAN
+        ///    DECLARE @ErrorMessage NVARCHAR(4000);  
+        ///    DECLARE @ErrorSeverity INT;  
+        ///    DECLARE @ErrorState INT;  
+        ///
+        ///    SELECT   
+        ///       @ErrorMessage = ERROR_MESSAGE(),  
+        ///       @ErrorSeverity = ERROR_SEVERITY(),  
+        ///       @ErrorState = ERROR_STATE();  
+        ///
+        ///    RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);  
+        ///END CATCH.
+        /// </summary>
+        internal static string Transaction {
+            get {
+                return ResourceManager.GetString("Transaction", resourceCulture);
             }
         }
     }

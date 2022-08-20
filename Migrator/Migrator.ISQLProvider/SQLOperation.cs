@@ -5,15 +5,15 @@ namespace Migrator.ISQLProviderNamespace
 {
     public enum SQLOperationType
     {
-        CREATE_TABLE = 0,
-        DROP_TABLE = 0,
-        CREATE_COLUMN = 1,
-        DROP_COLUMN = 2,
-        ALTER_COLUMN_TYPE = 3,
-        DROP_FK = 4,
-        ADD_FK =5,
-        MIGRATE_COLUMN = 6,
-        CHANGE_COLUMN_NAME = 7
+        CREATE_TABLE,
+        DROP_TABLE,
+        CREATE_COLUMN,
+        DROP_FK,
+        DROP_COLUMN,
+        ALTER_COLUMN_TYPE,
+        ADD_FK,
+        MIGRATE_COLUMN,
+        CHANGE_COLUMN_NAME
     }
 
     public abstract class SQLOperation
