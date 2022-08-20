@@ -1,4 +1,5 @@
 ﻿using Migrator.Commons;
+using Migrator.Commons.Logger;
 using Migrator.ISQLProviderNamespace;
 using Migrator.SQLServerProviderNamespace.SQLOperations;
 using System;
@@ -54,23 +55,27 @@ namespace Migrator
         ALTER_COLUMN_TYPE,
         DELETE_TABLE
     }
-
-    internal class TypeMigrator
+    public interface ITypeMigrator
     {
-        ISQLProvider _sqlProvider;
-        private readonly string _projectName = "Migrator";
+         void Migrate(List<Type> types);
+    }
 
-        public TypeMigrator(ISQLProvider sqlProvider)
+    public class TypeMigrator : ITypeMigrator
+    {
+
+        private readonly ISQLProvider _sqlProvider;
+        private readonly ILogger _logger;
+
+        public TypeMigrator(ISQLProvider sqlProvider, ILogger logger)
         {
             _sqlProvider = sqlProvider;
+            _logger = logger;
         }
 
-
-
-        internal void Migrate(List<Type> types)
+        public void Migrate(List<Type> types)
         {
-            string connString = ConfigurationManager.ConnectionStrings[_projectName].ConnectionString;
-            List<TModel> oldSchemas = _sqlProvider.GetSchemasFromDb(connString)
+            string connString = ConfigurationManager.ConnectionStrings["Migrator"].ConnectionString;
+            List <TModel> oldSchemas = _sqlProvider.GetSchemasFromDb(connString)
                                                    .Select(doc=>TModelConverter.ConverXmlToTypeModel(doc.xml))
                                                    .ToList();   
 
@@ -84,9 +89,8 @@ namespace Migrator
             var filteredOperations = OperationActionHelper.RemoveDuplicates(flattenOperations);
             var sortedOperations = OperationActionHelper.SortByType(filteredOperations);
           
-            //IEnumerable<Tuple<XmlDocument,string>> newSchemasXmls = newSchemas.Select(s => new Tuple<XmlDocument, string>(TModelConverter.ConverTypeModelToXML(s),s.EntityName));
             string sql = OperationActionHelper.Merge(sortedOperations);
-            Console.WriteLine(sql);
+            _logger.Log(sql);
             _sqlProvider.ExecuteScript(connString, sql, newSchemas);
         }
     }
