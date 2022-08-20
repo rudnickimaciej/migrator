@@ -42,7 +42,6 @@ namespace Migrator
         {
             return type.IsList() && !type.GetGenericArguments()[0].IsSimple();
         }
-
         internal static string GetNamespace(this Type type)
         {
             return type.IsList() ? type.GetGenericArguments()[0].Namespace : type.Namespace;
