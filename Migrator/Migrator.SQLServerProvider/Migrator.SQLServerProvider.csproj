@@ -63,7 +63,6 @@
     <Compile Include="SQLOperations\FK\DeleteFK\DeleteFKOperation.cs" />
     <Compile Include="SQLOperations\FK\AddFK\AddFKOperation.cs" />
     <Compile Include="SQLOperations\Tables\DeleteTable\DeleteTableOperation.cs" />
-    <Compile Include="SQLOperations\SQLOperationSchemaReader.cs" />
     <Compile Include="SQLProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

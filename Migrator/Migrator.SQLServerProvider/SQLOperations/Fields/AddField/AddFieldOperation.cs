@@ -7,27 +7,22 @@ namespace Migrator.SQLServerProviderNamespace.SQLOperations
     {
         public override SQLOperationType Type => SQLOperationType.CREATE_COLUMN;
 
-        //private void setWrap()
-        //{
-        //    _wrapSql = $"";
-        //}
-        public AddFieldOperation(TFieldModel field)
+        public AddFieldOperation(TFieldModel field) =>
+            setSql(field.EntityName, field.Name, field.SqlType, field.FieldLength);
+        
+
+        public AddFieldOperation(TFieldModel field, string fieldName) =>
+            setSql(field.EntityName, fieldName, field.SqlType, field.FieldLength);
+
+
+        public AddFieldOperation(string table, string fieldName, SQLType sqlType, int fieldLength) =>
+            setSql(table, fieldName, sqlType, fieldLength);
+
+
+        private void setSql(string table, string fieldName, SQLType sqlType,int fieldLength)
         {
-           
-
-             Sql = $"ALTER TABLE {field.EntityName} ADD {field.Name} {field.SqlType}"; //TODO: USE SCHEMA FROM FILE
+            Sql = "ALTER TABLE " + table + " ADD " + fieldName + " " + sqlType +
+            (fieldLength != -1 ? "(" + fieldLength + ")" : "(1000)");
         }
-
-        public AddFieldOperation(TFieldModel field, string fieldName)
-        {
-            Sql = $"ALTER TABLE {field.EntityName} ADD {fieldName} {field.SqlType}"; //TODO: USE SCHEMA FROM FILE
-        }
-
-        public AddFieldOperation(string table, string fieldName, SQLType sqlType)
-        {
-            Sql = $"ALTER TABLE {table} ADD {fieldName} {sqlType.ToString()}"; //TODO: USE SCHEMA FROM FILE
-        }
-
-
     } 
 }

@@ -75,12 +75,11 @@ namespace Migrator
         public void Migrate(List<Type> types)
         {
             string connString = ConfigurationManager.ConnectionStrings["Migrator"].ConnectionString;
-            List <TModel> oldSchemas = _sqlProvider.GetSchemasFromDb(connString)
-                                                   .Select(doc=>TModelConverter.ConverXmlToTypeModel(doc.xml))
-                                                   .ToList();   
+            IEnumerable<TModel> oldSchemas = _sqlProvider.GetCurrentSchemas(connString);
+   
 
             List<TModel> newSchemas = types.Select(t => TModelConverter.ConvertTypeToTypeModel(t)).ToList();
-            List<TModelPair> schemaPairs = TModelHelper.PairSchemas(oldSchemas, newSchemas);
+            List<TModelPair> schemaPairs = TModelHelper.PairSchemas(oldSchemas.ToList(), newSchemas);
 
             IEnumerable<ISQLAction> actions = OperationActionHelper.FlattenActions(schemaPairs.Select(p => _sqlProvider.CreateActions(p)));
 

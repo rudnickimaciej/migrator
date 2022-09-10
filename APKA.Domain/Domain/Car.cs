@@ -1,5 +1,5 @@
 ﻿using Migrator.Attributes;
-
+using System;
 
 namespace APKA.Domain
 {
@@ -8,12 +8,14 @@ namespace APKA.Domain
     {
         public int Pole1 { get; set; }
         public int Pole2 { get; set; }
+        [Length(200000)]
         public string Pole3 { get; set; }
 
     }
 
 
-    [Entity("Car")]
+    [Entity]
+
     public class Car2
     {
         public int Pole1 { get; set; }

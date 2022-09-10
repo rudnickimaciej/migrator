@@ -32,23 +32,5 @@ namespace Migrator.Commons.TypeMapping
                     throw new Exception("Brak mapowania typu!");
             }
         }
-
-        internal static Type SQLTypeToNetType(string sqlType)
-        {
-            switch (sqlType.ToLower())
-            {
-                case "int":
-                    return typeof(System.Int32);
-                case "varchar(30)":
-                    return typeof(System.String);
-                case "datetime":
-                    return typeof(System.DateTime);
-                case "bool":
-                    return typeof(System.Boolean);
-                default:
-                    throw new Exception("Brak mapowania typu!");
-            }
-
-        }
     }
 }

@@ -7,7 +7,7 @@ namespace Migrator.ISQLProviderNamespace
     {
         IEnumerable<ISQLAction> CreateActions(TModelPair modelPair);
 
-        List<XmlDoc> GetSchemasFromDb(string connectionString);
+        IEnumerable<TModel> GetCurrentSchemas(string connectionString);
         void ExecuteScript(string sql, string connectionString, IEnumerable<TModel> newSchemas);
     }
 }

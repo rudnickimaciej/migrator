@@ -42,7 +42,6 @@ namespace Migrator.Commons
                         Namespace = f.PropertyType.GetNamespace(),
                         NetType = f.PropertyType.Name,
                         SqlType = TypeMapper.ConvertToSQLType(f.PropertyType),
-                        IsRequired = fieldIsRequired(f),
                         FieldLength = getFieldLength(f)
                     });
                     continue;
@@ -58,8 +57,7 @@ namespace Migrator.Commons
                         Type = FieldType.REFERENCE,
                         Namespace = f.PropertyType.GetNamespace(),
                         NetType = f.PropertyType.Name,
-                        SqlType = SQLType.INT,
-                        IsRequired = fieldIsRequired(f)
+                        SqlType = SQLType.INT
                     });
                     continue;
                 }
@@ -129,8 +127,6 @@ namespace Migrator.Commons
                 XmlElement sqlType = doc.CreateElement(string.Empty, "SqlType", string.Empty);
                 sqlType.AppendChild(doc.CreateTextNode(((int)f.SqlType).ToString()));
 
-                XmlElement isRequired = doc.CreateElement(string.Empty, "IsRequired", string.Empty);
-                isRequired.AppendChild(doc.CreateTextNode(f.IsRequired.ToString()));
 
                 XmlElement fieldLength = doc.CreateElement(string.Empty, "FieldLength", string.Empty);
                 fieldLength.AppendChild(doc.CreateTextNode(f.FieldLength.ToString()));
@@ -140,7 +136,6 @@ namespace Migrator.Commons
                 field.AppendChild(fieldType);
                 field.AppendChild(netType);
                 field.AppendChild(sqlType);
-                field.AppendChild(isRequired);
                 field.AppendChild(fieldLength);
 
                 fields.AppendChild(field);
@@ -168,7 +163,6 @@ namespace Migrator.Commons
                     NetType = f["NetType"].InnerText,
                     SqlType = (SQLType)Int32.Parse(f["SqlType"].InnerText),
                     Namespace = f["namespace"].InnerText,
-                    IsRequired = bool.Parse(f["IsRequired"].InnerText),
                     FieldLength = int.Parse(f["FieldLength"].InnerText)
                 });
             }
@@ -188,11 +182,6 @@ namespace Migrator.Commons
           return  ConverTypeModelToXML(ConvertTypeToTypeModel(t));
         }
 
-        private static bool fieldIsRequired(PropertyInfo field)
-        {
-            Attribute requiredAttribute = field.GetCustomAttributes(typeof(Required)).FirstOrDefault();
-            return requiredAttribute != null;
-        }
         private static void validateDefaultValue(PropertyInfo field)
         {
             //if (!field.PropertyType.IsSimple())

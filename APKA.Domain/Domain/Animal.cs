@@ -11,7 +11,6 @@ namespace APKA.Domain
         public int Paws { get; set; }
         public string Name { get; set; }
 
-        [Name("Value")]
         public List<int> ListofInts { get; set; }
         public Person Person { get; set; }
         public Person Person2 { get; set; }

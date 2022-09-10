@@ -15,7 +15,7 @@ namespace Migrator.DI
         public static IContainer Configure()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterType<Application>().As<IApplication>();
+            builder.RegisterType<ApplicationTest>().As<IApplication>();
             builder.RegisterType<TypeMigrator>().As<ITypeMigrator>();
             builder.RegisterType<SQLServerProvider>().As<ISQLProvider>();
             builder.RegisterType<TSqlLogger>().As<ILogger>();
