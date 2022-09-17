@@ -1,4 +1,5 @@
 ﻿using APKA.Domain;
+using APKA.Domain2;
 using Migrator.Attributes;
 using Migrator.ISQLProviderNamespace;
 using System;
@@ -19,7 +20,13 @@ namespace Migrator
         }
 
         public void Run() =>
-            _migrator.Migrate(new List<Type>() { typeof(Animal), typeof(Car) , typeof(Person) });
+            _migrator.Migrate(
+                new List<Type>() {
+                    typeof(Client),
+                    typeof(ClientOrder) ,
+                    typeof(Order),
+                    typeof(Phone),
+                    typeof(Worker)});
        
         private static List<Type> LoadAllBinDirectoryAssemblies()
         {

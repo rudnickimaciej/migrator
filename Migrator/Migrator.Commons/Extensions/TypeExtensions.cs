@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Migrator.Commons.Extensions
 {
-    internal static class Extensions
+    internal static class TypeExtensions
     {
         public static bool IsSimple(this Type type)
         {
@@ -60,10 +60,6 @@ namespace Migrator.Commons.Extensions
             {
                 yield return projection(reader);
             }
-        }
-        public static string Clean(this string s)
-        {
-            return s.Replace('\t', ' ').Replace('\n', ' ').Replace('\r', ' ');
         }
     }
 }

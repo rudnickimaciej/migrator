@@ -31,6 +31,7 @@ namespace Migrator.Commons
         FLOAT,
         DECIMAL,
         VARCHAR,
+        CHAR,
         DATETIME,
         BIT
     }

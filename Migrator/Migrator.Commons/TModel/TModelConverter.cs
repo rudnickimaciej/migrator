@@ -57,7 +57,8 @@ namespace Migrator.Commons
                         Type = FieldType.REFERENCE,
                         Namespace = f.PropertyType.GetNamespace(),
                         NetType = f.PropertyType.Name,
-                        SqlType = SQLType.INT
+                        SqlType = SQLType.INT,
+                        FieldLength = getFieldLength(f)
                     });
                     continue;
                 }
@@ -86,7 +87,8 @@ namespace Migrator.Commons
                         Type = FieldType.REFERENCE_LIST,
                         Namespace = f.PropertyType.GetGenericArguments()[0].GetNamespace(),
                         NetType = f.PropertyType.GetGenericArguments()[0].Name,
-                        SqlType = SQLType.INT
+                        SqlType = SQLType.INT,
+                        FieldLength = getFieldLength(f)
                     });
                     continue;
                 }
@@ -198,9 +200,18 @@ namespace Migrator.Commons
         }
         private static int getFieldLength(PropertyInfo field)
         {
+            Type t = field.PropertyType;
+            if (t.IsList())
+            {
+                
+            }
+            int defaultLength = TypeMapper.GetTypeDefaultLength(field.PropertyType);
             Attribute lengthAttribute = field.GetCustomAttributes(typeof(Length)).FirstOrDefault();
 
-            return lengthAttribute != null ? (lengthAttribute as Length).Len : -1;       
+            if (defaultLength == -1 || (lengthAttribute as Length)?.Len == null)
+                return defaultLength;
+
+            return (lengthAttribute as Length).Len; 
         }
     }
 }

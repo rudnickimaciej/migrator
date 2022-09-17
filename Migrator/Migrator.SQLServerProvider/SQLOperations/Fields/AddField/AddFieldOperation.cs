@@ -21,8 +21,18 @@ namespace Migrator.SQLServerProviderNamespace.SQLOperations
 
         private void setSql(string table, string fieldName, SQLType sqlType,int fieldLength)
         {
+
+            bool fieldLengthFlag = fieldLength != -1;
+
             Sql = "ALTER TABLE " + table + " ADD " + fieldName + " " + sqlType +
-            (fieldLength != -1 ? "(" + fieldLength + ")" : "(1000)");
+            (fieldLengthFlag ? "(" + fieldLength + ")" : "");
+        }
+
+        private int getLength(int fieldLength)
+        {
+            if (fieldLength == -1)
+                return Consts.VARCHAR_DEFAULT_LENGTH;
+            return fieldLength;
         }
     } 
 }

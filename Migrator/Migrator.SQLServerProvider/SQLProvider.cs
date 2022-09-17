@@ -58,7 +58,7 @@ namespace Migrator.SQLServerProviderNamespace
             }
         }
 
-        public IEnumerable<TModel> GetCurrentSchemas(string connectionString)
+        public List<TModel> GetCurrentSchemas(string connectionString)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -69,7 +69,7 @@ namespace Migrator.SQLServerProviderNamespace
                 using (IDataReader reader = new SqlCommand(sqlEx, connection).ExecuteReader())
                 {
                     return reader.Select(r => new XmlDoc(r["EntitySchemaXML"] is DBNull ? null : r["EntitySchemaXML"].ToString())
-                  ).Select(doc => TModelConverter.ConverXmlToTypeModel(doc.xml));  
+                  ).Select(doc => TModelConverter.ConverXmlToTypeModel(doc.xml)).ToList();  
                 }
             }
         }
