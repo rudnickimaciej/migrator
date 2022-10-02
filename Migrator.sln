@@ -6,7 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4A7CD43B-F5E5-4FF8-9A01-5ECA93EAB945}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\..\Desktop\Migrations.xlsx = ..\..\..\Desktop\Migrations.xlsx
-		TODO.txt = TODO.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APKA", "APKA\APKA.csproj", "{5B7710F0-B8D5-4742-B42A-82F50EE6D4D9}"
