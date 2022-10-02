@@ -60,7 +60,7 @@ namespace Migrator.Tests
 
 
 
-            //_sqlProviderMock.Setup(p => p.GetSchemasFromDb()).Returns(new List<XmlDoc>() { });
+            //_sqlProviderMock.Setup(p => p.GetCurrentSchemas()).Returns(new List<XmlDoc>() { });
             //OperationActionHelper.
 
             //new Migrator.TypeMigrator(_sqlProviderMock.Object).Migrate(new List<Type>() { typeof(Animal) });

@@ -75,9 +75,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationTest.cs" />
     <Compile Include="Application.cs" />
     <Compile Include="DI\ContainerConfig.cs" />
-    <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="IApplication.cs" />
     <Compile Include="TypeMigrator.cs" />
     <Compile Include="OperationActionHelper.cs" />
@@ -90,6 +90,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\..\APKA.Domain\APKA.Domain.csproj">
+      <Project>{2b674e6b-3310-4261-8166-d7ff3e12075d}</Project>
+      <Name>APKA.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Migrator.Attributes\Migrator.Attributes.csproj">
       <Project>{06369554-715A-4F24-AFA7-1FFD2DAB7F2B}</Project>
       <Name>Migrator.Attributes</Name>

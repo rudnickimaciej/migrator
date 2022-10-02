@@ -12,16 +12,5 @@ namespace Migrator.Attributes
         public Entity()
         {
         }
-
-        public Entity(string name)
-        {
-            Name = name;
-        }
-
-        public string Name
-        {
-            get { return this.Name; }
-            set { this.Name = value; }
-        }
     }
 }

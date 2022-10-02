@@ -44,7 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Consts\Consts.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Logger\ILogger.cs" />
     <Compile Include="Logger\TSqlLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

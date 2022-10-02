@@ -30,7 +30,7 @@ namespace Migrator.SQLServerProviderNamespace
             if (pair.SchemaPair.Item2 == null)
                 return new List<ISQLAction>() { new DeleteTableAction(pair.SchemaPair.Item1) };
 
-            return ProcessModel(pair); //TOODO ZMIENIC NAZWER METODY
+            return ProcessModel(pair); //TODO ZMIENIC NAZWER METODY
         }
 
         private  IEnumerable<ISQLAction> ProcessModel(TModelPair pair)
@@ -53,39 +53,23 @@ namespace Migrator.SQLServerProviderNamespace
                 if (oldField != null && newField != null && (
                     oldField.Type != newField.Type ||
                     oldField.NetType != newField.NetType ||
-                    oldField.FieldLength != newField.FieldLength ||
-                    oldField.IsRequired != newField.IsRequired))
+                    oldField.FieldLength != newField.FieldLength))
                     yield return new ModifyFieldTypeAction(newField);
             }
         }
-        //public void CreateConfigurationTables(string connectionString)
-        //{
-        //    using (SqlConnection connection = new SqlConnection(connectionString))
-        //    {
-        //        connection.Open();
 
-        //        var sqlEx = sql.InitMigratorTables.Clean();
-        //        Console.WriteLine(sqlEx);
-        //        using (SqlCommand command = new SqlCommand(sqlEx, connection))
-        //        {
-        //            command.ExecuteNonQuery();
-
-        //        }
-        //    }
-        //}
-
-        public List<XmlDoc> GetSchemasFromDb(string connectionString)
+        public List<TModel> GetCurrentSchemas(string connectionString)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
                 var sqlEx = @sql.SelectSchemas.Clean();
-                Console.WriteLine(sqlEx);
+                _logger.Log(sqlEx);
                 using (IDataReader reader = new SqlCommand(sqlEx, connection).ExecuteReader())
                 {
                     return reader.Select(r => new XmlDoc(r["EntitySchemaXML"] is DBNull ? null : r["EntitySchemaXML"].ToString())
-                  ).ToList();
+                  ).Select(doc => TModelConverter.ConverXmlToTypeModel(doc.xml)).ToList();  
                 }
             }
         }
@@ -95,7 +79,8 @@ namespace Migrator.SQLServerProviderNamespace
             StringBuilder migrationInserts = new StringBuilder();
             newSchemas
                 .ToList()
-                .ForEach(s => migrationInserts.AppendLine($"INSERT INTO migrator.Migrations SELECT @Version, '{s.EntityName}', '{TModelConverter.ConverTypeModelToXML(s).InnerXml}', GETDATE()"));
+                .ForEach(s => migrationInserts.AppendLine($"INSERT INTO migrator.Migrations SELECT @Version, '{s.EntityName}', " +
+                                                          $"'{TModelConverter.ConverTypeModelToXML(s).InnerXml}', GETDATE()"));
 
             string formattedSql = string.Format(sql.Transaction.Clean(),
                 sql.InitMigratorTables.Clean(),

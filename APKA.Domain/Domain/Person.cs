@@ -7,11 +7,9 @@ namespace APKA.Domain
 
     public class Person
     {
-        [Required(43.3f)]
 
         public int Age { get; set; }
 
-        [Length()]
         public DateTime Birthday { get; set; }
     }
 }

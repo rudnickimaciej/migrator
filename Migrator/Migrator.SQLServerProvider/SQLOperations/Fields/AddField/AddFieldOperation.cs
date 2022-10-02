@@ -7,27 +7,32 @@ namespace Migrator.SQLServerProviderNamespace.SQLOperations
     {
         public override SQLOperationType Type => SQLOperationType.CREATE_COLUMN;
 
-        //private void setWrap()
-        //{
-        //    _wrapSql = $"";
-        //}
-        public AddFieldOperation(TFieldModel field)
-        {
-           
+        public AddFieldOperation(TFieldModel field) =>
+            setSql(field.EntityName, field.Name, field.SqlType, field.FieldLength);
+        
 
-             Sql = $"ALTER TABLE {field.EntityName} ADD {field.Name} {field.SqlType}"; //TODO: USE SCHEMA FROM FILE
+        public AddFieldOperation(TFieldModel field, string fieldName) =>
+            setSql(field.EntityName, fieldName, field.SqlType, field.FieldLength);
+
+
+        public AddFieldOperation(string table, string fieldName, SQLType sqlType, int fieldLength) =>
+            setSql(table, fieldName, sqlType, fieldLength);
+
+
+        private void setSql(string table, string fieldName, SQLType sqlType,int fieldLength)
+        {
+
+            bool fieldLengthFlag = fieldLength != -1;
+
+            Sql = "ALTER TABLE " + table + " ADD " + fieldName + " " + sqlType +
+            (fieldLengthFlag ? "(" + fieldLength + ")" : "");
         }
 
-        public AddFieldOperation(TFieldModel field, string fieldName)
+        private int getLength(int fieldLength)
         {
-            Sql = $"ALTER TABLE {field.EntityName} ADD {fieldName} {field.SqlType}"; //TODO: USE SCHEMA FROM FILE
+            if (fieldLength == -1)
+                return Consts.VARCHAR_DEFAULT_LENGTH;
+            return fieldLength;
         }
-
-        public AddFieldOperation(string table, string fieldName, SQLType sqlType)
-        {
-            Sql = $"ALTER TABLE {table} ADD {fieldName} {sqlType.ToString()}"; //TODO: USE SCHEMA FROM FILE
-        }
-
-
     } 
 }

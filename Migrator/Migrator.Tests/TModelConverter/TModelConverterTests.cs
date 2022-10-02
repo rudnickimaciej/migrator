@@ -16,7 +16,6 @@ namespace Migrator.Tests.Domain
     internal class Person
     {
         #region simple fields
-        [Required(2)]
         public int Age { get; set; }
         [Length(60)]
         public string Name { get; set; }

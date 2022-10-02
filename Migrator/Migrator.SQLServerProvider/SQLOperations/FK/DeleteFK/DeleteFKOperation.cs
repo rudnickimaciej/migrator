@@ -1,6 +1,5 @@
 ﻿using Migrator.Commons;
 using Migrator.ISQLProviderNamespace;
-using System.Collections.Generic;
 
 namespace Migrator.SQLServerProviderNamespace.SQLOperations
 {

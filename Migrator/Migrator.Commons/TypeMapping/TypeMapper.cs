@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Migrator.Commons.TypeMapping
 {
@@ -12,43 +8,63 @@ namespace Migrator.Commons.TypeMapping
         {
             switch (type.Name.ToLower())
             {
-                case "int16":
+                case Consts.INT16:
                     return SQLType.SMALLINT;
-                case "int32":
+
+                case Consts.INT32:
                     return SQLType.INT;
-                case "int64":
+
+                case Consts.INT64:
                     return SQLType.BIGINT;
-                case "double":
-                    return SQLType.FLOAT;
-                case "decimal":
+
+                case Consts.DECIMAL:
                     return SQLType.DECIMAL;
-                case "string":
+
+                //case Consts.DOUBLE:
+                //    return SQLType.DOUBLE;
+
+                case Consts.FLOAT:
+                    return SQLType.FLOAT;
+
+                case Consts.STRING:
                     return SQLType.VARCHAR;
-                case "datetime":
+
+                case Consts.CHAR:
+                    return SQLType.CHAR;
+
+                case Consts.DATETIME:
                     return SQLType.DATETIME;
-                case "boolean":
+
+                case Consts.BOOL:
                     return SQLType.BIT;
+
                 default:
                     throw new Exception("Brak mapowania typu!");
             }
         }
 
-        internal static Type SQLTypeToNetType(string sqlType)
+        internal static int GetTypeDefaultLength(Type type)
         {
-            switch (sqlType.ToLower())
+            switch (type.Name.ToLower())
             {
-                case "int":
-                    return typeof(System.Int32);
-                case "varchar(30)":
-                    return typeof(System.String);
-                case "datetime":
-                    return typeof(System.DateTime);
-                case "bool":
-                    return typeof(System.Boolean);
-                default:
-                    throw new Exception("Brak mapowania typu!");
-            }
+                case Consts.DECIMAL:
+                    return 10;
 
+                case Consts.FLOAT:
+                    return 100;
+
+                case Consts.STRING:
+                    return 101;
+
+                case Consts.CHAR:
+                    return 102;
+
+                case Consts.DATETIME:
+                    return 7;
+
+                default:
+                    return -1;
+            }
         }
     }
 }

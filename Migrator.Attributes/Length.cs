@@ -1,25 +1,16 @@
-﻿using Migrator.Attributes.Exceptions;
-using System;
+﻿using System;
 
 namespace Migrator.Attributes
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class Length : Attribute
     {
-        public Length()
+        public Length(System.Reflection.FieldInfo field)
         {
         }
 
         public Length(int length)
         {
-            if(length < 0)
-            {
-                throw new LengthAttributeTooSmall(length);
-            }
-            if(length > 8000)
-            {
-                throw new LengthAttributeTooBig(length);
-            }
             Len = length;
         }
 
