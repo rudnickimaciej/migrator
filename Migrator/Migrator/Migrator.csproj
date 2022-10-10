@@ -75,7 +75,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationTest.cs" />
     <Compile Include="Application.cs" />
     <Compile Include="DI\ContainerConfig.cs" />
     <Compile Include="IApplication.cs" />

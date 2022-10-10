@@ -65,7 +65,7 @@ namespace Migrator.SQLServerProviderNamespace
                 connection.Open();
 
                 var sqlEx = @sql.SelectSchemas.Clean();
-                _logger.Log(sqlEx);
+                _logger.Log(sqlEx, ConsoleColor.DarkCyan, ConsoleColor.White);
                 using (IDataReader reader = new SqlCommand(sqlEx, connection).ExecuteReader())
                 {
                     return reader.Select(r => new XmlDoc(r["EntitySchemaXML"] is DBNull ? null : r["EntitySchemaXML"].ToString())
@@ -89,12 +89,11 @@ namespace Migrator.SQLServerProviderNamespace
                 sql.DeclareVersionVariable.Clean(),
                 migrationInserts.ToString());
 
-            _logger.Log(formattedSql);
+            _logger.Log(formattedSql, ConsoleColor.Green, ConsoleColor.Black);
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                Console.WriteLine(formattedSql);
                 int i = new SqlCommand(formattedSql, connection).ExecuteNonQuery();
             }
         }

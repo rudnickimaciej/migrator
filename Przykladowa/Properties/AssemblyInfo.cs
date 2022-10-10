@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("APKA.Domain")]
+[assembly: AssemblyTitle("Przykladowa")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("APKA.Domain")]
+[assembly: AssemblyProduct("Przykladowa")]
 [assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2b674e6b-3310-4261-8166-d7ff3e12075d")]
+[assembly: Guid("a2bf27d8-a35f-47fe-88f4-d522ea08f018")]
 
 // Version information for an assembly consists of the following four values:
 //

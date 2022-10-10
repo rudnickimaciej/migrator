@@ -34,5 +34,13 @@ namespace Migrator.Commons.Logger
             generator.GenerateScript(parsedQuery, out formattedQuery);
             Console.WriteLine(formattedQuery);
         }
+
+        public void Log(string query, ConsoleColor background, ConsoleColor foreground)
+        {
+            Console.BackgroundColor = background;
+            Console.ForegroundColor = foreground;
+            Log(query);
+            Console.ResetColor();
+        }
     }
 }

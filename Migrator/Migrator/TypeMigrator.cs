@@ -89,7 +89,6 @@ namespace Migrator
             var sortedOperations = OperationActionHelper.SortByType(filteredOperations);
           
             string sql = OperationActionHelper.Merge(sortedOperations);
-            _logger.Log(sql);
             _sqlProvider.ExecuteScript(connString, sql, newSchemas);
         }
     }

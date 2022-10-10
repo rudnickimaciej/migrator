@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2B674E6B-3310-4261-8166-D7FF3E12075D}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>APKA.Domain</RootNamespace>
-    <AssemblyName>APKA.Domain</AssemblyName>
+    <ProjectGuid>{A2BF27D8-A35F-47FE-88F4-D522EA08F018}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Przykladowa</RootNamespace>
+    <AssemblyName>Przykladowa</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,7 +34,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,16 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain2\Client.cs" />
-    <Compile Include="Domain2\ClientOrder.cs" />
-    <Compile Include="Domain2\Order.cs" />
-    <Compile Include="Domain2\Phone.cs" />
-    <Compile Include="Domain2\Worker.cs" />
-    <Compile Include="Domain\Animal.cs" />
-    <Compile Include="Domain\Car.cs" />
-    <Compile Include="Domain\Klasa.cs" />
-    <Compile Include="Domain\Person.cs" />
+    <Compile Include="Domain\Klient.cs" />
+    <Compile Include="Domain\Pracownik.cs" />
+    <Compile Include="Domain\Przedmiot.cs" />
+    <Compile Include="Domain\Zamowienie.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Migrator.Attributes\Migrator.Attributes.csproj">

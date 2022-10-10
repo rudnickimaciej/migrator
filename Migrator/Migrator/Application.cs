@@ -17,13 +17,31 @@ namespace Migrator
             _migrator = migrator;
         }
 
-        public void Run() =>
-            _migrator.Migrate(LoadAllBinDirectoryAssemblies());
+        public void Run(string path) =>
+            _migrator.Migrate(LoadAllBinDirectoryAssemblies(path));
        
-        private static List<Type> LoadAllBinDirectoryAssemblies()
+        private static List<Type> LoadAllBinDirectoryAssemblies(string path)
         {
             List<Type> entityTypes = new List<Type>();
-            foreach (string dll in Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory), "*.dll", SearchOption.AllDirectories))
+            foreach (string dll in Directory.GetFiles(path, "*.dll", SearchOption.AllDirectories))
+            {
+                try
+                {
+                    Assembly loadedAssembly = Assembly.LoadFile(dll);
+                    entityTypes.AddRange(loadedAssembly.GetTypes().Where(t => t.IsDefined(typeof(Entity))));
+
+                }
+                catch (FileLoadException loadEx)
+                {
+                    throw loadEx;
+                }
+                catch (BadImageFormatException imgEx)
+                {
+                    throw imgEx;
+                }
+
+            }
+            foreach (string dll in Directory.GetFiles(path, "*.exe", SearchOption.AllDirectories))
             {
                 try
                 {
