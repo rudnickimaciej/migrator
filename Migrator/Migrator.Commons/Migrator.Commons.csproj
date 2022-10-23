@@ -65,7 +65,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ModelConverter.1.cd" />
     <None Include="packages.config" />
+    <None Include="TModel.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -51,7 +51,7 @@ namespace Migrator.Commons.TypeMapping
                     return 10;
 
                 case Consts.FLOAT:
-                    return 100;
+                    return 53;
 
                 case Consts.STRING:
                     return 101;

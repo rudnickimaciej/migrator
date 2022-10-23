@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Migrator.ISQLProviderNamespace.SQLOperation" Collapsed="true">
+    <Position X="1.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQEQAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>SQLOperation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Migrator.ISQLProviderNamespace.XmlDoc" Collapsed="true">
+    <Position X="4.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>XmlDoc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Migrator.ISQLProviderNamespace.ISQLAction" Collapsed="true">
+    <Position X="1.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ISQLAction.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Migrator.ISQLProviderNamespace.ISQLProvider" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAACAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ISQProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Migrator.ISQLProviderNamespace.SQLOperationType" Collapsed="true">
+    <Position X="1.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAMAAACAAAAAIAAAAAAEAAAAAAACABAAAAAQgAAA=</HashCode>
+      <FileName>SQLOperation.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

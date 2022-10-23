@@ -101,5 +101,10 @@
   <ItemGroup>
     <Folder Include="SQLOperations\DataMigrations\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ActionsDiagram.cd" />
+    <None Include="SQLProvider.cd" />
+    <None Include="OperationsDiagram.cd" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

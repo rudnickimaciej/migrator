@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Migrator.SQLServerProviderNamespace.SQLActions.AddFieldAction" Collapsed="true">
+    <Position X="0.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SQLActions\Fields\AddField\AddFieldAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Migrator.SQLServerProviderNamespace.SQLActions.DeleteFieldAction" Collapsed="true">
+    <Position X="0.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SQLActions\Fields\DeleteField\DeleteFieldAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Migrator.SQLServerProviderNamespace.SQLActions.ModifyFieldTypeAction" Collapsed="true">
+    <Position X="0.75" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SQLActions\Fields\ModifyFieldType\ModifyFieldTypeAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Migrator.SQLServerProviderNamespace.SQLActions.AddSimpleListTableAction" Collapsed="true">
+    <Position X="0.75" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SQLActions\Tables\AddTable\AddSimpleListTableAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Migrator.SQLServerProviderNamespace.SQLActions.AddTableAction" Collapsed="true">
+    <Position X="0.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SQLActions\Tables\AddTable\AddTableAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Migrator.SQLServerProviderNamespace.SQLActions.DeleteTableAction" Collapsed="true">
+    <Position X="0.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SQLActions\Tables\DeleteTable\DeleteTableAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Migrator.ISQLProviderNamespace.ISQLAction">
+    <Position X="4" Y="2.5" Width="3.25" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
