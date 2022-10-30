@@ -1,5 +1,6 @@
 ﻿using Migrator;
 using Migrator.Commons;
+using Migrator.Commons.Logger;
 using Migrator.ISQLProviderNamespace;
 using Migrator.SQLServerProviderNamespace;
 using Migrator.SQLServerProviderNamespace.SQLActions;
@@ -32,9 +33,7 @@ namespace Migrator.Tests.Actions.Fields
             TModel oldModel = TModelConverter.ConvertTypeToTypeModel(typeof(PersonOld));
             TModel newModel = TModelConverter.ConvertTypeToTypeModel(typeof(PersonNew));
 
-           
-
-            IEnumerable<ISQLAction> actions = new SQLServerProvider().CreateActions(new TModelPair(oldModel, newModel));
+            IEnumerable<ISQLAction> actions = new SQLServerProvider(new TSqlLogger()).CreateActions(new TModelPair(oldModel, newModel));
 
             Assert.AreEqual(1, actions.Count());
             Assert.IsTrue(actions.ToList()[0].GetType().Equals(typeof(DeleteFieldAction)));

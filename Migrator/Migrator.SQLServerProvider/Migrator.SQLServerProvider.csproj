@@ -84,12 +84,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SQLActions\Enums\AddEnumTable\AddEnumTableAction.sql" />
     <Content Include="SQLActions\Fields\AddField\AddFieldActionSimpleList.sql" />
     <Content Include="SQLActions\Fields\ModifyFieldType\ModifyFieldTypeAction.sql" />
     <Content Include="SQLActions\Tables\AddTable\AddTableAction.sql" />
     <Content Include="SQLActions\Fields\DeleteField\DeleteFieldAction.sql" />
-    <Content Include="SQLActions\Enums\UpdateEnumTable\UpdateEnumTableAction.sql" />
     <Content Include="SQLOperations\Fields\AddField\AddFieldOperationSchema.sql" />
     <Content Include="SQLOperations\Fields\AddField\AddFieldOperationSimpleListSchema.sql" />
     <Content Include="SQLOperations\Tables\CreateSimpleListTable\CreateTableOperationSchema.txt" />

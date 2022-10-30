@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Migrator.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    public class Entity : Attribute
+    public class Entity: Attribute
     {
         public Entity()
         {

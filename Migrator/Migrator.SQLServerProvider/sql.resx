@@ -159,6 +159,9 @@ IF NOT EXISTS (select * from sysobjects where name = 'Migrations')
 							ORDER BY CREATED DESC)
 	END</value>
   </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
   <data name="Transaction" xml:space="preserve">
     <value>BEGIN TRY
     BEGIN TRANSACTION
@@ -167,7 +170,7 @@ IF NOT EXISTS (select * from sysobjects where name = 'Migrations')
        {1}
        {2}
        {3}
-
+       {4}
     COMMIT TRAN
 END TRY
 BEGIN CATCH

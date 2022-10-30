@@ -47,6 +47,7 @@
     <Compile Include="Consts\Consts.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Helpers\RandomHelper.cs" />
     <Compile Include="Logger\ILogger.cs" />
     <Compile Include="Logger\TSqlLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

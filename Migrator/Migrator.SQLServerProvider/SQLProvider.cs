@@ -21,6 +21,10 @@ namespace Migrator.SQLServerProviderNamespace
         {
             _logger = logger;
         }
+        public SQLServerProvider()
+        {
+            
+        }
 
         public IEnumerable<ISQLAction> CreateActions(TModelPair pair)
         {

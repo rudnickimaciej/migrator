@@ -1,5 +1,6 @@
 ﻿using Migrator;
 using Migrator.Commons;
+using Migrator.Commons.Logger;
 using Migrator.ISQLProviderNamespace;
 using Migrator.SQLServerProviderNamespace;
 using Migrator.SQLServerProviderNamespace.SQLActions;
@@ -54,7 +55,7 @@ namespace Migrator.Tests.Actions.Fields
                     }
             };
 
-            IEnumerable<ISQLAction> actions = new SQLServerProvider().CreateActions(new TModelPair(oldSchema, newSchema));
+            IEnumerable<ISQLAction> actions = new SQLServerProvider(new TSqlLogger()).CreateActions(new TModelPair(oldSchema, newSchema));
 
             Assert.AreEqual(1, actions.Count());
             Assert.IsTrue(actions.ToList()[0].GetType().Equals(typeof(ModifyFieldTypeAction)));

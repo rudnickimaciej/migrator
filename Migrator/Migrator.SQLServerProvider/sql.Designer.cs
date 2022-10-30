@@ -118,6 +118,15 @@ namespace Migrator.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to BEGIN TRY
         ///    BEGIN TRANSACTION
         ///
@@ -125,7 +134,7 @@ namespace Migrator.Core {
         ///       {1}
         ///       {2}
         ///       {3}
-        ///
+        ///       {4}
         ///    COMMIT TRAN
         ///END TRY
         ///BEGIN CATCH
@@ -141,7 +150,7 @@ namespace Migrator.Core {
         ///       @ErrorState = ERROR_STATE();  
         ///
         ///    RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);  
-        ///END CATCH.
+        ///END CATC [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Transaction {
             get {

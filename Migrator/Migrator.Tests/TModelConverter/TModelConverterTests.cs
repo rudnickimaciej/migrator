@@ -48,15 +48,6 @@ namespace Migrator.Tests.Domain
         public List<Pet> Pets { get; set; }
         #endregion reference list fields
 
-        #region enums
-    
-        #endregion enums
-    }
-    internal enum Level
-    {
-        Low,
-        Medium,
-        High
     }
 }
 
@@ -66,7 +57,7 @@ namespace Migrator.Tests.TModelConverterNamespace
     {
        
         [TestCase(0, "Person","Age", "System","Int32",SQLType.INT, FieldType.SIMPLE)]
-        [TestCase(1, "Person", "FieldName", "System", "String", SQLType.VARCHAR, FieldType.SIMPLE)]
+        [TestCase(1, "Person", "Name", "System", "String", SQLType.VARCHAR, FieldType.SIMPLE)]
         [TestCase(2, "Person", "Date", "System", "DateTime", SQLType.DATETIME, FieldType.SIMPLE)]
         [TestCase(3, "Person", "Flag", "System", "Boolean", SQLType.BIT, FieldType.SIMPLE)]
         [TestCase(4, "Person", "Int16", "System", "Int16", SQLType.SMALLINT, FieldType.SIMPLE)]

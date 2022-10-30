@@ -20,8 +20,8 @@ namespace Migrator.Commons.TypeMapping
                 case Consts.DECIMAL:
                     return SQLType.DECIMAL;
 
-                //case Consts.DOUBLE:
-                //    return SQLType.DOUBLE;
+                case Consts.DOUBLE:
+                    return SQLType.FLOAT;
 
                 case Consts.FLOAT:
                     return SQLType.FLOAT;
@@ -60,7 +60,7 @@ namespace Migrator.Commons.TypeMapping
                     return 102;
 
                 case Consts.DATETIME:
-                    return 7;
+                    return -1;
 
                 default:
                     return -1;

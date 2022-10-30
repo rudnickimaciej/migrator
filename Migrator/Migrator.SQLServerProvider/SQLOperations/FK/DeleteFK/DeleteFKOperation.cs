@@ -1,4 +1,5 @@
 ﻿using Migrator.Commons;
+using Migrator.Commons.Helpers;
 using Migrator.ISQLProviderNamespace;
 
 namespace Migrator.SQLServerProviderNamespace.SQLOperations
@@ -9,9 +10,10 @@ namespace Migrator.SQLServerProviderNamespace.SQLOperations
 
         public DeleteFKOperation(TFieldModel field)
         {
-            Sql = $"DECLARE @SQL nvarchar(1000) SET @SQL = 'ALTER TABLE {field.EntityName} " +
+            string sqlVarName = $"@SQL_{new RandomHelper().GetRandomString()}";
+            Sql = $"DECLARE {sqlVarName} nvarchar(1000) SET {sqlVarName} = 'ALTER TABLE {field.EntityName} " +
                    $"DROP CONSTRAINT' (SELECT NAME FROM  sys.foreign_keys WHERE NAME LIKE 'FK__{field.EntityName}__{field.Name}%') " +
-                   $"EXEC (@SQL)";
+                   $"EXEC ({sqlVarName})";
         }
 
     }

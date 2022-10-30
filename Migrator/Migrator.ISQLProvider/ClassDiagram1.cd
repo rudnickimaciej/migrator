@@ -8,7 +8,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Migrator.ISQLProviderNamespace.XmlDoc" Collapsed="true">
-    <Position X="4.75" Y="3.25" Width="1.5" />
+    <Position X="4.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>XmlDoc.cs</FileName>
@@ -21,8 +21,8 @@
       <FileName>ISQLAction.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Migrator.ISQLProviderNamespace.ISQLProvider" Collapsed="true">
-    <Position X="4" Y="1.5" Width="1.5" />
+  <Interface Name="Migrator.ISQLProviderNamespace.ISQLProvider">
+    <Position X="4" Y="1.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAQAAAAAACAAIAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ISQProvider.cs</FileName>

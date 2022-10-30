@@ -9,9 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Migrator.Tests.Migrator.Cases.UpdateSchema.AddField
+namespace Migrator.Tests.Actions.Fields
 {
-    internal class MigrationAddFieldTests
+    internal class AddFieldActionTests2
     {
         internal class Sex
         {
@@ -34,10 +34,10 @@ namespace Migrator.Tests.Migrator.Cases.UpdateSchema.AddField
             public string Name { get; set; }
             public DateTime Date { get; set; }
             public bool Flag { get; set; }
-            public Int16 Int16 { get; set; }
-            public Int64 Int64 { get; set; }
-            public Double DoubleField { get; set; }
-            public Decimal DecimalField { get; set; }
+            public short Int16 { get; set; }
+            public long Int64 { get; set; }
+            public double DoubleField { get; set; }
+            public decimal DecimalField { get; set; }
 
 
             #endregion simple fields
