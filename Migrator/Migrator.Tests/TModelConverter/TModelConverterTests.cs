@@ -72,7 +72,7 @@ namespace Migrator.Tests.TModelConverterNamespace
 
         public void ConvertType2(int index, string entityName, string fieldName, string nameSpace,string netType, SQLType sqlType, FieldType fieldType )
         {
-            TModel model = TModelConverter.ConvertTypeToTypeModel(typeof(Person));
+            TModel model = TModelConverter.ConvertTypeToTModel(typeof(Person));
 
             Assert.AreEqual(model.Fields[index].Name, fieldName);
             Assert.AreEqual(model.Fields[index].Namespace, nameSpace);

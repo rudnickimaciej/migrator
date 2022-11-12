@@ -2,6 +2,6 @@
 {
     public interface IApplication
     {
-        void Run(string path);
+        void Run();
     }
 }

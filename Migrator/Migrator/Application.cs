@@ -2,6 +2,7 @@
 using Migrator.ISQLProviderNamespace;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -17,11 +18,12 @@ namespace Migrator
             _migrator = migrator;
         }
 
-        public void Run(string path) =>
-            _migrator.Migrate(LoadAllBinDirectoryAssemblies(path));
+        public void Run() =>
+            _migrator.Migrate(LoadAllBinDirectoryAssemblies());
        
-        private static List<Type> LoadAllBinDirectoryAssemblies(string path)
+        private static List<Type> LoadAllBinDirectoryAssemblies()
         {
+            string path = ConfigurationManager.AppSettings["Path"];
             List<Type> entityTypes = new List<Type>();
             foreach (string dll in Directory.GetFiles(path, "*.dll", SearchOption.AllDirectories))
             {

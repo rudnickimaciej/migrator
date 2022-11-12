@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Przykładowa.Domain
+namespace Przykładowa.Domena
 {
     [Entity]
     class Klient

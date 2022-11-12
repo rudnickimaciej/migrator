@@ -15,7 +15,7 @@ namespace Migrator.Program
             using (var scope = container.BeginLifetimeScope())
             {
                 IApplication app = scope.Resolve<IApplication>();
-                app.Run(args[0]);
+                app.Run();
             }
         }
     }

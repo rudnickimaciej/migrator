@@ -78,9 +78,9 @@ namespace Migrator.Tests.Actions.Fields
         [Test]
         public void InitialMigration_CreateTables()
         {
-            TModel personNewModel = TModelConverter.ConvertTypeToTypeModel(typeof(Person));
-            TModel petNewModel = TModelConverter.ConvertTypeToTypeModel(typeof(Pet));
-            TModel sexNewModel = TModelConverter.ConvertTypeToTypeModel(typeof(Sex));
+            TModel personNewModel = TModelConverter.ConvertTypeToTModel(typeof(Person));
+            TModel petNewModel = TModelConverter.ConvertTypeToTModel(typeof(Pet));
+            TModel sexNewModel = TModelConverter.ConvertTypeToTModel(typeof(Sex));
 
             var newModels = new List<TModel>() { personNewModel, petNewModel, sexNewModel };
             var oldModels = new List<TModel>();

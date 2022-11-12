@@ -30,8 +30,8 @@ namespace Migrator.Tests.Actions.Fields
         public void CreateAction_SimpleFieldRemoved_ReturnDeleteFieldAction()
         {
 
-            TModel oldModel = TModelConverter.ConvertTypeToTypeModel(typeof(PersonOld));
-            TModel newModel = TModelConverter.ConvertTypeToTypeModel(typeof(PersonNew));
+            TModel oldModel = TModelConverter.ConvertTypeToTModel(typeof(PersonOld));
+            TModel newModel = TModelConverter.ConvertTypeToTModel(typeof(PersonNew));
 
             IEnumerable<ISQLAction> actions = new SQLServerProvider(new TSqlLogger()).CreateActions(new TModelPair(oldModel, newModel));
 

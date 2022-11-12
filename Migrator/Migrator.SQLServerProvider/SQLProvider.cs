@@ -73,7 +73,7 @@ namespace Migrator.SQLServerProviderNamespace
                 using (IDataReader reader = new SqlCommand(sqlEx, connection).ExecuteReader())
                 {
                     return reader.Select(r => new XmlDoc(r["EntitySchemaXML"] is DBNull ? null : r["EntitySchemaXML"].ToString())
-                  ).Select(doc => TModelConverter.ConverXmlToTypeModel(doc.xml)).ToList();  
+                  ).Select(doc => TModelConverter.ConverXmlToTModel(doc.xml)).ToList();  
                 }
             }
         }

@@ -60,6 +60,7 @@ namespace Migrator
          void Migrate(List<Type> types);
     }
 
+
     public class TypeMigrator : ITypeMigrator
     {
 
@@ -75,10 +76,11 @@ namespace Migrator
         public void Migrate(List<Type> types)
         {
             string connString = ConfigurationManager.ConnectionStrings["Migrator"].ConnectionString;
+           var path= ConfigurationManager.GetSection("path");
             IEnumerable<TModel> oldSchemas = _sqlProvider.GetCurrentSchemas(connString);
    
 
-            List<TModel> newSchemas = types.Select(t => TModelConverter.ConvertTypeToTypeModel(t)).ToList();
+            List<TModel> newSchemas = types.Select(t => TModelConverter.ConvertTypeToTModel(t)).ToList();
             List<TModelPair> schemaPairs = TModelHelper.PairSchemas(oldSchemas.ToList(), newSchemas);
 
             IEnumerable<ISQLAction> actions = OperationActionHelper.FlattenActions(schemaPairs.Select(p => _sqlProvider.CreateActions(p)));

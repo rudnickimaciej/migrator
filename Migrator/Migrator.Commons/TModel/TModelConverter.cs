@@ -22,7 +22,7 @@ namespace Migrator.Commons
     }
     public static class TModelConverter 
     {
-        public static TModel ConvertTypeToTypeModel(Type t)
+        public static TModel ConvertTypeToTModel(Type t)
         {
             TModel model = new TModel();
             model.EntityName = t.Name;
@@ -146,7 +146,7 @@ namespace Migrator.Commons
             return doc;
         }
 
-        public static TModel ConverXmlToTypeModel(XmlDocument xml)
+        public static TModel ConverXmlToTModel(XmlDocument xml)
         {
             XmlNode node = xml.SelectSingleNode("/entity");
             TModel model = new TModel();
@@ -176,12 +176,12 @@ namespace Migrator.Commons
         {
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(xmlPath);
-            return ConverXmlToTypeModel(xmlDoc);
+            return ConverXmlToTModel(xmlDoc);
         }
 
         public static XmlDocument ConvertTypeToXML(Type t)
         {
-          return  ConverTypeModelToXML(ConvertTypeToTypeModel(t));
+          return  ConverTypeModelToXML(ConvertTypeToTModel(t));
         }
 
         private static void validateDefaultValue(PropertyInfo field)
