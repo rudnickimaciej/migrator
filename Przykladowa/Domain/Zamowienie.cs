@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Przykładowa.Domain
+namespace PrzykładowaAplikacja.Domena
 {
     [Entity]
     class Zamowienie
@@ -11,4 +11,26 @@ namespace Przykładowa.Domain
         public Przedmiot Przedmiot { get; set; }
         public int Ilosc { get; set; }
     }
-}
+
+
+
+
+
+
+
+                         
+
+                                [Entity]
+                                class Klasa
+                                {
+                                    public int Id { get; set; }
+
+                                    public int Pole1 { get; set; }
+                                }
+
+
+                string
+} 
+
+
+

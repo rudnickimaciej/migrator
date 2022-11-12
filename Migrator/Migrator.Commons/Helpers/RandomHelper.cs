@@ -8,13 +8,14 @@ namespace Migrator.Commons.Helpers
 {
     internal class RandomHelper
     {
-        public string GetRandomString()
+        static int i = 1;
+        public static string GetRandomString()
         {
             int length = 7;
-
+            
             // creating a StringBuilder object()
             StringBuilder str_build = new StringBuilder();
-            Random random = new Random();
+            Random random = new Random(++i);
 
             char letter;
 
