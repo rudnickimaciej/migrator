@@ -200,11 +200,12 @@ namespace Migrator.Commons
         }
         private static int getFieldLength(PropertyInfo field)
         {
-            Type t = field.PropertyType;
-            if (t.IsList())
+
+            if(field.PropertyType.IsList())
             {
-                
+                var i = 0;
             }
+            Type t = field.PropertyType.IsList() ? field.PropertyType.GetGenericArguments()[0] : field.PropertyType;
             int defaultLength = TypeMapper.GetTypeDefaultLength(field.PropertyType);
             Attribute lengthAttribute = field.GetCustomAttributes(typeof(Length)).FirstOrDefault();
 

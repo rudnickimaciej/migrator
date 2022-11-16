@@ -25,7 +25,7 @@ namespace Migrator.SQLServerProviderNamespace.SQLOperations
             bool fieldLengthFlag = fieldLength != -1;
 
             Sql = "ALTER TABLE " + table + " ADD " + fieldName + " " + sqlType +
-            (fieldLengthFlag ? "(" + fieldLength + ")" : "") + " GO";
+            (fieldLengthFlag ? "(" + fieldLength + ")" : "");
         }
 
         private int getLength(int fieldLength)

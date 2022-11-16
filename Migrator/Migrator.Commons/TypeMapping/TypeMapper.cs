@@ -48,16 +48,16 @@ namespace Migrator.Commons.TypeMapping
             switch (type.Name.ToLower())
             {
                 case Consts.DECIMAL:
-                    return 10;
+                    return 18;
 
                 case Consts.FLOAT:
-                    return 53;
+                    return -1;
 
                 case Consts.STRING:
-                    return 101;
+                    return 1;
 
                 case Consts.CHAR:
-                    return 102;
+                    return 1;
 
                 case Consts.DATETIME:
                     return -1;

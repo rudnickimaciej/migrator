@@ -8,20 +8,10 @@ namespace Przykładowa.Domena
     [Entity]
     class Przedmiot
     {
+        [Length(100)]
         public string Nazwa { get; set; }
-
-
-        public float CenaFloat { get; set; }
-        [Length(20)]
-        public float CenaFloatWithLength { get; set; }
-
-
-        public double CenaDouble { get; set; }
-        [Length(30)]
-        public double CenaDoubleWithLength { get; set; }
-
-        public decimal CenaDecimal { get; set; }
-        [Length(30)]
-        public decimal CenaDecimalWithLength { get; set; }
+        public float Cena{ get; set; }
     }
 }
+
+

@@ -7,9 +7,9 @@ namespace Przykładowa.Domena
     [Entity]
     class Klient
     {
-        [Length(150)]
+        [Length(20)]
         public string Imie { get; set; }
-        [Length(200)]
+        [Length(25)]
         public string Nazwisko { get; set; }
         public DateTime Urodziny { get; set; }
         public List<Zamowienie> Zamowienia { get; set; }
