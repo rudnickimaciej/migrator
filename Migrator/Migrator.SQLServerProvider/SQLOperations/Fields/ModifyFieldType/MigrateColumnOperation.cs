@@ -14,7 +14,7 @@ namespace Migrator.SQLServerProviderNamespace.SQLOperations
 
         public MigrateColumnOperation(TFieldModel field)
         {
-            Sql = $"UPDATE {field.EntityName} SET {field.Name}_temp = try_convert{field.SqlType}, {field.Name}";
+            Sql = $"UPDATE {field.EntityName} SET {field.Name}_temp = try_convert({field.SqlType}, {field.Name})";
         }
     }
 }
