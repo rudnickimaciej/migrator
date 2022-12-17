@@ -43,9 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Email.cs" />
     <Compile Include="Domain\Klient.cs" />
     <Compile Include="Domain\Pracownik.cs" />
     <Compile Include="Domain\Przedmiot.cs" />
+    <Compile Include="Domain\Telefon.cs" />
     <Compile Include="Domain\Zamowienie.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

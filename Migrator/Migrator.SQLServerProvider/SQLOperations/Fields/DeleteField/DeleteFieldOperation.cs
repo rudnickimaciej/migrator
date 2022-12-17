@@ -15,7 +15,7 @@ namespace Migrator.SQLServerProviderNamespace.SQLOperations
 
         public DeleteFieldOperation(string table, string fieldName)
         {
-            Sql = $"ALTER TABLE {table} DROP COLUMN {fieldName}"; 
+            Sql = $"ALTER TABLE {table}_{fieldName} DROP COLUMN {fieldName}"; 
         }
     }
 }

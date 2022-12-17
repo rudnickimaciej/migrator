@@ -15,6 +15,13 @@ namespace Migrator.SQLServerProviderNamespace.SQLOperations
                    $"DROP CONSTRAINT ' + (SELECT NAME FROM  sys.foreign_keys WHERE NAME LIKE 'FK__{field.EntityName}__{field.Name}%') " +
                    $"EXEC ({sqlVarName})";
         }
+        public DeleteFKOperation(string fieldName, string entityName)
+        {
+            string sqlVarName = $"@SQL_{RandomHelper.GetRandomString()}";
+            Sql = $"DECLARE {sqlVarName} nvarchar(1000) SET {sqlVarName} = 'ALTER TABLE {entityName} " +
+                   $"DROP CONSTRAINT ' + (SELECT NAME FROM  sys.foreign_keys WHERE NAME LIKE 'FK__{entityName}__{fieldName}%') " +
+                   $"EXEC ({sqlVarName})";
+        }
 
     }
 }
