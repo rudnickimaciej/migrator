@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Certyfikat.cs" />
     <Compile Include="Domain\Email.cs" />
     <Compile Include="Domain\Klient.cs" />
     <Compile Include="Domain\Pracownik.cs" />

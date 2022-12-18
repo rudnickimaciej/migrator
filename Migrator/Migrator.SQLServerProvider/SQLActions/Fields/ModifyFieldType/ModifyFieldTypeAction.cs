@@ -18,7 +18,7 @@ namespace Migrator.SQLServerProviderNamespace.SQLActions
              new AddFieldOperation(_field, $"{_field.Name}_temp"),
              new MigrateColumnOperation(_field),
              new RenameFieldOperation(_field.EntityName, $"{_field.Name}_temp",_field.Name),
-             new DeleteFieldOperation(_field.EntityName, $"{_field.Name}_temp")
+             new DeleteFieldOperation(_field)
           };
         }
     }

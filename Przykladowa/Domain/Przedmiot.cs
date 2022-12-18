@@ -10,7 +10,7 @@ namespace Przykładowa.Domena
     {
         [Length(100)]
         public string Nazwa { get; set; }
-        public float Cena{ get; set; }
+        public int Cena{ get; set; }
     }
 }
 

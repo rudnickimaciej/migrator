@@ -9,10 +9,9 @@ namespace Migrator.ISQLProviderNamespace
         DROP_TABLE,
         CREATE_COLUMN,
         DROP_FK,
-        DROP_COLUMN,
         ALTER_COLUMN_TYPE,
         ADD_FK,
-        MIGRATE_COLUMN,
+        DROP_COLUMN,
         CHANGE_COLUMN_NAME
     }
 

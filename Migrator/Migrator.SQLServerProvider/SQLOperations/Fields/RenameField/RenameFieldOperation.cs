@@ -4,7 +4,7 @@ namespace Migrator.SQLServerProviderNamespace.SQLOperations
 {
     internal class RenameFieldOperation : SQLOperation
     {
-        public override SQLOperationType Type => SQLOperationType.MIGRATE_COLUMN;
+        public override SQLOperationType Type => SQLOperationType.CHANGE_COLUMN_NAME;
 
         public RenameFieldOperation(string table, string oldName, string newName)
         {

@@ -1,4 +1,5 @@
 ﻿using Migrator.Attributes;
+using Przykladowa.Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +17,7 @@ namespace Przykładowa.Domena
         public List<Klient> Klienci { get; set; }
         public List<string> Telefony { get; set; }
         public Pracownik Przelozony { get; set; }
+        public List<Certyfikat> Certyfikaty { get; set; }
     }
 }
 
